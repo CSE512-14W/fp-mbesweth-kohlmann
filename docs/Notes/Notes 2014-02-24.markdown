@@ -1,0 +1,57 @@
+## Notes 2014-02-24
+
+### Semantic API Notes
+
+The NYT Semantic API can get us an `article_list`, and its array items contain:
+
+* `title`, the actual article title
+* `body`, which you might call the "lede"
+* `date`, e.g. `"2011-02-16T00:00:00Z"`
+* `url`, the URL to the full article on nytimes.com
+
+Note that there's no particular article identifier (that we might dump into the NYT Article Search API, for example). This means we may have to search for articles by title to get more metadata for them.
+
+### Times Tags API Notes
+
+This is both useful and useless. The result for "Barack Obama" returns this:
+
+''[
+  "Barack Obama",
+  [
+    "Obama, Barack (Per)"
+  ]
+]''
+
+"Per" is one of four particular Times tags, which also show up in the Semantic API ([source](http://developer.nytimes.com/docs/timestags_api/)):
+
+    > The TimesTags API operates on a subset of Times tags: those tags used to create Times Topics pages. The subset includes approximately 27,000 tags.
+
+### Lit Review Notes (oh shit)
+
+Not that bad (yet): the question is, "What have people done to show news data chronologically?"
+
+### Sample NYT API Queries Joe Tried
+
+Getting an article by title from the Article Search API:
+
+`http://api.nytimes.com/svc/search/v2/articlesearch.json?fq=headline:"4 Years Later, Scarred but Still Confident"&sort=newest&api-key=####`
+
+Getting the canonical name of "Barack Obama" from the Times Tags API:
+
+`http://api.nytimes.com/svc/suggest/v1/timestags?query=Barack+Obama&api-key=####`
+
+Getting all articles semantically related to the "person" "Obama, Barack" from the Semantic API:
+
+`http://api.nytimes.com/svc/semantic/v2/concept/name/person/Obama, Barack.json?&fields=article_list&api-key=####`
+
+### Hit List for This Week (by Thursday)
+
+- Project Progress Presentation (by Thursday morning)
+    - Joe will work on slides
+    - They'll be based on lit review, our existing proposal, etc.
+- Literature Review
+    - Go find at least two-three relevant papers each?
+    - Probably okay to cite papers from class, but I'm sure Jeff wants to see us go further
+- Project Plan
+- Early Visualization Tests
+    - See what a single Semantic API subject looks like on a single-axis timeline
