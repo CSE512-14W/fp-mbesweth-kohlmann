@@ -1,1 +1,1219 @@
-{"status":"OK","copyright":"Copyright (c) 2014 The New York Times Company.  All Rights Reserved.","num_results":1,"source_database":"slave","fields":["article_list"],"results":[{"concept_name":"Obama, Barack","is_times_tag":1,"concept_status":"Active","vernacular":null,"concept_type":"nytd_per","first_use":"2004-09-03","last_use":"2007-12-31","use_count":299,"article_list":{"results":[{"document_type":"article","body":"President Obama is making the case that while progress is slow, he is taking America to a better place \u2014 and that he will be a better president over the next four years than the last.","date":"2012-09-06T00:00:00Z","url":"http:\/\/www.nytimes.com\/2012\/09\/06\/us\/politics\/obama-seeking-re-election-asks-for-patience.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Peter","lastname":"BAKER"}],"original":"By PETER BAKER"},"type_of_material":"News","title":"4 Years Later, Scarred but Still Confident","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/http:\/\/www.nytimes.com\/images\/2012\/09\/06\/us\/jp-OBAMA-1\/jp-OBAMA-1-thumbStandard-v2.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["PRESIDENTIAL ELECTION OF 2008","UNITED STATES ECONOMY","PRESIDENTIAL ELECTION OF 2012"]}},{"document_type":"article","body":"President Obama said that any compromise to address Medicare, Medicaid and Social Security would first require an effort to build bipartisan trust.","date":"2011-02-16T00:00:00Z","url":"http:\/\/www.nytimes.com\/2011\/02\/16\/us\/politics\/16obama.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jackie","lastname":"CALMES"}],"original":"By JACKIE CALMES"},"type_of_material":"News","title":"BUDGET WANTING, OBAMA CONCEDES","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2011\/02\/16\/us\/16obama\/16obama-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["SENATE","HOUSE OF REPRESENTATIVES","DEMOCRATIC PARTY","REPUBLICAN PARTY"],"nytd_des":["UNITED STATES FINANCES AND BUDGET","UNITED STATES POLITICS AND GOVERNMENT","TAXATION","NATIONAL DEBT (US)","FEDERAL BUDGET (US)"]}},{"document_type":"article","body":"President Obama said Thursday that the weakening economy posed an \u201cemergency\u201d and urged passage of his $447 billion package.","date":"2011-10-07T00:00:00Z","url":"http:\/\/www.nytimes.com\/2011\/10\/07\/us\/politics\/obama-says-he-would-accept-a-surtax-on-high-incomes.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jackie","lastname":"CALMES"}],"original":"By JACKIE CALMES; Jennifer Steinhauer contributed reporting"},"type_of_material":"News","title":"Obama Describe Economy As Dire","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2011\/10\/07\/us\/07obama\/07obama-thumbStandard-v2.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["UNITED STATES ECONOMY","FEDERAL TAXES (US)","FEDERAL BUDGET (US)","UNEMPLOYMENT","LABOR AND JOBS"]}},{"document_type":"article","body":"President Obama cited concerns that the photos of U.S. military personnel abusing prisoners in Iraq and Afghanistan could further antagonize enemies.","date":"2009-05-14T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/05\/14\/us\/14photos.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jeff","lastname":"ZELENY"},{"organization":"","role":"reported","rank":2,"firstname":"Thom","lastname":"SHANKER"}],"original":"By JEFF ZELENY and THOM SHANKER; Elisabeth Bumiller and Scott Shane contributed reporting"},"type_of_material":"News","title":"OBAMA REVERSAL ON ABUSE PHOTOS","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["IRAQ","AFGHANISTAN"],"nytd_org":["JUSTICE DEPARTMENT","AMERICAN CIVIL LIBERTIES UNION"],"nytd_des":["DETAINEES","UNITED STATES INTERNATIONAL RELATIONS","UNITED STATES DEFENSE AND MILITARY FORCES","PRISONS AND PRISONERS","AFGHANISTAN WAR (2001- )","PRISONERS OF WAR","PHOTOGRAPHY","IRAQ WAR (2003- )","FREEDOM AND HUMAN RIGHTS","TERRORISM","DECISIONS AND VERDICTS"]}},{"document_type":"article","body":"President Obama\u2019s reluctance to respond more forcefully may change if Tehran carries out a sweeping crackdown.","date":"2009-06-20T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/06\/20\/world\/middleeast\/20policy.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Mark","lastname":"LANDLER"}],"original":"By MARK LANDLER; David M. Herszenhorn contributed reporting from Washington, and Stephen Castle from Brussels"},"type_of_material":"News","title":"Obama Resists Tougher Stand","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["IRAN"],"nytd_des":["UNITED STATES INTERNATIONAL RELATIONS","ELECTIONS","DEMONSTRATIONS AND RIOTS"]}},{"document_type":"article","body":"The president\u2019s new stance suggests he may be much less willing to compromise on health care, his top legislative priority, even if it means a partisan fight.","date":"2009-04-25T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/04\/25\/us\/politics\/25budget.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Carl","lastname":"HULSE"}],"original":"By CARL HULSE; Robert Pear contributed reporting"},"type_of_material":"News","title":"Obama Toughens Health Strategy","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["SENATE","HOUSE OF REPRESENTATIVES","DEMOCRATIC PARTY"],"nytd_des":["REFORM AND REORGANIZATION","HEALTH INSURANCE AND MANAGED CARE","FILIBUSTERS AND DEBATE CURBS"]}},{"document_type":"article","body":"A day after Democrats got what the president called a \u201cshellacking,\u201d both parties explored the reshaped political terrain.","date":"2010-11-04T00:00:00Z","url":"http:\/\/www.nytimes.com\/2010\/11\/04\/us\/politics\/04elect.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Peter","lastname":"BAKER"},{"organization":"","role":"reported","rank":2,"firstname":"Carl","lastname":"HULSE"}],"original":"By PETER BAKER and CARL HULSE; Megan Thee-Brenan, Michael Luo and Joseph Berger contributed reporting"},"type_of_material":"News","title":"THE GREAT DIVIDE: OBAMA AND G.O.P.","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2010\/11\/04\/us\/04elect2_inline\/04elect2_inline-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["UNITED STATES"],"nytd_org":["HOUSE OF REPRESENTATIVES","REPUBLICAN PARTY"],"nytd_des":["SENATE (US)","UNITED STATES POLITICS AND GOVERNMENT","TEA PARTY MOVEMENT","ELECTIONS","ELECTION RESULTS"]}},{"document_type":"article","body":"States that have borrowed from the federal government to pay unemployment benefits would get a two-year breather before facing tax increases and loan payments.","date":"2011-02-09T00:00:00Z","url":"http:\/\/www.nytimes.com\/2011\/02\/09\/us\/politics\/09states.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Michael","lastname":"COOPER"},{"firstname":"Sheryl","middlename":"Gay","lastname":"STOLBERG","rank":2,"role":"reported","organization":""}],"original":"By MICHAEL COOPER and SHERYL GAY STOLBERG"},"type_of_material":"News","title":"OBAMA OFFERING RESCUE TO STATES","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["STATES (US)","UNITED STATES POLITICS AND GOVERNMENT","UNEMPLOYMENT INSURANCE","TAXATION","FEDERAL TAXES (US)","FEDERAL BUDGET (US)","UNEMPLOYMENT","CREDIT AND DEBT"]}},{"document_type":"article","body":"An Illinois controversy pitting two important constituencies against each other put Barack Obama\u2019s legislative skills to the test.","date":"2008-02-03T00:00:00Z","url":"http:\/\/www.nytimes.com\/2008\/02\/03\/us\/politics\/03exelon.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Mike","lastname":"McINTIRE"}],"original":"By MIKE McINTIRE"},"type_of_material":"News","title":"Nuclear Leaks And Response Tested Obama","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["EXELON CORP","SENATE","DEMOCRATIC PARTY"],"nytd_des":["UNITED STATES POLITICS AND GOVERNMENT","PRESIDENTIAL ELECTION OF 2008","ATOMIC ENERGY"]}},{"document_type":"article","body":"President Obama has been making the case that reducing malpractice suits should be part of a health care overhaul.","date":"2009-06-15T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/06\/15\/health\/policy\/15health.html","byline":{"person":[{"firstname":"Sheryl","middlename":"Gay","lastname":"STOLBERG","rank":1,"role":"reported","organization":""},{"organization":"","role":"reported","rank":2,"firstname":"Robert","lastname":"PEAR"}],"original":"By SHERYL GAY STOLBERG and ROBERT PEAR"},"type_of_material":"News","title":"Obama Open To Reining In Medical Suits","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["AMERICAN MEDICAL ASSN"],"nytd_des":["REFORM AND REORGANIZATION","HEALTH INSURANCE AND MANAGED CARE","MALPRACTICE","MEDICINE AND HEALTH","LAW AND LEGISLATION"]}},{"document_type":"article","body":"Seeking to calm ire, the Obama administration said it would offer religious institutions an \u201caccommodation\u201d on a new health insurance rule.","date":"2012-02-11T00:00:00Z","url":"http:\/\/www.nytimes.com\/2012\/02\/11\/us\/politics\/obama-to-offer-accommodation-on-birth-control-rule-officials-say.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Helene","lastname":"COOPER"},{"organization":"","role":"reported","rank":2,"firstname":"Laurie","lastname":"GOODSTEIN"}],"original":"By HELENE COOPER and LAURIE GOODSTEIN; Helene Cooper reported from Washington, and Laurie Goodstein from New York"},"type_of_material":"News","title":"Obama Adjusts a Rule Covering Contraceptions","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["ROMAN CATHOLIC CHURCH","UNITED STATES CONFERENCE OF CATHOLIC BISHOPS"],"nytd_des":["HEALTH INSURANCE AND MANAGED CARE","PATIENT PROTECTION AND AFFORDABLE CARE ACT (2010)","BIRTH CONTROL AND FAMILY PLANNING"]}},{"document_type":"article","body":"President Obama is gaining support among evangelical leaders who want a path to legalization for illegal immigrants.","date":"2010-07-19T00:00:00Z","url":"http:\/\/www.nytimes.com\/2010\/07\/19\/us\/politics\/19evangelicals.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Laurie","lastname":"GOODSTEIN"}],"original":"By LAURIE GOODSTEIN"},"type_of_material":"News","title":"Obama Wins Unlikely Allies In Immigration","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2010\/07\/19\/us\/evangelicals-1\/evangelicals-1-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["UNITED STATES"],"nytd_des":["UNITED STATES POLITICS AND GOVERNMENT","ELECTION ISSUES","IMMIGRATION AND EMIGRATION","CHRISTIANS AND CHRISTIANITY","LAW AND LEGISLATION","EVANGELICAL MOVEMENT","HISPANIC-AMERICANS","ILLEGAL IMMIGRANTS"]}},{"document_type":"article","body":"President Obama\u2019s budget blueprint, to be laid out Monday, is an election-year wager that higher taxes on the rich and spending on popular programs will outweigh deficit concerns.","date":"2012-02-11T00:00:00Z","url":"http:\/\/www.nytimes.com\/2012\/02\/11\/us\/politics\/obamas-budget-to-focus-on-cutting-deficit-and-adding-jobs.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jonathan","lastname":"WEISMAN"}],"original":"By JONATHAN WEISMAN"},"type_of_material":"News","title":"Obama Budget Lessens Focus On the Deficit","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["FEDERAL BUDGET (US)","TAXATION","UNITED STATES ECONOMY","PRESIDENTIAL ELECTION OF 2012"]}},{"document_type":"article","body":"The president-elect\u2019s economic recovery plan ran into cross-fire from his own party, suggesting that it could take more time to pass than Democrats once hoped.","date":"2009-01-09T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/01\/09\/us\/politics\/09obama.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Peter","lastname":"BAKER"},{"organization":"","role":"reported","rank":2}],"original":"By PETER BAKER and DAVID M. HERSZENHORN"},"type_of_material":"News","title":"Senate Allies Fault Obama On Stimulus","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2009\/01\/09\/us\/09obama.75.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["SENATE","DEMOCRATIC PARTY"],"nytd_des":["LABOR","INFRASTRUCTURE (PUBLIC WORKS)","MORTGAGES","TAXATION","UNITED STATES ECONOMY","HOUSING","LAW AND LEGISLATION","UNEMPLOYMENT","OBAMA STIMULUS PLAN","BANKRUPTCIES"]}},{"document_type":"article","body":"A Republican fund-raising advantage among outside groups has led the White House to change course and use surrogates to encourage donations to a \u201csuper PAC.\u201d","date":"2012-02-07T00:00:00Z","url":"http:\/\/www.nytimes.com\/2012\/02\/07\/us\/politics\/with-a-signal-to-donors-obama-yields-on-super-pacs.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jeff","lastname":"ZELENY"},{"organization":"","role":"reported","rank":2,"firstname":"Jim","lastname":"RUTENBERG"}],"original":"By JEFF ZELENY and JIM RUTENBERG"},"type_of_material":"News","title":"Obama Yields In Marshaling Of 'Super PAC'","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2012\/02\/07\/us\/jp-SUPERPAC\/jp-SUPERPAC-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["PRIORITIES USA ACTION","DEMOCRATIC PARTY"],"nytd_des":["POLITICAL ACTION COMMITTEES","UNITED STATES POLITICS AND GOVERNMENT","PRESIDENTIAL ELECTION OF 2012","CAMPAIGN FINANCE"]}},{"document_type":"article","body":"President Obama has declared the swine flu outbreak a national emergency, allowing hospitals and local governments to speedily set up alternate sites for treatment and triage procedures if needed to handle any surge of patients, the White House said...","date":"2009-10-25T00:00:00Z","url":"http:\/\/query.nytimes.com\/gst\/fullpage.html?res=9401EED61E3DF936A15753C1A96F9C8B63","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jackie","lastname":"CALMES"},{"qualifier":"Jr.","firstname":"Donald","middlename":"G.","lastname":"McNEIL","rank":2,"role":"reported","organization":""}],"original":"By JACKIE CALMES and DONALD G. McNEIL Jr.; Jackie Calmes reported from Washington, and Donald G. McNeil Jr. from New York. Crystal Yednak in Chicago and Holli Chmela in Fairfax, Va. contributed reporting"},"type_of_material":"News","title":"Obama Declares The Swine Flu An Emergency","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["SWINE FLU","INFLUENZA","STATES (US)","VACCINATION AND IMMUNIZATION"]}},{"document_type":"article","body":"President Obama will use his election-year address to argue that it is the role of government to promote a prosperous and equitable society, setting a stark contrast between parties.","date":"2012-01-22T00:00:00Z","url":"http:\/\/www.nytimes.com\/2012\/01\/22\/us\/politics\/obama-to-draw-an-economic-line-in-state-of-union.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jackie","lastname":"CALMES"}],"original":"By JACKIE CALMES"},"type_of_material":"News","title":"In Speech, Obama to Draw Line on the Economy","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2012\/01\/22\/us\/22obama\/22obama-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["DEMOCRATIC PARTY"],"nytd_des":["TAXATION","UNITED STATES ECONOMY","PRESIDENTIAL ELECTION OF 2012","ECONOMIC CONDITIONS AND TRENDS","INCOME INEQUALITY","STATE OF THE UNION MESSAGE (US)"]}},{"document_type":"article","body":"As President Obama continued his Mideast trip, voices as disparate as Al Qaeda\u2019s and the Israeli government\u2019s competed to shape how his message would be heard.","date":"2009-06-04T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/06\/04\/world\/middleeast\/04prexy.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jeff","lastname":"ZELENY"},{"organization":"","role":"reported","rank":2,"firstname":"Helene","lastname":"COOPER"}],"original":"By JEFF ZELENY  and HELENE COOPER; Jeff Zeleny reported from Riyadh, and Helene Cooper from Washington"},"type_of_material":"News","title":"Rival Messages As Obama Lands In the Mideast","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2009\/06\/04\/world\/04prexy_75.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["MIDDLE EAST"],"nytd_des":["SPEECHES AND STATEMENTS","UNITED STATES INTERNATIONAL RELATIONS","UNITED STATES POLITICS AND GOVERNMENT","ISLAM"]}},{"document_type":"article","body":"With his declaration that he would waive the most contentious provisions of the Bush-era No Child Left Behind law, President Obama rerouted a decade of federal influence.","date":"2011-09-24T00:00:00Z","url":"http:\/\/www.nytimes.com\/2011\/09\/24\/education\/24educ.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Sam","lastname":"DILLON"}],"original":"By SAM DILLON"},"type_of_material":"News","title":"Obama Gives States a Voice In 'No Child'","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2011\/09\/24\/us\/EDUC\/EDUC-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["STATES (US)","REFORM AND REORGANIZATION","UNITED STATES POLITICS AND GOVERNMENT","EDUCATION (K-12)","NO CHILD LEFT BEHIND ACT"]}},{"document_type":"article","body":"President Obama on Thursday will publicly propose giving bank regulators the power to limit the size of the nation's largest banks and the scope of their risk-taking activities, an administration official said late Wednesday.     The president, for...","date":"2010-01-21T00:00:00Z","url":"http:\/\/query.nytimes.com\/gst\/fullpage.html?res=9D01E0DE103DF932A15752C0A9669D8B63","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jackie","lastname":"CALMES"},{"organization":"","role":"reported","rank":2,"firstname":"Louis","lastname":"UCHITELLE"}],"original":"By JACKIE CALMES and LOUIS UCHITELLE"},"type_of_material":"News","title":"Obama Will Seek Limits on Banks","concepts":{"nytd_per":["OBAMA, BARACK","VOLKER, PAUL A"],"nytd_geo":["EUROPE","UNITED STATES"],"nytd_des":["LABOR","PUBLIC OPINION","UNITED STATES ECONOMY","FINANCES","LAW AND LEGISLATION","STOCKS AND BONDS","UNEMPLOYMENT","BUDGETS AND BUDGETING","REGULATION AND DEREGULATION OF INDUSTRY","HOUSING AND REAL ESTATE","BANKS AND BANKING"]}},{"document_type":"article","body":"President Obama argued against a plan to impose new sanctions against Iran while negotiators sought a six-month agreement to freeze Tehran\u2019s nuclear program.","date":"2013-11-15T00:00:00Z","url":"http:\/\/www.nytimes.com\/2013\/11\/15\/us\/politics\/obama-iran.html","byline":{"contributor":"Thomas Erdbrink contributed reporting from Tehran, William J. Broad from New York, and Isabel Kershner from Jerusalem.","person":[{"organization":"","role":"reported","firstname":"Mark","rank":1,"lastname":"LANDLER"},{"firstname":"David","middlename":"E.","lastname":"SANGER","rank":2,"role":"reported","organization":""}],"original":"By MARK LANDLER and DAVID E. SANGER"},"type_of_material":"News","title":"Obama Calls for Patience in Iran Talks","concepts":{"nytd_des":["International Relations","United States International Relations","Nuclear Weapons","Embargoes and Economic Sanctions"],"nytd_geo":["Iran"],"nytd_org":["International Atomic Energy Agency"],"nytd_per":["Obama, Barack"]}},{"document_type":"article","body":"The Obama administration plans to combine California\u2019s tough new auto-emissions rules with existing fuel economy limits to create a single new national standard.","date":"2009-05-19T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/05\/19\/business\/19emissions.html","byline":{"person":[{"organization":"","role":"reported","rank":1}],"original":"By JOHN M. BRODER; Micheline Maynard and Bill Vlasic contributed reporting"},"type_of_material":"News","title":"Obama to Toughen Rules On Emissions and Mileage","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2009\/05\/19\/business\/19emissions01-75.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["CALIFORNIA"],"nytd_des":["AUTOMOBILES","FUEL EFFICIENCY","GREENHOUSE GAS EMISSIONS"]}},{"document_type":"article","body":"The president criticized bankers for giving themselves $18.4 billion in bonuses as the government was rescuing firms.","date":"2009-01-30T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/01\/30\/business\/30obama.html","byline":{"person":[{"firstname":"Sheryl","middlename":"Gay","lastname":"STOLBERG","rank":1,"role":"reported","organization":""},{"organization":"","role":"reported","rank":2,"firstname":"Stephen","lastname":"LABATON"}],"original":"By SHERYL GAY STOLBERG and STEPHEN LABATON; John Harwood contributed reporting"},"type_of_material":"News","title":"BANKER BONUSES ARE 'SHAMEFUL,' OBAMA DECLARES","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2009\/01\/30\/business\/30obama01-75.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["UNITED STATES"],"nytd_des":["SUBPRIME MORTGAGE CRISIS","EXECUTIVE COMPENSATION","WAGES AND SALARIES","EMERGENCY ECONOMIC STABILIZATION ACT (2008)","FINANCES","STOCKS AND BONDS","BUDGETS AND BUDGETING","REGULATION AND DEREGULATION OF INDUSTRY","BONUSES"]}},{"document_type":"article","body":"In an interview with The Times, President Obama opened the door to a reconciliation process in which the American military would reach out to elements of the Taliban.","date":"2009-03-08T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/03\/08\/us\/politics\/08obama.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Helene","lastname":"COOPER"},{"firstname":"Sheryl","middlename":"Gay","lastname":"STOLBERG","rank":2,"role":"reported","organization":""}],"original":"By HELENE COOPER and SHERYL GAY STOLBERG; Jeff Zeleny and Peter Baker contributed reporting"},"type_of_material":"News","title":"Obama Ponders Outreach To Elements of the Taliban","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2009\/03\/07\/us\/politics\/08obama_75.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["IRAQ","AFGHANISTAN"],"nytd_org":["TALIBAN"],"nytd_des":["AFGHANISTAN WAR (2001- )","UNITED STATES ECONOMY"]}},{"document_type":"article","body":"President Obama\u2019s standing remains remarkably strong among African-Americans, but Democrats say turning out those voters in 2012 remains a challenge.","date":"2011-10-27T00:00:00Z","url":"http:\/\/www.nytimes.com\/2011\/10\/27\/us\/politics\/obamas-support-among-blacks-remains-strong.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Helene","lastname":"COOPER"}],"original":"By HELENE COOPER"},"type_of_material":"News","title":"Black Support for Obama Is Steady and Strong","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2011\/10\/27\/us\/27race\/27race-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["BLACKS","PRESIDENTIAL ELECTION OF 2012","POLLS AND PUBLIC OPINION"]}},{"document_type":"article","body":"In blunt language before a rare joint session of Congress, the president presented his most forceful case yet for a sweeping health care overhaul.","date":"2009-09-10T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/09\/10\/us\/politics\/10obama.html","byline":{"person":[{"firstname":"Sheryl","middlename":"Gay","lastname":"STOLBERG","rank":1,"role":"reported","organization":""},{"organization":"","role":"reported","rank":2,"firstname":"Jeff","lastname":"ZELENY"}],"original":"By SHERYL GAY STOLBERG and JEFF ZELENY"},"type_of_material":"News","title":"Obama, Armed With Details, Challenges Congress","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2009\/09\/09\/us\/10obama_75.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["REFORM AND REORGANIZATION","UNITED STATES POLITICS AND GOVERNMENT","HEALTH INSURANCE AND MANAGED CARE"]}},{"document_type":"article","body":"The party-line schism in the vote for the stimulus bill highlighted the difficulty of changing Washington\u2019s ways.","date":"2009-02-14T00:00:00Z","url":"http:\/\/www.nytimes.com\/2009\/02\/14\/us\/politics\/14obama.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Peter","lastname":"BAKER"}],"original":"By PETER BAKER; Jeff Zeleny contributed reporting"},"type_of_material":"News","title":"Bipartisanship Isn't So Easy, Obama Discovers","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_org":["REPUBLICAN PARTY"],"nytd_des":["UNITED STATES POLITICS AND GOVERNMENT","OBAMA STIMULUS PLAN"]}},{"document_type":"article","body":"African-Americans voiced pride and amazement over Senator Barack Obama\u2019s victory in Iowa, with some seeing the result as a signal moment in race relations.","date":"2008-01-05T00:00:00Z","url":"http:\/\/www.nytimes.com\/2008\/01\/05\/us\/politics\/05race.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Diane","lastname":"CARDWELL"}],"original":"By DIANE CARDWELL; Reporting was contributed by James Barron, Timothy Williams and John Eligon from New York; Lakiesha R. Carr and Holli Chmela from Washington; Rebecca Cathcart from Los Angeles; Brenda Goodman from Birmingham, Ala.; Rachel Mosteller from Houston; Susan Saulny from Chicago; Kirk Semple from Miami; and Katie Zezima from Boston"},"type_of_material":"News","title":"Daring to Believe, Blacks Savor Obama Victory","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["IOWA"],"nytd_des":["UNITED STATES POLITICS AND GOVERNMENT","PRIMARIES AND CAUCUSES","PRESIDENTIAL ELECTION OF 2008","BLACKS","RACE"]}},{"document_type":"article","body":"With an election year ahead, President Obama set forth a long list of domestic economic proposals, many of which centered on jobs and changing the tax code.","date":"2012-01-25T00:00:00Z","url":"http:\/\/www.nytimes.com\/2012\/01\/25\/us\/politics\/state-of-the-union-2012.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Helene","lastname":"COOPER"}],"original":"By HELENE COOPER; John M. Broder contributed reporting"},"type_of_material":"News","title":"Obama Sets Goal Of Economy Built For The Long Run","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2012\/01\/25\/us\/sub-OBAMA\/sub-OBAMA-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_des":["UNITED STATES POLITICS AND GOVERNMENT","TAXATION","UNITED STATES ECONOMY","PRESIDENTIAL ELECTION OF 2012","FEDERAL TAXES (US)","LABOR AND JOBS","INCOME INEQUALITY","STATE OF THE UNION MESSAGE (US)"]}},{"document_type":"article","body":"The House overwhelmingly rejected a measure to increase the debt limit, a vote staged by Republicans to pressure President Obama to accept deep cuts.","date":"2011-06-01T00:00:00Z","url":"http:\/\/www.nytimes.com\/2011\/06\/01\/us\/politics\/01fiscal.html","byline":{"person":[{"organization":"","role":"reported","rank":1,"firstname":"Jackie","lastname":"CALMES"}],"original":"By JACKIE CALMES; Jennifer Steinhauer and Carl Hulse contributed reporting"},"type_of_material":"News","title":"PRESSING OBAMA, HOUSE BARS RISE FOR DEBT CEILING","small_image_height":75,"small_image_url":"http:\/\/graphics8.nytimes.com\/images\/2011\/06\/01\/us\/fiscal-2\/fiscal-2-thumbStandard.jpg","concepts":{"nytd_per":["OBAMA, BARACK"],"nytd_geo":["UNITED STATES"],"nytd_org":["HOUSE OF REPRESENTATIVES"],"nytd_des":["NATIONAL DEBT (US)","FEDERAL BUDGET (US)","BUDGETS AND BUDGETING"]}}],"total":2279}}]}
+{
+  "status": "OK",
+  "copyright": "Copyright (c) 2014 The New York Times Company.  All Rights Reserved.",
+  "num_results": 1,
+  "source_database": "slave",
+  "fields": [
+    "article_list"
+  ],
+  "results": [
+    {
+      "concept_name": "Obama, Barack",
+      "is_times_tag": 1,
+      "concept_status": "Active",
+      "vernacular": null,
+      "concept_type": "nytd_per",
+      "first_use": "2004-09-03",
+      "last_use": "2007-12-31",
+      "use_count": 299,
+      "article_list": {
+        "results": [
+          {
+            "document_type": "article",
+            "body": "President Obama is making the case that while progress is slow, he is taking America to a better place — and that he will be a better president over the next four years than the last.",
+            "date": "2012-09-06T00:00:00Z",
+            "url": "http://www.nytimes.com/2012/09/06/us/politics/obama-seeking-re-election-asks-for-patience.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Peter",
+                  "lastname": "BAKER"
+                }
+              ],
+              "original": "By PETER BAKER"
+            },
+            "type_of_material": "News",
+            "title": "4 Years Later, Scarred but Still Confident",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/http://www.nytimes.com/images/2012/09/06/us/jp-OBAMA-1/jp-OBAMA-1-thumbStandard-v2.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "PRESIDENTIAL ELECTION OF 2008",
+                "UNITED STATES ECONOMY",
+                "PRESIDENTIAL ELECTION OF 2012"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama said that any compromise to address Medicare, Medicaid and Social Security would first require an effort to build bipartisan trust.",
+            "date": "2011-02-16T00:00:00Z",
+            "url": "http://www.nytimes.com/2011/02/16/us/politics/16obama.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jackie",
+                  "lastname": "CALMES"
+                }
+              ],
+              "original": "By JACKIE CALMES"
+            },
+            "type_of_material": "News",
+            "title": "BUDGET WANTING, OBAMA CONCEDES",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2011/02/16/us/16obama/16obama-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "SENATE",
+                "HOUSE OF REPRESENTATIVES",
+                "DEMOCRATIC PARTY",
+                "REPUBLICAN PARTY"
+              ],
+              "nytd_des": [
+                "UNITED STATES FINANCES AND BUDGET",
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "TAXATION",
+                "NATIONAL DEBT (US)",
+                "FEDERAL BUDGET (US)"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama said Thursday that the weakening economy posed an “emergency” and urged passage of his $447 billion package.",
+            "date": "2011-10-07T00:00:00Z",
+            "url": "http://www.nytimes.com/2011/10/07/us/politics/obama-says-he-would-accept-a-surtax-on-high-incomes.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jackie",
+                  "lastname": "CALMES"
+                }
+              ],
+              "original": "By JACKIE CALMES; Jennifer Steinhauer contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "Obama Describe Economy As Dire",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2011/10/07/us/07obama/07obama-thumbStandard-v2.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "UNITED STATES ECONOMY",
+                "FEDERAL TAXES (US)",
+                "FEDERAL BUDGET (US)",
+                "UNEMPLOYMENT",
+                "LABOR AND JOBS"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama cited concerns that the photos of U.S. military personnel abusing prisoners in Iraq and Afghanistan could further antagonize enemies.",
+            "date": "2009-05-14T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/05/14/us/14photos.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jeff",
+                  "lastname": "ZELENY"
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Thom",
+                  "lastname": "SHANKER"
+                }
+              ],
+              "original": "By JEFF ZELENY and THOM SHANKER; Elisabeth Bumiller and Scott Shane contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "OBAMA REVERSAL ON ABUSE PHOTOS",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "IRAQ",
+                "AFGHANISTAN"
+              ],
+              "nytd_org": [
+                "JUSTICE DEPARTMENT",
+                "AMERICAN CIVIL LIBERTIES UNION"
+              ],
+              "nytd_des": [
+                "DETAINEES",
+                "UNITED STATES INTERNATIONAL RELATIONS",
+                "UNITED STATES DEFENSE AND MILITARY FORCES",
+                "PRISONS AND PRISONERS",
+                "AFGHANISTAN WAR (2001- )",
+                "PRISONERS OF WAR",
+                "PHOTOGRAPHY",
+                "IRAQ WAR (2003- )",
+                "FREEDOM AND HUMAN RIGHTS",
+                "TERRORISM",
+                "DECISIONS AND VERDICTS"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama’s reluctance to respond more forcefully may change if Tehran carries out a sweeping crackdown.",
+            "date": "2009-06-20T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/06/20/world/middleeast/20policy.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Mark",
+                  "lastname": "LANDLER"
+                }
+              ],
+              "original": "By MARK LANDLER; David M. Herszenhorn contributed reporting from Washington, and Stephen Castle from Brussels"
+            },
+            "type_of_material": "News",
+            "title": "Obama Resists Tougher Stand",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "IRAN"
+              ],
+              "nytd_des": [
+                "UNITED STATES INTERNATIONAL RELATIONS",
+                "ELECTIONS",
+                "DEMONSTRATIONS AND RIOTS"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "The president’s new stance suggests he may be much less willing to compromise on health care, his top legislative priority, even if it means a partisan fight.",
+            "date": "2009-04-25T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/04/25/us/politics/25budget.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Carl",
+                  "lastname": "HULSE"
+                }
+              ],
+              "original": "By CARL HULSE; Robert Pear contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "Obama Toughens Health Strategy",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "SENATE",
+                "HOUSE OF REPRESENTATIVES",
+                "DEMOCRATIC PARTY"
+              ],
+              "nytd_des": [
+                "REFORM AND REORGANIZATION",
+                "HEALTH INSURANCE AND MANAGED CARE",
+                "FILIBUSTERS AND DEBATE CURBS"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "A day after Democrats got what the president called a “shellacking,” both parties explored the reshaped political terrain.",
+            "date": "2010-11-04T00:00:00Z",
+            "url": "http://www.nytimes.com/2010/11/04/us/politics/04elect.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Peter",
+                  "lastname": "BAKER"
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Carl",
+                  "lastname": "HULSE"
+                }
+              ],
+              "original": "By PETER BAKER and CARL HULSE; Megan Thee-Brenan, Michael Luo and Joseph Berger contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "THE GREAT DIVIDE: OBAMA AND G.O.P.",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2010/11/04/us/04elect2_inline/04elect2_inline-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "UNITED STATES"
+              ],
+              "nytd_org": [
+                "HOUSE OF REPRESENTATIVES",
+                "REPUBLICAN PARTY"
+              ],
+              "nytd_des": [
+                "SENATE (US)",
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "TEA PARTY MOVEMENT",
+                "ELECTIONS",
+                "ELECTION RESULTS"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "States that have borrowed from the federal government to pay unemployment benefits would get a two-year breather before facing tax increases and loan payments.",
+            "date": "2011-02-09T00:00:00Z",
+            "url": "http://www.nytimes.com/2011/02/09/us/politics/09states.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Michael",
+                  "lastname": "COOPER"
+                },
+                {
+                  "firstname": "Sheryl",
+                  "middlename": "Gay",
+                  "lastname": "STOLBERG",
+                  "rank": 2,
+                  "role": "reported",
+                  "organization": ""
+                }
+              ],
+              "original": "By MICHAEL COOPER and SHERYL GAY STOLBERG"
+            },
+            "type_of_material": "News",
+            "title": "OBAMA OFFERING RESCUE TO STATES",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "STATES (US)",
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "UNEMPLOYMENT INSURANCE",
+                "TAXATION",
+                "FEDERAL TAXES (US)",
+                "FEDERAL BUDGET (US)",
+                "UNEMPLOYMENT",
+                "CREDIT AND DEBT"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "An Illinois controversy pitting two important constituencies against each other put Barack Obama’s legislative skills to the test.",
+            "date": "2008-02-03T00:00:00Z",
+            "url": "http://www.nytimes.com/2008/02/03/us/politics/03exelon.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Mike",
+                  "lastname": "McINTIRE"
+                }
+              ],
+              "original": "By MIKE McINTIRE"
+            },
+            "type_of_material": "News",
+            "title": "Nuclear Leaks And Response Tested Obama",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "EXELON CORP",
+                "SENATE",
+                "DEMOCRATIC PARTY"
+              ],
+              "nytd_des": [
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "PRESIDENTIAL ELECTION OF 2008",
+                "ATOMIC ENERGY"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama has been making the case that reducing malpractice suits should be part of a health care overhaul.",
+            "date": "2009-06-15T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/06/15/health/policy/15health.html",
+            "byline": {
+              "person": [
+                {
+                  "firstname": "Sheryl",
+                  "middlename": "Gay",
+                  "lastname": "STOLBERG",
+                  "rank": 1,
+                  "role": "reported",
+                  "organization": ""
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Robert",
+                  "lastname": "PEAR"
+                }
+              ],
+              "original": "By SHERYL GAY STOLBERG and ROBERT PEAR"
+            },
+            "type_of_material": "News",
+            "title": "Obama Open To Reining In Medical Suits",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "AMERICAN MEDICAL ASSN"
+              ],
+              "nytd_des": [
+                "REFORM AND REORGANIZATION",
+                "HEALTH INSURANCE AND MANAGED CARE",
+                "MALPRACTICE",
+                "MEDICINE AND HEALTH",
+                "LAW AND LEGISLATION"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "Seeking to calm ire, the Obama administration said it would offer religious institutions an “accommodation” on a new health insurance rule.",
+            "date": "2012-02-11T00:00:00Z",
+            "url": "http://www.nytimes.com/2012/02/11/us/politics/obama-to-offer-accommodation-on-birth-control-rule-officials-say.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Helene",
+                  "lastname": "COOPER"
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Laurie",
+                  "lastname": "GOODSTEIN"
+                }
+              ],
+              "original": "By HELENE COOPER and LAURIE GOODSTEIN; Helene Cooper reported from Washington, and Laurie Goodstein from New York"
+            },
+            "type_of_material": "News",
+            "title": "Obama Adjusts a Rule Covering Contraceptions",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "ROMAN CATHOLIC CHURCH",
+                "UNITED STATES CONFERENCE OF CATHOLIC BISHOPS"
+              ],
+              "nytd_des": [
+                "HEALTH INSURANCE AND MANAGED CARE",
+                "PATIENT PROTECTION AND AFFORDABLE CARE ACT (2010)",
+                "BIRTH CONTROL AND FAMILY PLANNING"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama is gaining support among evangelical leaders who want a path to legalization for illegal immigrants.",
+            "date": "2010-07-19T00:00:00Z",
+            "url": "http://www.nytimes.com/2010/07/19/us/politics/19evangelicals.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Laurie",
+                  "lastname": "GOODSTEIN"
+                }
+              ],
+              "original": "By LAURIE GOODSTEIN"
+            },
+            "type_of_material": "News",
+            "title": "Obama Wins Unlikely Allies In Immigration",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2010/07/19/us/evangelicals-1/evangelicals-1-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "UNITED STATES"
+              ],
+              "nytd_des": [
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "ELECTION ISSUES",
+                "IMMIGRATION AND EMIGRATION",
+                "CHRISTIANS AND CHRISTIANITY",
+                "LAW AND LEGISLATION",
+                "EVANGELICAL MOVEMENT",
+                "HISPANIC-AMERICANS",
+                "ILLEGAL IMMIGRANTS"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama’s budget blueprint, to be laid out Monday, is an election-year wager that higher taxes on the rich and spending on popular programs will outweigh deficit concerns.",
+            "date": "2012-02-11T00:00:00Z",
+            "url": "http://www.nytimes.com/2012/02/11/us/politics/obamas-budget-to-focus-on-cutting-deficit-and-adding-jobs.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jonathan",
+                  "lastname": "WEISMAN"
+                }
+              ],
+              "original": "By JONATHAN WEISMAN"
+            },
+            "type_of_material": "News",
+            "title": "Obama Budget Lessens Focus On the Deficit",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "FEDERAL BUDGET (US)",
+                "TAXATION",
+                "UNITED STATES ECONOMY",
+                "PRESIDENTIAL ELECTION OF 2012"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "The president-elect’s economic recovery plan ran into cross-fire from his own party, suggesting that it could take more time to pass than Democrats once hoped.",
+            "date": "2009-01-09T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/01/09/us/politics/09obama.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Peter",
+                  "lastname": "BAKER"
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2
+                }
+              ],
+              "original": "By PETER BAKER and DAVID M. HERSZENHORN"
+            },
+            "type_of_material": "News",
+            "title": "Senate Allies Fault Obama On Stimulus",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2009/01/09/us/09obama.75.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "SENATE",
+                "DEMOCRATIC PARTY"
+              ],
+              "nytd_des": [
+                "LABOR",
+                "INFRASTRUCTURE (PUBLIC WORKS)",
+                "MORTGAGES",
+                "TAXATION",
+                "UNITED STATES ECONOMY",
+                "HOUSING",
+                "LAW AND LEGISLATION",
+                "UNEMPLOYMENT",
+                "OBAMA STIMULUS PLAN",
+                "BANKRUPTCIES"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "A Republican fund-raising advantage among outside groups has led the White House to change course and use surrogates to encourage donations to a “super PAC.”",
+            "date": "2012-02-07T00:00:00Z",
+            "url": "http://www.nytimes.com/2012/02/07/us/politics/with-a-signal-to-donors-obama-yields-on-super-pacs.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jeff",
+                  "lastname": "ZELENY"
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Jim",
+                  "lastname": "RUTENBERG"
+                }
+              ],
+              "original": "By JEFF ZELENY and JIM RUTENBERG"
+            },
+            "type_of_material": "News",
+            "title": "Obama Yields In Marshaling Of 'Super PAC'",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2012/02/07/us/jp-SUPERPAC/jp-SUPERPAC-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "PRIORITIES USA ACTION",
+                "DEMOCRATIC PARTY"
+              ],
+              "nytd_des": [
+                "POLITICAL ACTION COMMITTEES",
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "PRESIDENTIAL ELECTION OF 2012",
+                "CAMPAIGN FINANCE"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama has declared the swine flu outbreak a national emergency, allowing hospitals and local governments to speedily set up alternate sites for treatment and triage procedures if needed to handle any surge of patients, the White House said...",
+            "date": "2009-10-25T00:00:00Z",
+            "url": "http://query.nytimes.com/gst/fullpage.html?res=9401EED61E3DF936A15753C1A96F9C8B63",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jackie",
+                  "lastname": "CALMES"
+                },
+                {
+                  "qualifier": "Jr.",
+                  "firstname": "Donald",
+                  "middlename": "G.",
+                  "lastname": "McNEIL",
+                  "rank": 2,
+                  "role": "reported",
+                  "organization": ""
+                }
+              ],
+              "original": "By JACKIE CALMES and DONALD G. McNEIL Jr.; Jackie Calmes reported from Washington, and Donald G. McNeil Jr. from New York. Crystal Yednak in Chicago and Holli Chmela in Fairfax, Va. contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "Obama Declares The Swine Flu An Emergency",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "SWINE FLU",
+                "INFLUENZA",
+                "STATES (US)",
+                "VACCINATION AND IMMUNIZATION"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama will use his election-year address to argue that it is the role of government to promote a prosperous and equitable society, setting a stark contrast between parties.",
+            "date": "2012-01-22T00:00:00Z",
+            "url": "http://www.nytimes.com/2012/01/22/us/politics/obama-to-draw-an-economic-line-in-state-of-union.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jackie",
+                  "lastname": "CALMES"
+                }
+              ],
+              "original": "By JACKIE CALMES"
+            },
+            "type_of_material": "News",
+            "title": "In Speech, Obama to Draw Line on the Economy",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2012/01/22/us/22obama/22obama-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "DEMOCRATIC PARTY"
+              ],
+              "nytd_des": [
+                "TAXATION",
+                "UNITED STATES ECONOMY",
+                "PRESIDENTIAL ELECTION OF 2012",
+                "ECONOMIC CONDITIONS AND TRENDS",
+                "INCOME INEQUALITY",
+                "STATE OF THE UNION MESSAGE (US)"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "As President Obama continued his Mideast trip, voices as disparate as Al Qaeda’s and the Israeli government’s competed to shape how his message would be heard.",
+            "date": "2009-06-04T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/06/04/world/middleeast/04prexy.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jeff",
+                  "lastname": "ZELENY"
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Helene",
+                  "lastname": "COOPER"
+                }
+              ],
+              "original": "By JEFF ZELENY  and HELENE COOPER; Jeff Zeleny reported from Riyadh, and Helene Cooper from Washington"
+            },
+            "type_of_material": "News",
+            "title": "Rival Messages As Obama Lands In the Mideast",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2009/06/04/world/04prexy_75.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "MIDDLE EAST"
+              ],
+              "nytd_des": [
+                "SPEECHES AND STATEMENTS",
+                "UNITED STATES INTERNATIONAL RELATIONS",
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "ISLAM"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "With his declaration that he would waive the most contentious provisions of the Bush-era No Child Left Behind law, President Obama rerouted a decade of federal influence.",
+            "date": "2011-09-24T00:00:00Z",
+            "url": "http://www.nytimes.com/2011/09/24/education/24educ.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Sam",
+                  "lastname": "DILLON"
+                }
+              ],
+              "original": "By SAM DILLON"
+            },
+            "type_of_material": "News",
+            "title": "Obama Gives States a Voice In 'No Child'",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2011/09/24/us/EDUC/EDUC-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "STATES (US)",
+                "REFORM AND REORGANIZATION",
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "EDUCATION (K-12)",
+                "NO CHILD LEFT BEHIND ACT"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama on Thursday will publicly propose giving bank regulators the power to limit the size of the nation's largest banks and the scope of their risk-taking activities, an administration official said late Wednesday.     The president, for...",
+            "date": "2010-01-21T00:00:00Z",
+            "url": "http://query.nytimes.com/gst/fullpage.html?res=9D01E0DE103DF932A15752C0A9669D8B63",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jackie",
+                  "lastname": "CALMES"
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Louis",
+                  "lastname": "UCHITELLE"
+                }
+              ],
+              "original": "By JACKIE CALMES and LOUIS UCHITELLE"
+            },
+            "type_of_material": "News",
+            "title": "Obama Will Seek Limits on Banks",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK",
+                "VOLKER, PAUL A"
+              ],
+              "nytd_geo": [
+                "EUROPE",
+                "UNITED STATES"
+              ],
+              "nytd_des": [
+                "LABOR",
+                "PUBLIC OPINION",
+                "UNITED STATES ECONOMY",
+                "FINANCES",
+                "LAW AND LEGISLATION",
+                "STOCKS AND BONDS",
+                "UNEMPLOYMENT",
+                "BUDGETS AND BUDGETING",
+                "REGULATION AND DEREGULATION OF INDUSTRY",
+                "HOUSING AND REAL ESTATE",
+                "BANKS AND BANKING"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama argued against a plan to impose new sanctions against Iran while negotiators sought a six-month agreement to freeze Tehran’s nuclear program.",
+            "date": "2013-11-15T00:00:00Z",
+            "url": "http://www.nytimes.com/2013/11/15/us/politics/obama-iran.html",
+            "byline": {
+              "contributor": "Thomas Erdbrink contributed reporting from Tehran, William J. Broad from New York, and Isabel Kershner from Jerusalem.",
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "firstname": "Mark",
+                  "rank": 1,
+                  "lastname": "LANDLER"
+                },
+                {
+                  "firstname": "David",
+                  "middlename": "E.",
+                  "lastname": "SANGER",
+                  "rank": 2,
+                  "role": "reported",
+                  "organization": ""
+                }
+              ],
+              "original": "By MARK LANDLER and DAVID E. SANGER"
+            },
+            "type_of_material": "News",
+            "title": "Obama Calls for Patience in Iran Talks",
+            "concepts": {
+              "nytd_des": [
+                "International Relations",
+                "United States International Relations",
+                "Nuclear Weapons",
+                "Embargoes and Economic Sanctions"
+              ],
+              "nytd_geo": [
+                "Iran"
+              ],
+              "nytd_org": [
+                "International Atomic Energy Agency"
+              ],
+              "nytd_per": [
+                "Obama, Barack"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "The Obama administration plans to combine California’s tough new auto-emissions rules with existing fuel economy limits to create a single new national standard.",
+            "date": "2009-05-19T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/05/19/business/19emissions.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1
+                }
+              ],
+              "original": "By JOHN M. BRODER; Micheline Maynard and Bill Vlasic contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "Obama to Toughen Rules On Emissions and Mileage",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2009/05/19/business/19emissions01-75.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "CALIFORNIA"
+              ],
+              "nytd_des": [
+                "AUTOMOBILES",
+                "FUEL EFFICIENCY",
+                "GREENHOUSE GAS EMISSIONS"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "The president criticized bankers for giving themselves $18.4 billion in bonuses as the government was rescuing firms.",
+            "date": "2009-01-30T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/01/30/business/30obama.html",
+            "byline": {
+              "person": [
+                {
+                  "firstname": "Sheryl",
+                  "middlename": "Gay",
+                  "lastname": "STOLBERG",
+                  "rank": 1,
+                  "role": "reported",
+                  "organization": ""
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Stephen",
+                  "lastname": "LABATON"
+                }
+              ],
+              "original": "By SHERYL GAY STOLBERG and STEPHEN LABATON; John Harwood contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "BANKER BONUSES ARE 'SHAMEFUL,' OBAMA DECLARES",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2009/01/30/business/30obama01-75.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "UNITED STATES"
+              ],
+              "nytd_des": [
+                "SUBPRIME MORTGAGE CRISIS",
+                "EXECUTIVE COMPENSATION",
+                "WAGES AND SALARIES",
+                "EMERGENCY ECONOMIC STABILIZATION ACT (2008)",
+                "FINANCES",
+                "STOCKS AND BONDS",
+                "BUDGETS AND BUDGETING",
+                "REGULATION AND DEREGULATION OF INDUSTRY",
+                "BONUSES"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "In an interview with The Times, President Obama opened the door to a reconciliation process in which the American military would reach out to elements of the Taliban.",
+            "date": "2009-03-08T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/03/08/us/politics/08obama.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Helene",
+                  "lastname": "COOPER"
+                },
+                {
+                  "firstname": "Sheryl",
+                  "middlename": "Gay",
+                  "lastname": "STOLBERG",
+                  "rank": 2,
+                  "role": "reported",
+                  "organization": ""
+                }
+              ],
+              "original": "By HELENE COOPER and SHERYL GAY STOLBERG; Jeff Zeleny and Peter Baker contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "Obama Ponders Outreach To Elements of the Taliban",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2009/03/07/us/politics/08obama_75.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "IRAQ",
+                "AFGHANISTAN"
+              ],
+              "nytd_org": [
+                "TALIBAN"
+              ],
+              "nytd_des": [
+                "AFGHANISTAN WAR (2001- )",
+                "UNITED STATES ECONOMY"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "President Obama’s standing remains remarkably strong among African-Americans, but Democrats say turning out those voters in 2012 remains a challenge.",
+            "date": "2011-10-27T00:00:00Z",
+            "url": "http://www.nytimes.com/2011/10/27/us/politics/obamas-support-among-blacks-remains-strong.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Helene",
+                  "lastname": "COOPER"
+                }
+              ],
+              "original": "By HELENE COOPER"
+            },
+            "type_of_material": "News",
+            "title": "Black Support for Obama Is Steady and Strong",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2011/10/27/us/27race/27race-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "BLACKS",
+                "PRESIDENTIAL ELECTION OF 2012",
+                "POLLS AND PUBLIC OPINION"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "In blunt language before a rare joint session of Congress, the president presented his most forceful case yet for a sweeping health care overhaul.",
+            "date": "2009-09-10T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/09/10/us/politics/10obama.html",
+            "byline": {
+              "person": [
+                {
+                  "firstname": "Sheryl",
+                  "middlename": "Gay",
+                  "lastname": "STOLBERG",
+                  "rank": 1,
+                  "role": "reported",
+                  "organization": ""
+                },
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 2,
+                  "firstname": "Jeff",
+                  "lastname": "ZELENY"
+                }
+              ],
+              "original": "By SHERYL GAY STOLBERG and JEFF ZELENY"
+            },
+            "type_of_material": "News",
+            "title": "Obama, Armed With Details, Challenges Congress",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2009/09/09/us/10obama_75.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "REFORM AND REORGANIZATION",
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "HEALTH INSURANCE AND MANAGED CARE"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "The party-line schism in the vote for the stimulus bill highlighted the difficulty of changing Washington’s ways.",
+            "date": "2009-02-14T00:00:00Z",
+            "url": "http://www.nytimes.com/2009/02/14/us/politics/14obama.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Peter",
+                  "lastname": "BAKER"
+                }
+              ],
+              "original": "By PETER BAKER; Jeff Zeleny contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "Bipartisanship Isn't So Easy, Obama Discovers",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_org": [
+                "REPUBLICAN PARTY"
+              ],
+              "nytd_des": [
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "OBAMA STIMULUS PLAN"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "African-Americans voiced pride and amazement over Senator Barack Obama’s victory in Iowa, with some seeing the result as a signal moment in race relations.",
+            "date": "2008-01-05T00:00:00Z",
+            "url": "http://www.nytimes.com/2008/01/05/us/politics/05race.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Diane",
+                  "lastname": "CARDWELL"
+                }
+              ],
+              "original": "By DIANE CARDWELL; Reporting was contributed by James Barron, Timothy Williams and John Eligon from New York; Lakiesha R. Carr and Holli Chmela from Washington; Rebecca Cathcart from Los Angeles; Brenda Goodman from Birmingham, Ala.; Rachel Mosteller from Houston; Susan Saulny from Chicago; Kirk Semple from Miami; and Katie Zezima from Boston"
+            },
+            "type_of_material": "News",
+            "title": "Daring to Believe, Blacks Savor Obama Victory",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "IOWA"
+              ],
+              "nytd_des": [
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "PRIMARIES AND CAUCUSES",
+                "PRESIDENTIAL ELECTION OF 2008",
+                "BLACKS",
+                "RACE"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "With an election year ahead, President Obama set forth a long list of domestic economic proposals, many of which centered on jobs and changing the tax code.",
+            "date": "2012-01-25T00:00:00Z",
+            "url": "http://www.nytimes.com/2012/01/25/us/politics/state-of-the-union-2012.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Helene",
+                  "lastname": "COOPER"
+                }
+              ],
+              "original": "By HELENE COOPER; John M. Broder contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "Obama Sets Goal Of Economy Built For The Long Run",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2012/01/25/us/sub-OBAMA/sub-OBAMA-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_des": [
+                "UNITED STATES POLITICS AND GOVERNMENT",
+                "TAXATION",
+                "UNITED STATES ECONOMY",
+                "PRESIDENTIAL ELECTION OF 2012",
+                "FEDERAL TAXES (US)",
+                "LABOR AND JOBS",
+                "INCOME INEQUALITY",
+                "STATE OF THE UNION MESSAGE (US)"
+              ]
+            }
+          },
+          {
+            "document_type": "article",
+            "body": "The House overwhelmingly rejected a measure to increase the debt limit, a vote staged by Republicans to pressure President Obama to accept deep cuts.",
+            "date": "2011-06-01T00:00:00Z",
+            "url": "http://www.nytimes.com/2011/06/01/us/politics/01fiscal.html",
+            "byline": {
+              "person": [
+                {
+                  "organization": "",
+                  "role": "reported",
+                  "rank": 1,
+                  "firstname": "Jackie",
+                  "lastname": "CALMES"
+                }
+              ],
+              "original": "By JACKIE CALMES; Jennifer Steinhauer and Carl Hulse contributed reporting"
+            },
+            "type_of_material": "News",
+            "title": "PRESSING OBAMA, HOUSE BARS RISE FOR DEBT CEILING",
+            "small_image_height": 75,
+            "small_image_url": "http://graphics8.nytimes.com/images/2011/06/01/us/fiscal-2/fiscal-2-thumbStandard.jpg",
+            "concepts": {
+              "nytd_per": [
+                "OBAMA, BARACK"
+              ],
+              "nytd_geo": [
+                "UNITED STATES"
+              ],
+              "nytd_org": [
+                "HOUSE OF REPRESENTATIVES"
+              ],
+              "nytd_des": [
+                "NATIONAL DEBT (US)",
+                "FEDERAL BUDGET (US)",
+                "BUDGETS AND BUDGETING"
+              ]
+            }
+          }
+        ],
+        "total": 2279
+      }
+    }
+  ]
+}
