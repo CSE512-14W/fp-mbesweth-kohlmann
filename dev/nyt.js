@@ -1,17 +1,34 @@
 $(document).ready(function(){
 
-
+	var svg = d3.select(".donut")
 	var margin = {top: 20, right: 30, bottom: 30, left: 40},
 		width = 3000 - margin.left - margin.right,
 	    height = 500 - margin.top - margin.bottom;
 
+
 	var data = [];
 	var rects;
-
+	
 	// this populates relative position of
-	// 
-	for(var i = 1; i <= 200; i++)
-		data.push(i * 5)
+	for(var i = 0; i < 200; i++)
+		data.push(i)
+
+	var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, data.length]).range([0, width]).focus(width/2);
+
+     svg.on("mousemove", function() {
+     	var mouse = d3.mouse(this);
+     	xScale.distortion(2.5).focus(mouse[0]);
+
+     	rects.call(position);
+	  });
+
+	  // Positions the bars based on data.
+	  function position(rect) {
+	      rect.attr("x", function(d, i) {
+	          return xScale(i);
+	      });
+	  }
+
 
 	donut(data);
 
@@ -20,12 +37,13 @@ $(document).ready(function(){
 	var left = 171;
 	var barRange = 0.5;
 	var closestBar = rects[0][0];
-	console.log(rects[0][0]);
 	
-
+	
 	$("svg").mousemove(function(event){
 
+		fisheye.focus(d3.mouse(this));
 
+		/*
 		//console.log((event.screenX - left) / 10);
 		// get the bar closest to a mouse move
 		// then resize the rest of the bars
@@ -39,11 +57,14 @@ $(document).ready(function(){
 			//.attr('width', "30px")
 			.attr('fill', 'black')
 			.duration(500);
+		*/
 		
 	});
 
+
 	var donutSliceColor;
 	console.log(rects[0][0].__data__)
+	
 
 	function getClosestBar(mousePosition){
 		for(var i = 0; i < rects[0].length; i++){
@@ -73,7 +94,7 @@ function donut(data) {
 	    .outerRadius(radius );
 
 
-	var svg = d3.select(".donut")
+	svg 
 		.data([data])
 	    .attr("width", width)
 	    .attr("height", height)
@@ -87,27 +108,66 @@ function donut(data) {
 		.attr('width', function(d){ return 10 + "px" })
 		.attr('height', function(d){ return 200 + "px" })
 		.attr('x', function(d, i ){ return 15 * i  })
-		.attr('fill', "pink");
+		.attr('fill', "pink")
+		.on('mouseover', function(){
+			var rect = d3.select(this)
+			var position = rect[0][0].__data__;
+			/*
+			rect.transition()
+				//.attr('y', 300)
+				.attr('width', "30px")
+				.duration(50);
+			*/
 
-	console.log(rects);
+			//moveSquares(position, rects[0].length, true);
+			moveSquares(position, rects[0].length);
+		})
+		.on('mouseout',function(){
+			/*
+			var rect = d3.select(this)
+			var position = rect[0][0].__data__;
+			d3.select(this)
+				.transition()
+				//.attr('y', 0)
+				.attr('width', "10px")
+				.duration(500)
 
-	/*
-	rects.on('mouseover', function(){
-		//console.log('over');
-		d3.select(this)
-			.transition()
-			//.attr('y', 300)
-			.attr('width', "30px")
-			.duration(500);
-	}).on('mouseout',function(){
-		//console.log('out');
-		d3.select(this)
-			.transition()
-			//.attr('y', 0)
-			.attr('width', "10px")
-			.duration(500);
-	});
-	*/
+			moveSquares(position, rects[0].length, false);
+			*/
+		})
+		.call(position);
+	
+
+	function moveSquares(position, length) {
+		console.log("position: " + position);
+
+		var scaledPosition;
+		/*
+		for(var i = 0; i < length; i++){
+			otherPosition = i + 1;
+			if(otherPosition > position)
+				otherPosition = Math.abs(length - otherPosition - position);
+
+			scaledPosition = Math.log(otherPosition)
+			console.log(i + " should be " + scaledPosition + " big.");
+		}
+		/*
+		for(var i = position + 1; i < length; i++){
+			var current = d3.select(rects[0][i]);
+			var oldX = current.attr("x");
+			if(forward){
+				current
+					.transition()
+					.attr("x", parseInt(oldX) + 20);
+			} else {
+				current
+					.transition()
+					.attr("x", parseInt(oldX) - 20);	
+			}
+		}
+		*/
+	}
+	
 
 	var mySquare=svg.append("rect")
 	  .attr("x",60)
@@ -152,4 +212,61 @@ function donut(data) {
 
 
 });
+
+/*
+(function chart2() {
+  var width = 960,
+      height = 180,
+      xStepsBig = d3.range(10, width, 16),
+      yStepsBig = d3.range(10, height, 16),
+      xStepsSmall = d3.range(0, width + 6, 6),
+      yStepsSmall = d3.range(0, height + 6, 6);
+
+  var fisheye = d3.fisheye.circular()
+      .focus([360, 90])
+      .radius(100);
+
+  var line = d3.svg.line();
+
+  var svg = d3.select("#chart2").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+    .append("g")
+      .attr("transform", "translate(-.5,-.5)");
+
+  svg.append("rect")
+      .attr("class", "background")
+      .attr("width", width)
+      .attr("height", height);
+
+  svg.selectAll(".x")
+      .data(xStepsBig)
+    .enter().append("path")
+      .attr("class", "x")
+      .datum(function(x) { return yStepsSmall.map(function(y) { return [x, y]; }); });
+
+  svg.selectAll(".y")
+      .data(yStepsBig)
+    .enter().append("path")
+      .attr("class", "y")
+      .datum(function(y) { return xStepsSmall.map(function(x) { return [x, y]; }); });
+
+  var path = svg.selectAll("path")
+      .attr("d", fishline);
+
+  svg.on("mousemove", function() {
+    fisheye.focus(d3.mouse(this));
+    path.attr("d", fishline);
+  });
+
+  function fishline(d) {
+    return line(d.map(function(d) {
+      d = fisheye({x: d[0], y: d[1]});
+      return [d.x, d.y];
+    }));
+  }
+})();
+*/
+
+
 
