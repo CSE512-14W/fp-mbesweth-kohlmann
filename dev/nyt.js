@@ -27,6 +27,9 @@ $(document).ready(function(){
 	      rect.attr("x", function(d, i) {
 	          return xScale(i);
 	      });
+	      rect.attr("width", function(d, i) {
+	          return "20px";
+	      });
 	  }
 
 
@@ -114,6 +117,7 @@ function donut(data) {
 		.attr('height', function(d){ return 200 + "px" })
 		.attr('x', function(d, i ){ return 15 * i  })
 		.attr('fill', "#3D5C95")
+		/*
 		.on('mouseover', function(){
 			var rect = d3.select(this)
 			var position = rect[0][0].__data__;
@@ -131,7 +135,7 @@ function donut(data) {
 			/*
 			var rect = d3.select(this)
 			var position = rect[0][0].__data__;
-			*/
+			
 			d3.select(this)
 				.transition()
 				//.attr('y', 0)
@@ -141,6 +145,7 @@ function donut(data) {
 			//moveSquares(position, rects[0].length, false);
 			
 		})
+*/
 		.call(position);
 	
 
