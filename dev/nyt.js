@@ -38,12 +38,12 @@ $(document).ready(function(){
 	var barRange = 0.5;
 	var closestBar = rects[0][0];
 	
-	
+	/*
 	$("svg").mousemove(function(event){
 
 		fisheye.focus(d3.mouse(this));
 
-		/*
+		
 		//console.log((event.screenX - left) / 10);
 		// get the bar closest to a mouse move
 		// then resize the rest of the bars
@@ -57,13 +57,14 @@ $(document).ready(function(){
 			//.attr('width', "30px")
 			.attr('fill', 'black')
 			.duration(500);
-		*/
+		
 		
 	});
+*/
 
 
 	var donutSliceColor;
-	console.log(rects[0][0].__data__)
+	
 	
 
 	function getClosestBar(mousePosition){
@@ -93,6 +94,10 @@ function donut(data) {
 	    .innerRadius(radius - 400)
 	    .outerRadius(radius );
 
+	svg.append('rect')
+		.attr('width', width)
+		.attr('height', height)
+		.attr('fill','#D3EDF2')
 
 	svg 
 		.data([data])
@@ -108,32 +113,33 @@ function donut(data) {
 		.attr('width', function(d){ return 10 + "px" })
 		.attr('height', function(d){ return 200 + "px" })
 		.attr('x', function(d, i ){ return 15 * i  })
-		.attr('fill', "pink")
+		.attr('fill', "#3D5C95")
 		.on('mouseover', function(){
 			var rect = d3.select(this)
 			var position = rect[0][0].__data__;
-			/*
+			
 			rect.transition()
 				//.attr('y', 300)
 				.attr('width', "30px")
-				.duration(50);
-			*/
+				.duration(200);
+			
 
 			//moveSquares(position, rects[0].length, true);
-			moveSquares(position, rects[0].length);
+			//moveSquares(position, rects[0].length);
 		})
 		.on('mouseout',function(){
 			/*
 			var rect = d3.select(this)
 			var position = rect[0][0].__data__;
+			*/
 			d3.select(this)
 				.transition()
 				//.attr('y', 0)
 				.attr('width', "10px")
-				.duration(500)
+				.duration(200)
 
-			moveSquares(position, rects[0].length, false);
-			*/
+			//moveSquares(position, rects[0].length, false);
+			
 		})
 		.call(position);
 	
