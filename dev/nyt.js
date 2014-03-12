@@ -1,3 +1,5 @@
+var data = [];
+
 $(document).ready(function(){
 
 	var svg = d3.select(".donut")
@@ -6,7 +8,6 @@ $(document).ready(function(){
 	    height = window.innerHeight - margin.top - margin.bottom;
 
 
-	var data = [];
 	var rects;
 	
 	// this populates relative position of
@@ -32,14 +33,21 @@ $(document).ready(function(){
 		  })
 	  }
 
-
-	donut(data);
+	d3.json("/news/obama_again_reduced.json", function(error, json) {
+	  if (error) return console.warn(error);
+	 // data = json;
+	 //console.log(json);
+	 data = [];
+	 for(var i = 0; i < 2000; i++)
+		data.push(json[i])
+	  //console.log(data);
+	  donut();
+	});
 
 	$svg = $("svg");
 
 	var left = 171;
 	var barRange = 0.5;
-	var closestBar = rects[0][0];
 	
 	/*
 	$("svg").mousemove(function(event){
@@ -70,6 +78,7 @@ $(document).ready(function(){
 	
 	
 
+	/*
 	function getClosestBar(mousePosition){
 		for(var i = 0; i < rects[0].length; i++){
 			if((i - mousePosition) < barRange){
@@ -80,9 +89,10 @@ $(document).ready(function(){
 		}
 		return closestBar;
 	}
+	*/
 
 
-function donut(data) {
+function donut() {
 	
 	
     radius = Math.min(width, height) / 2;
@@ -146,7 +156,9 @@ function donut(data) {
 			//moveSquares(position, rects[0].length, false);
 			
 		})
-
+		.on('click', function(d) {
+			console.log(d);
+		})
 		.call(position);
 	
 
