@@ -118,13 +118,18 @@ function donut() {
 	    .append("g")
 	    .attr("transform", "translate(" + 0 + "," + height / 5 + ")");
 
-	rects = svg.selectAll("rect")
+	rectGroups = svg.selectAll("g")
 		.data(function(d, i) { return d })
 		.enter()
+		.append("g")
+		.attr('x', function(d, i ){ return 15 * i  })
+	;
+
+	rects = rectGroups
 		.append("rect")
 		.attr('width', function(d){ return 160 + "px" })
 		.attr('height', function(d){ return 500 + "px" })
-		.attr('x', function(d, i ){ return 15 * i  })
+		
 		.attr('fill', "#3D5C95")
 		
 		.on('mouseover', function(){
@@ -159,7 +164,15 @@ function donut() {
 		.on('click', function(d) {
 			console.log(d);
 		})
-		.call(position);
+		//.append("text")
+		//.text(function(d) { return d.main_headline })
+		.call(position)
+	;
+
+	rectText = rectGroups
+		.append("text")
+		.text(function(d) {	return d.main_headline });
+	;
 	
 
 	function moveSquares(position, length) {
