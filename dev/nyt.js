@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var svg = d3.select(".donut")
-	var margin = {top: 20, right: 30, bottom: 30, left: 40},
+	var margin = {top: 20, right: 250, bottom: 30, left: 40},
 		width = window.innerWidth - margin.left - margin.right,
 	    height = window.innerHeight - margin.top - margin.bottom;
 
@@ -99,7 +99,7 @@ function donut(data) {
 	svg.append('rect')
 		.attr('width', width)
 		.attr('height', height)
-		.attr('fill','#D3EDF2')
+		.attr('fill','white')
 
 	svg 
 		.data([data])

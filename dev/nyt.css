@@ -3,6 +3,12 @@ body{
 	margin: 0;
 }
 
-h1{
-	margin-left: 250px;
+h1, .donut{
+	margin-left: 165px;
+}
+
+h1 {
+	margin-top: 500px;
+	font-size: 100pt;
+	margin-bottom: 0px;
 }
