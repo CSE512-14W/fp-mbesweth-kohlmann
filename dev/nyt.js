@@ -2,8 +2,8 @@ $(document).ready(function(){
 
 	var svg = d3.select(".donut")
 	var margin = {top: 20, right: 30, bottom: 30, left: 40},
-		width = 3000 - margin.left - margin.right,
-	    height = 500 - margin.top - margin.bottom;
+		width = window.innerWidth - margin.left - margin.right,
+	    height = window.innerHeight - margin.top - margin.bottom;
 
 
 	var data = [];
@@ -17,19 +17,19 @@ $(document).ready(function(){
 
      svg.on("mousemove", function() {
      	var mouse = d3.mouse(this);
-     	xScale.distortion(2.5).focus(mouse[0]);
+     	xScale.distortion(10).focus(mouse[0]);
 
      	rects.call(position);
-	  });
+	});
 
 	  // Positions the bars based on data.
 	  function position(rect) {
 	      rect.attr("x", function(d, i) {
-	          return xScale(i);
+	          return xScale(i) + 5;
 	      });
 	      rect.attr("width", function(d, i) {
-	          return "20px";
-	      });
+		      return xScale(i+.97) - xScale(i);
+		  })
 	  }
 
 
@@ -84,8 +84,7 @@ $(document).ready(function(){
 
 function donut(data) {
 	
-	var width = 4000,
-    height = 1000,
+	
     radius = Math.min(width, height) / 2;
 
 	var color = d3.scale.category20();
@@ -113,18 +112,19 @@ function donut(data) {
 		.data(function(d, i) { return d })
 		.enter()
 		.append("rect")
-		.attr('width', function(d){ return 10 + "px" })
-		.attr('height', function(d){ return 200 + "px" })
+		.attr('width', function(d){ return 160 + "px" })
+		.attr('height', function(d){ return 500 + "px" })
 		.attr('x', function(d, i ){ return 15 * i  })
 		.attr('fill', "#3D5C95")
-		/*
+		
 		.on('mouseover', function(){
 			var rect = d3.select(this)
 			var position = rect[0][0].__data__;
 			
 			rect.transition()
 				//.attr('y', 300)
-				.attr('width', "30px")
+				//.attr('width', "30px")
+				.attr('fill', 'pink')
 				.duration(200);
 			
 
@@ -132,20 +132,21 @@ function donut(data) {
 			//moveSquares(position, rects[0].length);
 		})
 		.on('mouseout',function(){
-			/*
+			
 			var rect = d3.select(this)
 			var position = rect[0][0].__data__;
 			
 			d3.select(this)
 				.transition()
 				//.attr('y', 0)
-				.attr('width', "10px")
+				//.attr('width', "10px")
+				.attr('fill','#3D5C95')
 				.duration(200)
 
 			//moveSquares(position, rects[0].length, false);
 			
 		})
-*/
+
 		.call(position);
 	
 
@@ -178,7 +179,7 @@ function donut(data) {
 		}
 		*/
 	}
-	
+	/*
 
 	var mySquare=svg.append("rect")
 	  .attr("x",60)
@@ -193,7 +194,7 @@ function donut(data) {
 	})
 
 
-	/*
+	
 	var path = svg.selectAll("path")
 	    .data(pie.value(function(d) { return d }))
 	  	.enter().append("path")
