@@ -26,7 +26,7 @@ $(document).ready(function(){
      	rectText.each(function() {
      		var $that = d3.select(this);
      		var x = $that.attr("x");
-     		$that.selectAll("tspan").attr("x", x);
+     		$that.selectAll("tspan").attr("x", x + 30 + "px");
      	});
 	});
 
@@ -204,6 +204,7 @@ function donut() {
 				var lineContent = words.slice(i, i + wordsPerLine).join(" ");
 				$that.append("tspan")
 					.attr("dy", (1.2) + "em")
+					.attr('dx', "1em")
 					.text(lineContent)
 				;
 			}
