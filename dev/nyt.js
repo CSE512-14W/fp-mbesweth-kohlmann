@@ -23,6 +23,11 @@ $(document).ready(function(){
 
      	rects.call(position);
      	rectText.call(position);
+     	rectText.each(function() {
+     		var $that = d3.select(this);
+     		var x = $that.attr("x");
+     		$that.selectAll("tspan").attr("x", x);
+     	});
 	});
 
 	  // Positions the bars based on data.
@@ -136,7 +141,7 @@ function donut() {
 	rects = rectGroups
 		.append("rect")
 		.attr('width', function(d){ return 160 + "px" })
-		.attr('height', function(d){ return 500 + "px" })
+		.attr('height', function(d){ return 250 + "px" })
 		
 		.attr('fill', "#3D5C95")
 		
@@ -177,12 +182,33 @@ function donut() {
 		.call(position)
 	;
 
+	// Append svg <text> element
+	// rectText = rectGroups
+	// 	.append("text")
+	// 	.attr("y", "80px")
+	// 	.text(function(d) {	return d.main_headline });
+	// ;
+
+	// Append svg foreignObject element containing an HTML paragraph
 	rectText = rectGroups
 		.append("text")
-		.attr("y", "30px")
-		.text(function(d) {	return d.main_headline });
+		.attr("y", "10px")
+		.attr("data-headline", function(d) { return d.main_headline; })
+		.each(function(d) {
+			var $that = d3.select(this);
+			var textContent = d.main_headline;
+			var wordsPerLine = 4;
+			var words = textContent.split(" ");
+
+			for (var i = 0; i < words.length; i += wordsPerLine) {
+				var lineContent = words.slice(i, i + wordsPerLine).join(" ");
+				$that.append("tspan")
+					.attr("dy", (1.2) + "em")
+					.text(lineContent)
+				;
+			}
+		});
 	;
-	
 
 	function moveSquares(position, length) {
 		console.log("position: " + position);
