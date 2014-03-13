@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nyt.css') }}">
+    </head>
+    <body>
+        <div id="container">
+            <header>
+                <p>This is an attempt to visualize articles from The New York Times. You might even say it's a Dynamic Timeline for News Articles With Interactive Exploration and Linking of Related Subjects’ Timelines.</p> 
+                <h1>Barack Obama</h1>
+            </header>
+            <div class="content">
+                <svg xmlns="http://www.w3.org/2000/svg" class="donut"></svg>
+            </div>
+        </div>
+
+
+        <!-- flask_util.url_for() in JavaScript: https://github.com/kohlmannj/flask_util_js -->
+        <script type="text/javascript" src="{{ url_for("flask_util_js") }}" charset="utf-8"></script>
+        <!-- D3 CDN with Local Fallback -->
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script>window.d3 || document.write('<script src="{{ url_for('static', filename='js/vendor/d3.min.js') }}" charset="utf-8"><\/script>')</script>
+        <!-- jQuery CDN with Local Fallback -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery-2.1.0.min.js') }}"><\/script>')</script>
+        <!-- Underscore -->
+        <!--script src="{{ url_for('static', filename='js/vendor/underscore-min.js') }}"></script-->
+        <!-- Backbone -->
+        <!--script src="{{ url_for('static', filename='js/vendor/backbone-min.js') }}"></script-->
+        <!-- Plugins -->
+        <!--script src="js/plugins.js"></script-->
+        <!-- Main Script -->
+        <!--script src="{{ url_for('static', filename='js/main.js') }}"></script-->
+
+        <script src="{{ url_for('static', filename='js/fisheye.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/nyt.js') }}"></script>
+    </body>
+</html>

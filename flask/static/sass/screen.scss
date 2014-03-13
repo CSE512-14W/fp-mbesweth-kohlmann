@@ -1,0 +1,20 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "base";
+
+/* -------------------------------------------------------------------------*/
+/* Layout */
+
+@include establish-baseline($base-font-size);
+
+body {
+    font-family: "Avenir Next", "Avenir", "Helvetica Neue", "Helvetica", sans-serif;
+    background-color: #fff;
+}
+
+.container {
+  @include container;
+  position: relative;
+//  @include susy-grid-background;
+}
