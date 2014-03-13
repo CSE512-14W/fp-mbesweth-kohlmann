@@ -135,7 +135,7 @@ def reduce_by_year_with_multimedia(input_path, output_dir):
                     "name" in keyword and type(keyword["name"]) in (str, unicode) and keyword["name"] not in keyword_names_to_skip and
                     "value" in keyword and type(keyword["value"]) in (str, unicode) and keyword["value"] != ""
                 ):
-                    flat_keyword = u"fq=%s:(%s)" % (keyword["name"], keyword["value"])
+                    flat_keyword = u'fq=%s:("%s")' % (keyword["name"], keyword["value"])
                     flat_keywords.append(flat_keyword)
         # Get the multimedia from the original article data
         thumbnail_url = None
