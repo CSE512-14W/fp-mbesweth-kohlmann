@@ -9,6 +9,7 @@ $(document).ready(function(){
 
 
 	var rects;
+	var rectText;
 	
 	// this populates relative position of
 	for(var i = 0; i < 200; i++)
@@ -18,9 +19,10 @@ $(document).ready(function(){
 
      svg.on("mousemove", function() {
      	var mouse = d3.mouse(this);
-     	xScale.distortion(10).focus(mouse[0]);
+     	xScale.distortion(100).focus(mouse[0]);
 
      	rects.call(position);
+     	rectText.call(position);
 	});
 
 	  // Positions the bars based on data.
@@ -33,12 +35,18 @@ $(document).ready(function(){
 		  })
 	  }
 
+	  function textPosition(text){
+	  	text.attr("x", function(d, i) {
+	          return xScale(i) + 5;
+	      });
+	  }
+
 	d3.json("/news/obama_again_reduced.json", function(error, json) {
 	  if (error) return console.warn(error);
 	 // data = json;
 	 //console.log(json);
 	 data = [];
-	 for(var i = 0; i < 2000; i++)
+	 for(var i = 0; i < 500; i++)
 		data.push(json[i])
 	  //console.log(data);
 	  donut();
@@ -171,6 +179,7 @@ function donut() {
 
 	rectText = rectGroups
 		.append("text")
+		.attr("y", "30px")
 		.text(function(d) {	return d.main_headline });
 	;
 	
