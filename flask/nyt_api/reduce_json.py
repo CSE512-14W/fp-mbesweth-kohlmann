@@ -112,15 +112,22 @@ def reduce_by_year_with_multimedia(input_path, output_dir):
     # Beyond here, we've got to actually do the reduction
     # Read in the input file.
     json_data = get_input_json(input_path)
-    # Reduce the data into a new JSON file:
+    # Figure out the range of years that the article list covers
+    first_year = dateutil.parser.parse(json_data[0]["pub_date"]).year
+    last_year = dateutil.parser.parse(json_data[-1]["pub_date"]).year
+    year_range = range(first_year, last_year + 1, 1)
     new_data = OrderedDict()
+    # Add keys and lists for each year in the year range into the OrderedDict
+    for year in year_range:
+        new_data[year] = []
+    # Reduce the data into a new JSON file:
     for article in json_data:
         # Get the article year
         article_date = dateutil.parser.parse(article["pub_date"])
         article_year = article_date.year
         # Determine if the year is already a key in new_data
         if article_year not in new_data:
-            new_data[article_year] = []
+            raise ValueError("The year %d should absolutely be in new_data by now..." % article_year)
         # Get the byline for the article
         byline = None
         if "byline" in article and article["byline"] is not None and "original" in article["byline"]:

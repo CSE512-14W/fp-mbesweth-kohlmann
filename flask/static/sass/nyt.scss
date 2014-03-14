@@ -1,3 +1,5 @@
+$margin: 32pt;
+
 body{
 	font-family: avenir;
 	margin: 0;
@@ -12,8 +14,8 @@ p {
 	margin-top: 100px;
 }
 
-h1, .donut, p{
-	margin-left: 165px;
+h1, .donut, p {
+	margin-left: 80px;
 }
 
 h1 {
@@ -22,7 +24,63 @@ h1 {
 	margin-bottom: 0px;
 }
 
-
 text {
 	fill: white;
+}
+
+//#single_year_timeline {
+//  border: 2px solid blue;
+//}
+
+.content {
+  margin: $margin;
+  height: 640px;
+
+  svg {
+    width: 100%;
+  }
+}
+
+svg g#all_years_timeline {
+  g.year {
+    rect.bg {
+      fill: #efefef;
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+
+    rect.fg {
+      fill: #3D5C95;
+      stroke: #fff;
+      stroke-width: 2px;
+      -webkit-transition-property: fill;
+      -webkit-transition-duration: 0.25s;
+    }
+
+    text.label {
+      font-size: 18px;
+      line-height: 24px;
+      text-anchor: middle;
+      font-weight: 500;
+      fill: #000;
+    }
+
+    text.annotation {
+      font-size: 14px;
+      line-height: 18px;
+      text-anchor: middle;
+      font-weight: 500;
+      fill: #999;
+    }
+
+    &:hover, &.active {
+      rect.bg {
+        fill: #ccc;
+      }
+
+      rect.fg {
+        fill: #cc0000;
+      }
+    }
+  }
 }
