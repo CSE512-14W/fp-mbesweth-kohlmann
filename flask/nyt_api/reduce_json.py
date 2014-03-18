@@ -184,7 +184,7 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
     for year, year_docs in new_data.items():
         # Update max_year_docs
         if len(year_docs) > final_data["max_hits"]:
-            final_data["max_hits"] = year_docs
+            final_data["max_hits"] = len(year_docs)
         # Count the most popular keywords in this year's articles
         year_keywords_counter = Counter()
         year_by_month_docs = None

@@ -1,0 +1,43 @@
+{
+    // Years and months also contain most_common_keywords and least_common_keywords attributes
+    "least_common_keywords": [],
+    "most_common_keywords": [],
+    "max_hits": 0,
+    "years": [
+        {
+            "months_max_hits": null,
+            "hits": 0,
+            "year": 1990,
+            "docs": null,
+            "least_common_keywords": [],
+            "most_common_keywords": [],
+            "months": [
+                {
+                    "least_common_keywords": [],
+                    "most_common_keywords": [],
+                    "hits": 0,
+                    // All lists of docs look like this
+                    "docs": {
+                        "original_byline": "BY PATRICK HEALY and ADAM NAGOURNEY",
+                        "multimedia_url": "http://nyt.com/images/2007/01/04/us/04clinton_75.jpg",
+                        "web_url": "http://www.nytimes.com/2007/01/04/us/04clinton.html",
+                        // Keywords look like this for some stupid reason
+                        // Use this JavaScript one-liner to extract the keyword type and value:
+                        // keyword_str.match(/fq=([^:]+):\(\"([^\"]+)\"\)/)
+                        "keywords": [
+                            "fq=persons:(\"EDWARDS, JOHN\")",
+                            "fq=persons:(\"OBAMA, BARACK\")",
+                            "fq=persons:(\"CLINTON, HILLARY RODHAM\")",
+                            "fq=persons:(\"GORE, AL\")",
+                            "fq=persons:(\"KERRY, JOHN\")",
+                            "fq=subject:(\"PRESIDENTIAL ELECTION OF 2008\")"
+                        ],
+                        "main_headline": "In the Back Room and Over Drinks, Senator Clinton Plans for 2008",
+                        "_id": "4fd2552f8eb7c8105d7fd75c",
+                        "pub_date": "2007-01-04T00:00:00Z"
+                    }
+                }
+            ]
+        }
+    ]
+}
