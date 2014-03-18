@@ -17,7 +17,7 @@ var init = function() {
     var $container = d3.select("#container .content");
     var $svg = CreateSVGContainer($container);
     // Set up a timeline for all the years represented in the data set.
-    var $all_years_timeline = AllYearsTimeline(data, $svg);
+    var $all_years_timeline = AllYearsTimeline(data.years, $svg);
 //    var $single_year_timeline = SingleYearTimeline($svg);
 };
 
@@ -26,7 +26,7 @@ var CreateSVGContainer = function($container) {
     var svg_height = 640;
 
     var $svg = $container.append("svg")
-        .data([data])
+//        .data([data])
         .attr("width", svg_width + "px")
         .attr("height", svg_height + "px")
     ;
@@ -189,19 +189,25 @@ var AllYearsTimeline = function(data, $svg) {
             $single_year_timeline.remove();
 //        } else {
         }
-        $single_year_timeline = SingleYearTimeline($svg, d.docs);
-        // Bring the single year timeline in
-        $single_year_timeline
-            .transition()
-            .duration(1000)
-            .attr("opacity", "1.0")
-        ;
-        // Slide the all years timeline down
-        $timeline
-            .transition()
-            .duration(1000)
-            .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
-        ;
+        // Should we display a month timeline or an article timeline next?
+        if (d.docs == null) {
+            window.alert("We should show a month timeline for the year" + d.year + ".");
+            throw "Month timeline not implemented yet.";
+        } else {
+            $single_year_timeline = SingleYearTimeline($svg, d.docs);
+            // Bring the single year timeline in
+            $single_year_timeline
+                .transition()
+                .duration(1000)
+                .attr("opacity", "1.0")
+            ;
+            // Slide the all years timeline down
+            $timeline
+                .transition()
+                .duration(1000)
+                .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
+            ;
+        }
     });
 
     // All Done

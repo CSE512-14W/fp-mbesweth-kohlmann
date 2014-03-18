@@ -97,12 +97,14 @@ def reduce_by_year(input_path, output_dir):
     return output_path
 
 
-def reduce_by_year_with_multimedia(input_path, output_dir):
+def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_limit=200):
+    # File suffix
+    file_suffix = "_reduce_by_year_and_month_with_multimedia"
     # Get the input filename and stuff
     input_filename = os.path.basename(input_path)
     input_splitext = os.path.splitext(input_filename)
     # Did we already reduce this data? Figure out what the output path would be...
-    output_filename = input_splitext[0] + "_reduce_by_year_with_multimedia" + input_splitext[1]
+    output_filename = input_splitext[0] + file_suffix + input_splitext[1]
     output_path = os.path.join(output_dir, output_filename)
     # Does that file already exist?
     if os.path.exists(output_path) and os.path.isfile(output_path):
@@ -171,35 +173,121 @@ def reduce_by_year_with_multimedia(input_path, output_dir):
         # Append the reduced data to the new_data structure (by year)
         new_data[article_year].append(new_article_data)
     # Reformulate the OrderedDict into a list of dicts
-    data_list = []
+    all_years_keywords_counter = Counter()
+    final_data = {
+        "max_hits": 0,
+        "years": [],
+        "most_common_keywords": Counter(),
+        "least_common_keywords": Counter()
+    }
+    # Handle each year and separate a year into months if it contains more articles than year_docs_limit
     for year, year_docs in new_data.items():
+        # Update max_year_docs
+        if len(year_docs) > final_data["max_hits"]:
+            final_data["max_hits"] = year_docs
         # Count the most popular keywords in this year's articles
         year_keywords_counter = Counter()
-        for year_doc in year_docs:
-            year_keywords_counter += Counter(year_doc["keywords"])
-        # Get the top and bottom 10 keywords
+        year_by_month_docs = None
+        # Set up the base data structure for the year in an eventual list in the final data structure
+        year_list_entry = dict(
+            year=year,
+            docs=None,
+            months=None,
+            most_common_keywords=None,
+            least_common_keywords=None,
+            hits=len(year_docs),
+            months_max_hits=None
+        )
+        # Separate the year into months if it contains more articles than year_docs_limit
+        if len(year_docs) > year_docs_limit:
+            # Separate into months
+            year_by_month_docs, year_keywords_counter, months_max_hits = _output_year_by_month(year, year_docs)
+            year_list_entry.update(
+                months=year_by_month_docs,
+                months_max_hits=months_max_hits
+            )
+        else:
+            # Handle the year all at once
+            for year_doc in year_docs:
+                year_keywords_counter += Counter(year_doc["keywords"])
+            year_list_entry.update(
+                docs=year_docs
+            )
+        # Get the top and bottom 10 keywords for the year
         most_common_keywords = year_keywords_counter.most_common(10)
         least_common_keywords = least_common_values(year_keywords_counter, 10)
         # Reformulate this year's data as a dict
-        year_list_entry = {
-            "year": year,
-            "docs": year_docs,
-            "hits": len(year_docs),
-            "most_common_keywords": most_common_keywords,
-            "least_common_keywords": least_common_keywords
-        }
-        data_list.append(year_list_entry)
+        year_list_entry.update(
+            hits=len(year_docs),
+            most_common_keywords=most_common_keywords,
+            least_common_keywords=least_common_keywords
+        )
+        # Combine this year's data with the final data
+        final_data["years"].append(year_list_entry)
+        all_years_keywords_counter += year_keywords_counter
         if debug:
             print "Calculated aggregate data for %d" % year
+    # Finish up with most and least common keywords
+    final_data["most_common_keywords"] = all_years_keywords_counter.most_common(10)
+    final_data["least_common_keywords"] = least_common_values(all_years_keywords_counter, 10)
     # Output data_list as JSON to a new file
-    output_filename = input_splitext[0] + "_reduce_by_year_with_multimedia" + input_splitext[1]
+    output_filename = input_splitext[0] + file_suffix + input_splitext[1]
     output_path = os.path.join(output_dir, output_filename)
     with codecs.open(output_path, mode="w", encoding="utf-8") as fileobj:
-        fileobj.write( json.dumps(data_list) )
+        fileobj.write(
+            json.dumps(final_data)
+        )
     if debug:
         print "%s reduced to new file: %s" % (input_path, output_path)
     # Return the path to said file
     return output_path
+
+
+def _output_year_by_month(year, year_docs):
+    year_by_month = []
+    month_range = range(1, 13, 1)
+    year_keywords_counter = Counter()
+    months_max_hits = 0
+    # Create a dict for each month in the year
+    for month in month_range:
+        month_dict = {
+            "month": month,
+            "year": year,
+            "docs": [],
+            "hits": None,
+            "most_common_keywords": None,
+            "least_common_keywords": None
+        }
+        year_by_month.append(month_dict)
+    # Iterate through the docs and assign them to a month
+    for article in year_docs:
+        # Get the publication date as an actual date
+        article_date = dateutil.parser.parse(article["pub_date"])
+        article_year = article_date.year
+        article_month = article_date.month
+        if article_year != year or article_month not in month_range:
+            raise ValueError("Trying to insert an article published %02d/%04d into articles for %04d, which makes no sense" % (
+                article_month, article_year, year
+            ))
+        # Insert the article into year_by_month somewhere
+        month_index = article_month - 1
+        year_by_month[month_index]["docs"].append(article)
+    # Get common keywords and hits for each month
+    for month_dict in year_by_month:
+        if len(month_dict["docs"]) > months_max_hits:
+            months_max_hits = len(month_dict["docs"])
+        month_keywords = Counter()
+        month_dict["hits"] = len(month_dict["docs"])
+        # Get keyword counts
+        for month_doc in month_dict["docs"]:
+            month_keywords += Counter(month_doc["keywords"])
+        # Get the top and bottom ten keywords for the month
+        month_dict["most_common_keywords"] = month_keywords.most_common(10)
+        month_dict["least_common_keywords"] = least_common_values(month_keywords, 10)
+        # Add this month's keywords counter to the year's keywords counter
+        year_keywords_counter += month_keywords
+    # Return some data structures
+    return year_by_month, year_keywords_counter, months_max_hits
 
 
 def reduce_by_year_minimal(input_path, output_dir):

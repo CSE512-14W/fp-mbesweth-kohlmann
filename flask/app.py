@@ -30,7 +30,7 @@ def search():
     # original_json_full_path
     if original_json_full_path is not None:
         # Reformulate the JSON into whatever we're expecting on the other end
-        reduced_json_full_path = reduce_json.reduce_by_year_with_multimedia(
+        reduced_json_full_path = reduce_json.reduce_by_year_and_month_with_multimedia(
             original_json_full_path,
             article_search_root_path
         )
