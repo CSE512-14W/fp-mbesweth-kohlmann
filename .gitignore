@@ -1,1 +1,4 @@
 .sass-cache
+flask/.idea
+
+*.pyc
