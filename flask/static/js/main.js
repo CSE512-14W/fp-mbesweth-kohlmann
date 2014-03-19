@@ -19,7 +19,7 @@ var init = function() {
     var $div = CreateDivContainer($container);
     // Set up a timeline for all the years represented in the data set.
     var $all_years_timeline = createTimeline(data, $svg);
-    var $single_year_timeline = SingleYearTimeline(data.years[14], $div);
+    var $single_year_timeline = SingleYearTimeline(data.years[17].months[0], $div);
 };
 
 var CreateSVGContainer = function($container) {
@@ -233,7 +233,6 @@ var SingleYearTimeline = function(data, $html) {
     height = window.innerHeight - margin.top - margin.bottom;
 
     var rects;
-    var rectText;
 
     // this populates relative position of
 //  for (var i = 0; i < 200; i++) {
@@ -242,16 +241,20 @@ var SingleYearTimeline = function(data, $html) {
 
     var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, data.docs.length]).range([0, width]).focus(width/2);
 
-      // Positions the bars based on data.
-    var position = function(rect) {
-        rect.each(function(d, i) {
-            $(this).css({
-                transform: "translateX(" + xScale(i) + 5 + "px)"
-            });
-        });
-        rect.attr("width", function(d, i) {
-            return xScale(i + .97) - xScale(i);
-        });
+    // Positions the bars based on data.
+    var position = function(d, i) {
+        // get the current transformation
+//        var transform = new WebKitCSSMatrix(
+//            d3.select(this).style("-webkit-transform")
+//        );
+        var transform = new WebKitCSSMatrix()
+            .translate(xScale(i) + 5, 0)
+//            .scale((xScale(i + .97) - xScale(i)) / 160, 1.0)
+        ;
+        d3.select(this)
+            .style("-webkit-transform", transform)
+            .style("width", xScale(i + .97) - xScale(i) + "px")
+        ;
     };
 
 //  var textPosition = function(text) {
@@ -278,11 +281,12 @@ var SingleYearTimeline = function(data, $html) {
     // DOM setup
     var $timeline = $html.append("div")
         .attr("id", "single_year_timeline")
-        .attr("width", timeline_width + "px")
-        .attr("height", timeline_height + "px")
-        .style("position", "absolute")
-        .style("left", 0)
-        .style("top", 0)
+        .style("width", timeline_width + "px")
+        .style("height", 250 + "px")
+        .data([data.docs])
+//        .style("position", "absolute")
+//        .style("left", 0)
+//        .style("top", 0)
 //        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
     ;
     // Apply the translation transform
@@ -316,69 +320,70 @@ var SingleYearTimeline = function(data, $html) {
         .value(function (d) {return d })
     ;
 
-    $timeline
-        .data([data.docs])
-        .attr("width", width)
-        .attr("height", height)
-//      .append("g")
-//      .attr("transform", "translate(" + 0 + "," + height / 5 + ")")
-//        .attr("opacity", "0.0")
-    ;
+//    $timeline
+//        .data([data.docs])
+//        .attr("width", width)
+//        .attr("height", height)
+////      .append("g")
+////      .attr("transform", "translate(" + 0 + "," + height / 5 + ")")
+////        .attr("opacity", "0.0")
+//    ;
 
-    rectGroups = $timeline.selectAll("div")
-        .data(function(d, i) { return d })
+    rects = $timeline.selectAll("div")
+        .data(function(d) { return d })
         .enter()
         .append("div")
         .classed("rect", true)
-//        .style('width', 160 + "px")
-//      .style('height', 250 + "px")
-        .style('background-color', "#3D5C95")
-        .on('mouseover', function() {
-            var rect = d3.select(this)
-            var position = rect[0][0].__data__;
-
-            rect.transition()
-                //.attr('y', 300)
-                //.attr('width', "30px")
-                .style('background-color', '#cc0000')
-                .duration(200);
+        .attr("data-headline", function(d) { return d.main_headline; })
+        .attr("data-multimedia", function(d) { return d.multimedia_url; })
+        .style("-webkit-transform", function(d, i) {
+            return "translate(" + 15 * i + ", " + 0 + ")"
         })
-        .on('mouseout',function(){
-
-            var rect = d3.select(this)
-            var position = rect[0][0].__data__;
-
-            d3.select(this)
-                .transition()
-                //.attr('y', 0)
-                //.attr('width', "10px")
-                .style('background-color','#3D5C95')
-                .duration(200)
-            ;
-
-            //moveSquares(position, rects[0].length, false);
-
-        })
+//        .style('background-color', "#3D5C95")
+//        .on('mouseover', function() {
+////            var rect = d3.select(this)
+////            var position = rect[0][0].__data__;
+//
+//            rect.transition()
+//                .style('background-color', '#cc0000')
+//                .duration(200)
+//            ;
+//        })
+//        .on('mouseout',function(){
+//
+//            var rect = d3.select(this)
+//            var position = rect[0][0].__data__;
+//
+//            d3.select(this)
+//                .transition()
+//                .duration(200)
+//            ;
+//
+//        })
         .on('click', function(d) {
             window.open(d.web_url);
         })
     ;
 
-    // CSS Transforms
-    rectGroups
-        .each(function(d, i) {
-            $(this).css({
-                transform: "translateX(" + 15 * i + "px)"
-            });
-
-            var transform = new WebKitCSSMatrix(
-                $(this).css("-webkit-transform")
-            );
-            transform = transform.translate(0, i * -250);
-            $(this).css("-webkit-transform", transform);
-        })
-//      .attr('x', function(d, i ){ return 15 * i  })
+    rectInsides = rects
+        .append("div")
+        .classed("rectInside", true)
     ;
+
+    // CSS Transforms
+//    rects
+//        .each(function(d, i) {
+//            $(this).css({
+//                transform: "translateX(" + 15 * i + "px)"
+//            });
+//
+//            var transform = new WebKitCSSMatrix(
+//                $(this).css("-webkit-transform")
+//            );
+//            transform = transform.translate(0, i * -250);
+//            $(this).css("-webkit-transform", transform);
+//        })
+//    ;
 
 //  rects = rectGroups
 //      .append("div")
@@ -424,52 +429,48 @@ var SingleYearTimeline = function(data, $html) {
 //  ;
 
     // Append svg foreignObject element containing an HTML paragraph
-    rectText = rectGroups
-        .append("span")
-        .attr("y", "10px")
-        .attr("data-headline", function(d) { return d.main_headline; })
+    rectHeadlines = rectInsides
+        .append("h3")
+//        .attr("data-headline", function(d) { return d.main_headline; })
         .text(function(d) { return d.main_headline; })
-//      .each(function(d) {
-//          var $that = d3.select(this);
-//          var textContent = d.main_headline;
-//          var wordsPerLine = 4;
-//          var words = textContent.split(" ");
-//
-//          for (var i = 0; i < words.length; i += wordsPerLine) {
-//              var lineContent = words.slice(i, i + wordsPerLine).join(" ");
-//              $that.append("tspan")
-//                  .attr("dy", (1.2) + "em")
-//                  .attr('dx', "1em")
-//                  .text(lineContent)
-//              ;
-//          }
-//      })
+    ;
+
+    rectLeads = rectInsides
+        .append("p")
+        .text(function(d) { return d.lead_paragraph; })
+    ;
+
+    rectImgs = rectInsides.each(function(d, i) {
+        if (d.multimedia_url) {
+            d3.select(this)
+                .append("img")
+                .attr("src", d.multimedia_url)
+                .attr("class", d.multimedia_type)
+            ;
+        }
+    })
+//        .append("img")
+////        .attr("data-multimedia", function(d) { return d.multimedia_url; })
+//        .attr("src", function(d) { return d.multimedia_url; })
     ;
 
     // Event Handlers
     $timeline.on("mousemove", function() {
         var mouse = d3.mouse(this);
         xScale.distortion(100).focus(mouse[0]);
-
-        rects.call(position);
-        rectText.call(position);
-        rectText.each(function() {
-            var $that = d3.select(this);
-            var x = $that.attr("x");
-            $that.selectAll("tspan").attr("x", x + 30 + "px");
-        });
+        rects.each(position);
     });
 
     // Invoke the layout right away
     xScale.distortion(100).focus(960);
 
-    rects.call(position);
-    rectText.call(position);
-    rectText.each(function() {
-        var $that = d3.select(this);
-        var x = $that.attr("x");
-        $that.selectAll("tspan").attr("x", x + 30 + "px");
-    });
+//    rects.call(position);
+//    rectText.call(position);
+//    rectText.each(function() {
+//        var $that = d3.select(this);
+//        var x = $that.attr("x");
+//        $that.selectAll("tspan").attr("x", x + 30 + "px");
+//    });
 
     // Return
     return $timeline;

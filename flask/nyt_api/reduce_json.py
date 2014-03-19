@@ -15,6 +15,12 @@ import heapq
 import collections
 
 
+multimedia_types = [
+    "xlarge",
+    ""
+]
+
+
 def least_common_values(counter, to_find=None):
     if to_find is None:
         return sorted(counter.items(), key=itemgetter(1), reverse=False)
@@ -40,6 +46,9 @@ def reduce(input_path, output_dir):
     # Reduce the data into a new JSON file
     new_data = []
     for article in json_data:
+        lead_paragraph = None
+        if "lead_paragraph" in article:
+            lead_paragraph = article["lead_paragraph"]
         byline = None
         if "byline" in article and article["byline"] is not None and "original" in article["byline"]:
             byline = article["byline"]["original"]
@@ -48,6 +57,7 @@ def reduce(input_path, output_dir):
             "main_headline": article["headline"]["main"],
             "web_url": article["web_url"],
             "original_byline": byline,
+            "lead_paragraph": lead_paragraph,
             "_id": article["_id"]
         }
         new_data.append(new_article_data)
@@ -147,7 +157,9 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
                     flat_keyword = u'fq=%s:("%s")' % (keyword["name"], keyword["value"])
                     flat_keywords.append(flat_keyword)
         # Get the multimedia from the original article data
-        thumbnail_url = None
+        multimedia_url = None
+
+        multimedia_type = None
         if "multimedia" in article and len(article["multimedia"]) > 0:
             for index, multimedia in enumerate(article["multimedia"]):
                 # Skip the multimedia item if it doesn't have a "url" key. Yikes.
@@ -155,11 +167,14 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
                     continue
                 # Get the very first multimedia item so we at least have something
                 if index == 0:
-                    thumbnail_url = u"http://nyt.com/%s" % multimedia["url"]
-                # Prefer thumbnail multimedia
-                if "subtype" in multimedia and multimedia["subtype"] == "thumbnail":
-                    thumbnail_url = "http://nyt.com/" + multimedia["url"]
-                    break
+                    multimedia_url = u"http://nyt.com/%s" % multimedia["url"]
+                # Get one particular multimedia entry
+                if "subtype" in multimedia:
+                    multimedia_url = "http://nyt.com/" + multimedia["url"]
+                    multimedia_type =  multimedia["subtype"]
+                    # Prefer xlarge
+                    if multimedia["subtype"] == "xlarge":
+                        break
         # Prepare a dict with all the article data we care about
         new_article_data = {
             "pub_date": article["pub_date"],
@@ -168,7 +183,8 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
             "original_byline": byline,
             "_id": article["_id"],
             "keywords": flat_keywords,
-            "multimedia_url": thumbnail_url
+            "multimedia_url": multimedia_url,
+            "multimedia_type": multimedia_type
         }
         # Append the reduced data to the new_data structure (by year)
         new_data[article_year].append(new_article_data)

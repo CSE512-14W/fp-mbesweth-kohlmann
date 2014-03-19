@@ -52,7 +52,7 @@ svg g#all_years_timeline, svg g#month_timeline {
     }
 
     rect.fg {
-      fill: #3D5C95;
+      fill: $fillColor;
       stroke: #fff;
       stroke-width: 2px;
       -webkit-transition-property: fill;
@@ -81,18 +81,51 @@ svg g#all_years_timeline, svg g#month_timeline {
       }
 
       rect.fg {
-        fill: #cc0000;
+        fill: $fillColorActive;
       }
     }
   }
 }
 
 div#single_year_timeline {
+  position: relative;
+  background: purple;
+
   .rect {
     width: 160px;
     height: 250px;
     background-color: $fillColor;
     color: #fff;
     overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+
+    .rectInside {
+      width: 420px;
+      height: 100%;
+      padding: 10px;
+      background: gray;
+      margin: 0 auto;
+    }
+
+    h3 {
+      margin: 0;
+      font-weight: 500;
+      background-color: green;
+    }
+
+    p {
+      background-color: white;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+    }
   }
 }
