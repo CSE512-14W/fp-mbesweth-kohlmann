@@ -1,6 +1,6 @@
 /* line 5, ../sass/nyt.scss */
 body {
-  font-family: avenir;
+  font-family: Avenir;
   margin: 0;
 }
 
@@ -43,21 +43,21 @@ text {
 }
 
 /* line 48, ../sass/nyt.scss */
-svg g#all_years_timeline g.year rect.bg {
+svg g#all_years_timeline g.bar rect.bg, svg g#month_timeline g.bar rect.bg {
   fill: #efefef;
   stroke: #fff;
   stroke-width: 2px;
 }
 /* line 54, ../sass/nyt.scss */
-svg g#all_years_timeline g.year rect.fg {
-  fill: #3d5c95;
+svg g#all_years_timeline g.bar rect.fg, svg g#month_timeline g.bar rect.fg {
+  fill: #3D5C95;
   stroke: #fff;
   stroke-width: 2px;
   -webkit-transition-property: fill;
   -webkit-transition-duration: 0.25s;
 }
 /* line 62, ../sass/nyt.scss */
-svg g#all_years_timeline g.year text.label {
+svg g#all_years_timeline g.bar text.label, svg g#month_timeline g.bar text.label {
   font-size: 18px;
   line-height: 24px;
   text-anchor: middle;
@@ -65,7 +65,7 @@ svg g#all_years_timeline g.year text.label {
   fill: #000;
 }
 /* line 70, ../sass/nyt.scss */
-svg g#all_years_timeline g.year text.annotation {
+svg g#all_years_timeline g.bar text.annotation, svg g#month_timeline g.bar text.annotation {
   font-size: 14px;
   line-height: 18px;
   text-anchor: middle;
@@ -73,15 +73,15 @@ svg g#all_years_timeline g.year text.annotation {
   fill: #999;
 }
 /* line 79, ../sass/nyt.scss */
-svg g#all_years_timeline g.year:hover rect.bg, svg g#all_years_timeline g.year.active rect.bg {
+svg g#all_years_timeline g.bar:hover rect.bg, svg g#all_years_timeline g.bar.active rect.bg, svg g#month_timeline g.bar:hover rect.bg, svg g#month_timeline g.bar.active rect.bg {
   fill: #ccc;
 }
 /* line 83, ../sass/nyt.scss */
-svg g#all_years_timeline g.year:hover rect.fg, svg g#all_years_timeline g.year.active rect.fg {
+svg g#all_years_timeline g.bar:hover rect.fg, svg g#all_years_timeline g.bar.active rect.fg, svg g#month_timeline g.bar:hover rect.fg, svg g#month_timeline g.bar.active rect.fg {
   fill: #cc0000;
 }
 
-/* line 93, ../sass/nyt.scss */
+/* line 91, ../sass/nyt.scss */
 div#single_year_timeline .rect {
   width: 160px;
   height: 250px;

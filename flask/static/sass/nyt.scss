@@ -2,8 +2,8 @@ $margin: 32pt;
 $fillColor: #3D5C95;
 $fillColorActive: #cc0000;
 
-body {
-	font-family: avenir;
+body{
+	font-family: Avenir;
 	margin: 0;
 }
 
@@ -43,8 +43,8 @@ text {
   }
 }
 
-svg g#all_years_timeline {
-  g.year {
+svg g#all_years_timeline, svg g#month_timeline {
+  g.bar {
     rect.bg {
       fill: #efefef;
       stroke: #fff;
@@ -52,7 +52,7 @@ svg g#all_years_timeline {
     }
 
     rect.fg {
-      fill: $fillColor;
+      fill: #3D5C95;
       stroke: #fff;
       stroke-width: 2px;
       -webkit-transition-property: fill;
@@ -81,15 +81,13 @@ svg g#all_years_timeline {
       }
 
       rect.fg {
-        fill: $fillColorActive;
+        fill: #cc0000;
       }
     }
   }
 }
 
 div#single_year_timeline {
-
-
   .rect {
     width: 160px;
     height: 250px;

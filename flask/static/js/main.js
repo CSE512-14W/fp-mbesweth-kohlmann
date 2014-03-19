@@ -18,7 +18,7 @@ var init = function() {
     var $svg = CreateSVGContainer($container);
     var $div = CreateDivContainer($container);
     // Set up a timeline for all the years represented in the data set.
-    var $all_years_timeline = AllYearsTimeline(data, $svg);
+    var $all_years_timeline = createTimeline(data, $svg);
     var $single_year_timeline = SingleYearTimeline(data.years[14], $div);
 };
 
@@ -44,7 +44,28 @@ var CreateDivContainer = function($container) {
     ;
 };
 
-var AllYearsTimeline = function(data, $svg) {
+var createTimeline = function(data, $svg) {
+
+    //dealing with year data
+    var maxHits;    // max number of articles
+    var timeLength; // number of years or months being considered
+    var timeData;   // the associated month or year data
+    var graphName;
+    var months;
+    if(data.years){
+        maxHits    = data.max_hits;
+        timeLength = data.years.length;
+        timeData   = data.years;
+        graphName  = "all_years_timeline";
+    } else { // dealing with month data
+        maxHits    = data.months_max_hits;
+        timeLength = data.months.length;
+        timeData   = data.months;
+        graphName  = "month_timeline";
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+    }
+    console.log(data);
+    console.log(data.years);
     // SVG container width and height
     var svg_width = parseInt( $svg.style("width") );
     var svg_height = parseInt( $svg.style("height") );
@@ -55,13 +76,20 @@ var AllYearsTimeline = function(data, $svg) {
     var timeline_x = margin;
     var timeline_y = svg_height / 2 + margin - 36;
     var timeline_y_centered = svg_height / 2 - timeline_height / 2;
-    // Year rect size
-    var year_rect_width = timeline_width / data.years.length;
+
+    //data.max_hits
+    var heightScale = d3.scale.log().domain([maxHits, 0.5]).range([timeline_height,0]);
+
+    console.log(heightScale(428));
+
+    // Year rect size | data.years.length
+    var year_rect_width = timeline_width / timeLength;
 
     // DOM setup
     var $timeline = $svg.append("g")
-        .data([data.years])
-        .attr("id", "all_years_timeline")
+        //data.years
+        .data([timeData])
+        .attr("id", graphName)
         .attr("width", timeline_width + "px")
         .attr("height", timeline_height + "px")
         .attr("transform", "translate(" + timeline_x + ", " + timeline_y_centered + ")")
@@ -75,7 +103,7 @@ var AllYearsTimeline = function(data, $svg) {
     $year_groups
         .enter()
         .append("g")
-        .classed("year", true)
+        .classed("bar", true)
         .attr("data-year", function(d) { return d.year; })
         .attr("data-hits", function(d) { return d.hits; })
     ;
@@ -97,19 +125,11 @@ var AllYearsTimeline = function(data, $svg) {
         .classed("fg", true)
         .attr("x", function(d,i) { return (i * year_rect_width) + "px" })
         .attr("y", function(d,i) {
-            var height = 4 * d.hits;
-            if (height > timeline_height) {
-                height = timeline_height;
-            }
-            return (timeline_height - height) / 2 + "px";
+            return timeline_height - heightScale(d.hits) + "px";
         })
         .attr("width", year_rect_width + "px")
         .attr("height", function(d,i) {
-            var height = 4 * d.hits;
-            if (height > timeline_height) {
-                height = timeline_height;
-            }
-            return height + "px";
+            return heightScale(d.hits) + "px";
         })
         // .attr("transform", "scale(1.0, 0.0)")
         // .attr("transform-origin", "50%, 50%")
@@ -121,14 +141,21 @@ var AllYearsTimeline = function(data, $svg) {
 
     var $year_labels = $year_groups
         .append("text")
-        .classed("label", true)
-        .text(function(d) { return d.year; })
+        .classed("annotation", true)
+        .text(function(d, i) { 
+            if(data.years)
+                return d.year; 
+            else {
+                return months[i] + ".";
+            }
+        })
         .attr("width", year_rect_width + "px")
         .attr("height", 24 + "px")
         .attr("x", function(d,i) { return (i * year_rect_width + year_rect_width / 2) + "px" })
         .attr("y", (timeline_height + 24) + "px")
     ;
 
+    /*
     var $year_annotations = $year_groups
         .append("text")
         .classed("annotation", true)
@@ -138,6 +165,7 @@ var AllYearsTimeline = function(data, $svg) {
         .attr("x", function(d,i) { return (i * year_rect_width + year_rect_width / 2) + "px" })
         .attr("y", (timeline_height + 42) + "px")
     ;
+    */
 
 //    $timeline
 //        .transition()
@@ -148,7 +176,7 @@ var AllYearsTimeline = function(data, $svg) {
 
     var $single_year_timeline = null;
 
-    // var $single_year_timeline = SingleYearTimeline(data[17].docs, $svg);
+    // var $single_year_timeline = SingleYearTimeline($svg, data[17].docs);
 
     // Event Handlers
     $year_groups.selectAll("rect, text").on("mouseenter", function(d, i) {
@@ -173,10 +201,13 @@ var AllYearsTimeline = function(data, $svg) {
         }
         // Should we display a month timeline or an article timeline next?
         if (d.docs == null) {
-            window.alert("We should show a month timeline for the year" + d.year + ".");
-            throw "Month timeline not implemented yet.";
+            //console.log(d);
+            $("#all_years_timeline").remove();
+            createTimeline(d, $svg);
+            //window.alert("We should show a month timeline for the year" + d.year + ".");
+            //throw "Month timeline not implemented yet.";
         } else {
-            $single_year_timeline = SingleYearTimeline(d, $svg);
+            $single_year_timeline = SingleYearTimeline($svg, d.docs);
             // Bring the single year timeline in
             $single_year_timeline
                 .transition()
@@ -192,14 +223,6 @@ var AllYearsTimeline = function(data, $svg) {
         }
     });
 
-    // Move the timeline downwards
-    $timeline
-        .transition()
-        .delay(500)
-        .duration(1000)
-        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
-    ;
-
     // All Done
     return $timeline;
 };
@@ -209,18 +232,18 @@ var SingleYearTimeline = function(data, $html) {
     width = window.innerWidth - margin.left - margin.right,
     height = window.innerHeight - margin.top - margin.bottom;
 
-	var rects;
-	var rectText;
+    var rects;
+    var rectText;
 
-	// this populates relative position of
-//	for (var i = 0; i < 200; i++) {
-//		data.push(i)
+    // this populates relative position of
+//  for (var i = 0; i < 200; i++) {
+//      data.push(i)
 //    }
 
-	var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, data.docs.length]).range([0, width]).focus(width/2);
+    var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, data.docs.length]).range([0, width]).focus(width/2);
 
-	  // Positions the bars based on data.
-	var position = function(rect) {
+      // Positions the bars based on data.
+    var position = function(rect) {
         rect.each(function(d, i) {
             $(this).css({
                 transform: "translateX(" + xScale(i) + 5 + "px)"
@@ -231,13 +254,13 @@ var SingleYearTimeline = function(data, $html) {
         });
     };
 
-//	var textPosition = function(text) {
-//	    text.each(function(d, i) {
-//	        $(this).css({
+//  var textPosition = function(text) {
+//      text.each(function(d, i) {
+//          $(this).css({
 //                transform: xScale(i) + 5
 //            });
 //        });
-//	};
+//  };
     //////////////////////
     // Begin Joe's Code //
     //////////////////////
@@ -269,17 +292,17 @@ var SingleYearTimeline = function(data, $html) {
 
     // Event handler
     $timeline.on("mousemove", function() {
-     	var mouse = d3.mouse(this);
-     	xScale.distortion(100).focus(mouse[0]);
+        var mouse = d3.mouse(this);
+        xScale.distortion(100).focus(mouse[0]);
 
-     	rects.call(position);
-     	rectText.call(position);
-     	rectText.each(function() {
-     		var $that = d3.select(this);
-//     		var x = $that.attr("x");
-//     		$that.selectAll("tspan").attr("x", x + 30 + "px");
-     	});
-	});
+        rects.call(position);
+        rectText.call(position);
+        rectText.each(function() {
+            var $that = d3.select(this);
+//          var x = $that.attr("x");
+//          $that.selectAll("tspan").attr("x", x + 30 + "px");
+        });
+    });
 
 //    return $timeline;
     ////////////////////
@@ -287,58 +310,58 @@ var SingleYearTimeline = function(data, $html) {
     ////////////////////
     radius = Math.min(width, height) / 2;
 
-	var color = d3.scale.category20();
+    var color = d3.scale.category20();
 
     var pie = d3.layout.pie()
-	    .value(function (d) {return d })
+        .value(function (d) {return d })
     ;
 
-	$timeline
-		.data([data.docs])
-	    .attr("width", width)
-	    .attr("height", height)
-//	    .append("g")
-//	    .attr("transform", "translate(" + 0 + "," + height / 5 + ")")
+    $timeline
+        .data([data.docs])
+        .attr("width", width)
+        .attr("height", height)
+//      .append("g")
+//      .attr("transform", "translate(" + 0 + "," + height / 5 + ")")
 //        .attr("opacity", "0.0")
     ;
 
-	rectGroups = $timeline.selectAll("div")
-		.data(function(d, i) { return d })
-		.enter()
-		.append("div")
+    rectGroups = $timeline.selectAll("div")
+        .data(function(d, i) { return d })
+        .enter()
+        .append("div")
         .classed("rect", true)
 //        .style('width', 160 + "px")
-//		.style('height', 250 + "px")
+//      .style('height', 250 + "px")
         .style('background-color', "#3D5C95")
         .on('mouseover', function() {
-			var rect = d3.select(this)
-			var position = rect[0][0].__data__;
+            var rect = d3.select(this)
+            var position = rect[0][0].__data__;
 
-			rect.transition()
-				//.attr('y', 300)
-				//.attr('width', "30px")
-				.style('background-color', '#cc0000')
-				.duration(200);
-		})
-		.on('mouseout',function(){
+            rect.transition()
+                //.attr('y', 300)
+                //.attr('width', "30px")
+                .style('background-color', '#cc0000')
+                .duration(200);
+        })
+        .on('mouseout',function(){
 
-			var rect = d3.select(this)
-			var position = rect[0][0].__data__;
+            var rect = d3.select(this)
+            var position = rect[0][0].__data__;
 
-			d3.select(this)
-				.transition()
-				//.attr('y', 0)
-				//.attr('width', "10px")
-				.style('background-color','#3D5C95')
-				.duration(200)
+            d3.select(this)
+                .transition()
+                //.attr('y', 0)
+                //.attr('width', "10px")
+                .style('background-color','#3D5C95')
+                .duration(200)
             ;
 
-			//moveSquares(position, rects[0].length, false);
+            //moveSquares(position, rects[0].length, false);
 
-		})
-		.on('click', function(d) {
-			window.open(d.web_url);
-		})
+        })
+        .on('click', function(d) {
+            window.open(d.web_url);
+        })
     ;
 
     // CSS Transforms
@@ -354,88 +377,88 @@ var SingleYearTimeline = function(data, $html) {
             transform = transform.translate(0, i * -250);
             $(this).css("-webkit-transform", transform);
         })
-//		.attr('x', function(d, i ){ return 15 * i  })
-	;
+//      .attr('x', function(d, i ){ return 15 * i  })
+    ;
 
-//	rects = rectGroups
-//		.append("div")
+//  rects = rectGroups
+//      .append("div")
 //        .classed("rect")
-//		.attr('width', function(d) { return 160 + "px" })
-//		.attr('height', function(d) { return 250 + "px" })
-//		.style('background-color', "#3D5C95")
-//		.on('mouseover', function() {
-//			var rect = d3.select(this)
-//			var position = rect[0][0].__data__;
+//      .attr('width', function(d) { return 160 + "px" })
+//      .attr('height', function(d) { return 250 + "px" })
+//      .style('background-color', "#3D5C95")
+//      .on('mouseover', function() {
+//          var rect = d3.select(this)
+//          var position = rect[0][0].__data__;
 //
-//			rect.transition()
-//				//.attr('y', 300)
-//				//.attr('width', "30px")
-//				.style('background-color', '#cc0000')
-//				.duration(200);
+//          rect.transition()
+//              //.attr('y', 300)
+//              //.attr('width', "30px")
+//              .style('background-color', '#cc0000')
+//              .duration(200);
 //
 //
-//			//moveSquares(position, rects[0].length, true);
-//			//moveSquares(position, rects[0].length);
-//		})
-//		.on('mouseout',function(){
+//          //moveSquares(position, rects[0].length, true);
+//          //moveSquares(position, rects[0].length);
+//      })
+//      .on('mouseout',function(){
 //
-//			var rect = d3.select(this)
-//			var position = rect[0][0].__data__;
+//          var rect = d3.select(this)
+//          var position = rect[0][0].__data__;
 //
-//			d3.select(this)
-//				.transition()
-//				//.attr('y', 0)
-//				//.attr('width', "10px")
-//				.style('background-color','#3D5C95')
-//				.duration(200)
+//          d3.select(this)
+//              .transition()
+//              //.attr('y', 0)
+//              //.attr('width', "10px")
+//              .style('background-color','#3D5C95')
+//              .duration(200)
 //
-//			//moveSquares(position, rects[0].length, false);
+//          //moveSquares(position, rects[0].length, false);
 //
-//		})
-//		.on('click', function(d) {
-//			window.open(d.web_url);
-//		})
-//		//.append("text")
-//		//.text(function(d) { return d.main_headline })
-//		.call(position)
-//	;
+//      })
+//      .on('click', function(d) {
+//          window.open(d.web_url);
+//      })
+//      //.append("text")
+//      //.text(function(d) { return d.main_headline })
+//      .call(position)
+//  ;
 
-	// Append svg foreignObject element containing an HTML paragraph
-	rectText = rectGroups
-		.append("span")
-		.attr("y", "10px")
-		.attr("data-headline", function(d) { return d.main_headline; })
+    // Append svg foreignObject element containing an HTML paragraph
+    rectText = rectGroups
+        .append("span")
+        .attr("y", "10px")
+        .attr("data-headline", function(d) { return d.main_headline; })
         .text(function(d) { return d.main_headline; })
-//		.each(function(d) {
-//			var $that = d3.select(this);
-//			var textContent = d.main_headline;
-//			var wordsPerLine = 4;
-//			var words = textContent.split(" ");
+//      .each(function(d) {
+//          var $that = d3.select(this);
+//          var textContent = d.main_headline;
+//          var wordsPerLine = 4;
+//          var words = textContent.split(" ");
 //
-//			for (var i = 0; i < words.length; i += wordsPerLine) {
-//				var lineContent = words.slice(i, i + wordsPerLine).join(" ");
-//				$that.append("tspan")
-//					.attr("dy", (1.2) + "em")
-//					.attr('dx', "1em")
-//					.text(lineContent)
-//				;
-//			}
-//		})
-	;
+//          for (var i = 0; i < words.length; i += wordsPerLine) {
+//              var lineContent = words.slice(i, i + wordsPerLine).join(" ");
+//              $that.append("tspan")
+//                  .attr("dy", (1.2) + "em")
+//                  .attr('dx', "1em")
+//                  .text(lineContent)
+//              ;
+//          }
+//      })
+    ;
 
     // Event Handlers
     $timeline.on("mousemove", function() {
-     	var mouse = d3.mouse(this);
-     	xScale.distortion(100).focus(mouse[0]);
+        var mouse = d3.mouse(this);
+        xScale.distortion(100).focus(mouse[0]);
 
-     	rects.call(position);
-     	rectText.call(position);
-     	rectText.each(function() {
-     		var $that = d3.select(this);
-     		var x = $that.attr("x");
-     		$that.selectAll("tspan").attr("x", x + 30 + "px");
-     	});
-	});
+        rects.call(position);
+        rectText.call(position);
+        rectText.each(function() {
+            var $that = d3.select(this);
+            var x = $that.attr("x");
+            $that.selectAll("tspan").attr("x", x + 30 + "px");
+        });
+    });
 
     // Invoke the layout right away
     xScale.distortion(100).focus(960);
