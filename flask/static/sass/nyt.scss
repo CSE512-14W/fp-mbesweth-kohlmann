@@ -88,6 +88,7 @@ svg g#all_years_timeline, svg g#month_timeline {
 }
 
 div#single_year_timeline {
+  display: none;
   .rect {
     width: 160px;
     height: 250px;
