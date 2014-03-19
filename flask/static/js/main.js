@@ -136,6 +136,9 @@ var createTimeline = function(data, $svg) {
         // .attr("transform-origin", "50%, 50%")
         .attr("opacity", "0")
         .transition()
+        .attr("height", function(d,i) {
+            return heightScale(d.hits) + "px";
+        })
         // .attr("transform", "scale(1.0, 1.0)")
         .attr("opacity", "1.0")
     ;
