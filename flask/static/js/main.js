@@ -17,7 +17,7 @@ var init = function() {
     var $container = d3.select("#container .content");
     var $svg = CreateSVGContainer($container);
     // Set up a timeline for all the years represented in the data set.
-    var $all_years_timeline = AllYearsTimeline(data, $svg);
+    var $all_years_timeline = createTimeline(data, $svg);
 //    var $single_year_timeline = SingleYearTimeline($svg);
 };
 
@@ -62,7 +62,25 @@ var TransitionToSingleYearTimeline = function(single_year_data, $svg, $all_years
     ;
 }
 
-var AllYearsTimeline = function(data, $svg) {
+var createTimeline = function(data, $svg) {
+
+    //dealing with year data
+    var maxHits;    // max number of articles
+    var timeLength; // number of years or months being considered
+    var timeData;   // the associated month or year data
+    var graphName;
+    if(data.years){
+        maxHits    = data.max_hits;
+        timeLength = data.years.length;
+        timeData   = data.years;
+        graphName  = "all_years_timeline";
+    } else { // dealing with month data
+        maxHits    = data.months_max_hits;
+        timeLength = data.months.length;
+        timeData   = data.months;
+        graphName  = "month_timeline";
+    }
+    console.log(data);
     console.log(data.years);
     // SVG container width and height
     var svg_width = parseInt( $svg.style("width") );
@@ -75,17 +93,19 @@ var AllYearsTimeline = function(data, $svg) {
     var timeline_y = svg_height / 2 + margin - 36;
     var timeline_y_centered = svg_height / 2 - timeline_height / 2;
 
-    var heightScale = d3.scale.log().domain([data.max_hits, 0.5]).range([timeline_height,0]);
+    //data.max_hits
+    var heightScale = d3.scale.log().domain([maxHits, 0.5]).range([timeline_height,0]);
 
     console.log(heightScale(428));
 
-    // Year rect size
-    var year_rect_width = timeline_width / data.years.length;
+    // Year rect size | data.years.length
+    var year_rect_width = timeline_width / timeLength;
 
     // DOM setup
     var $timeline = $svg.append("g")
-        .data([data.years])
-        .attr("id", "all_years_timeline")
+        //data.years
+        .data([timeData])
+        .attr("id", graphName)
         .attr("width", timeline_width + "px")
         .attr("height", timeline_height + "px")
         .attr("transform", "translate(" + timeline_x + ", " + timeline_y_centered + ")")
@@ -99,7 +119,7 @@ var AllYearsTimeline = function(data, $svg) {
     $year_groups
         .enter()
         .append("g")
-        .classed("year", true)
+        .classed("bar", true)
         .attr("data-year", function(d) { return d.year; })
         .attr("data-hits", function(d) { return d.hits; })
     ;
@@ -191,8 +211,11 @@ var AllYearsTimeline = function(data, $svg) {
         }
         // Should we display a month timeline or an article timeline next?
         if (d.docs == null) {
-            window.alert("We should show a month timeline for the year" + d.year + ".");
-            throw "Month timeline not implemented yet.";
+            //console.log(d);
+            $("#all_years_timeline").remove();
+            createTimeline(d, $svg);
+            //window.alert("We should show a month timeline for the year" + d.year + ".");
+            //throw "Month timeline not implemented yet.";
         } else {
             $single_year_timeline = SingleYearTimeline($svg, d.docs);
             // Bring the single year timeline in

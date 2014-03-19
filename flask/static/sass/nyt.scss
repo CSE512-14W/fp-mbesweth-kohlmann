@@ -41,8 +41,8 @@ text {
   }
 }
 
-svg g#all_years_timeline {
-  g.year {
+svg g#all_years_timeline, svg g#month_timeline {
+  g.bar {
     rect.bg {
       fill: #efefef;
       stroke: #fff;
