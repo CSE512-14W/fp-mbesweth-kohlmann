@@ -1,6 +1,8 @@
 $margin: 32pt;
+$fillColor: #3D5C95;
+$fillColorActive: #cc0000;
 
-body{
+body {
 	font-family: avenir;
 	margin: 0;
 }
@@ -50,7 +52,7 @@ svg g#all_years_timeline {
     }
 
     rect.fg {
-      fill: #3D5C95;
+      fill: $fillColor;
       stroke: #fff;
       stroke-width: 2px;
       -webkit-transition-property: fill;
@@ -79,8 +81,20 @@ svg g#all_years_timeline {
       }
 
       rect.fg {
-        fill: #cc0000;
+        fill: $fillColorActive;
       }
     }
+  }
+}
+
+div#single_year_timeline {
+
+
+  .rect {
+    width: 160px;
+    height: 250px;
+    background-color: $fillColor;
+    color: #fff;
+    overflow: hidden;
   }
 }

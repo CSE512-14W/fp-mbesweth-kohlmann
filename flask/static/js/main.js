@@ -16,51 +16,33 @@ var init = function() {
     }
     var $container = d3.select("#container .content");
     var $svg = CreateSVGContainer($container);
+    var $div = CreateDivContainer($container);
     // Set up a timeline for all the years represented in the data set.
-    var $all_years_timeline = AllYearsTimeline(data.years, $svg);
-//    var $single_year_timeline = SingleYearTimeline($svg);
+    var $all_years_timeline = AllYearsTimeline(data, $svg);
+    var $single_year_timeline = SingleYearTimeline(data.years[14], $div);
 };
 
 var CreateSVGContainer = function($container) {
     var svg_width = 1920;
     var svg_height = 640;
 
-    var $svg = $container.append("svg")
-//        .data([data])
+    return $container.append("svg")
+        .attr("id", "svgContainer")
         .attr("width", svg_width + "px")
         .attr("height", svg_height + "px")
     ;
+};
 
-    return $svg;
-}
+var CreateDivContainer = function($container) {
+    var svg_width = 1920;
+    var svg_height = 640;
 
-var TransitionToSingleYearTimeline = function(single_year_data, $svg, $all_years_timeline, $single_year_timeline) {
-    // SVG container width and height
-    var svg_width = parseInt( $svg.style("width") );
-    var svg_height = parseInt( $svg.style("height") );
-    // Timeline group position and size
-    var margin = 32;
-    var timeline_width = svg_width - margin * 2;
-    var timeline_height = svg_height / 2 - margin * 2;
-    var timeline_x = margin;
-    var timeline_y = svg_height / 2 + margin;
-    var timeline_y_centered = svg_height / 2 - timeline_height / 2;
-
-    $all_years_timeline
-        .transition()
-        .delay(500)
-        .duration(1000)
-        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
+    return $container.append("div")
+        .attr("id", "divContainer")
+        .attr("width", svg_width + "px")
+        .attr("height", svg_height + "px")
     ;
-
-    $single_year_timeline
-        .data([single_year_data])
-        .transition()
-        .delay(500)
-        .duration(1000)
-        .attr("opacity", 1.0)
-    ;
-}
+};
 
 var AllYearsTimeline = function(data, $svg) {
     // SVG container width and height
@@ -74,11 +56,11 @@ var AllYearsTimeline = function(data, $svg) {
     var timeline_y = svg_height / 2 + margin - 36;
     var timeline_y_centered = svg_height / 2 - timeline_height / 2;
     // Year rect size
-    var year_rect_width = timeline_width / data.length;
+    var year_rect_width = timeline_width / data.years.length;
 
     // DOM setup
     var $timeline = $svg.append("g")
-        .data([data])
+        .data([data.years])
         .attr("id", "all_years_timeline")
         .attr("width", timeline_width + "px")
         .attr("height", timeline_height + "px")
@@ -166,7 +148,7 @@ var AllYearsTimeline = function(data, $svg) {
 
     var $single_year_timeline = null;
 
-    // var $single_year_timeline = SingleYearTimeline($svg, data[17].docs);
+    // var $single_year_timeline = SingleYearTimeline(data[17].docs, $svg);
 
     // Event Handlers
     $year_groups.selectAll("rect, text").on("mouseenter", function(d, i) {
@@ -194,7 +176,7 @@ var AllYearsTimeline = function(data, $svg) {
             window.alert("We should show a month timeline for the year" + d.year + ".");
             throw "Month timeline not implemented yet.";
         } else {
-            $single_year_timeline = SingleYearTimeline($svg, d.docs);
+            $single_year_timeline = SingleYearTimeline(d, $svg);
             // Bring the single year timeline in
             $single_year_timeline
                 .transition()
@@ -210,11 +192,19 @@ var AllYearsTimeline = function(data, $svg) {
         }
     });
 
+    // Move the timeline downwards
+    $timeline
+        .transition()
+        .delay(500)
+        .duration(1000)
+        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
+    ;
+
     // All Done
     return $timeline;
 };
 
-var SingleYearTimeline = function($svg, data) {
+var SingleYearTimeline = function(data, $html) {
     var margin = {top: 20, right: 250, bottom: 30, left: 40},
     width = window.innerWidth - margin.left - margin.right,
     height = window.innerHeight - margin.top - margin.bottom;
@@ -227,43 +217,33 @@ var SingleYearTimeline = function($svg, data) {
 //		data.push(i)
 //    }
 
-	var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, data.length]).range([0, width]).focus(width/2);
-
-    //
-    $svg.on("mousemove", function() {
-     	var mouse = d3.mouse(this);
-     	xScale.distortion(100).focus(mouse[0]);
-
-     	rects.call(position);
-     	rectText.call(position);
-     	rectText.each(function() {
-     		var $that = d3.select(this);
-     		var x = $that.attr("x");
-     		$that.selectAll("tspan").attr("x", x + 30 + "px");
-     	});
-	});
+	var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, data.docs.length]).range([0, width]).focus(width/2);
 
 	  // Positions the bars based on data.
 	var position = function(rect) {
-        rect.attr("x", function(d, i) {
-            return xScale(i) + 5;
+        rect.each(function(d, i) {
+            $(this).css({
+                transform: "translateX(" + xScale(i) + 5 + "px)"
+            });
         });
         rect.attr("width", function(d, i) {
-            return xScale(i+.97) - xScale(i);
+            return xScale(i + .97) - xScale(i);
         });
     };
 
-	var textPosition = function(text) {
-	    text.attr("x", function(d, i) {
-	        return xScale(i) + 5;
-        });
-	};
+//	var textPosition = function(text) {
+//	    text.each(function(d, i) {
+//	        $(this).css({
+//                transform: xScale(i) + 5
+//            });
+//        });
+//	};
     //////////////////////
     // Begin Joe's Code //
     //////////////////////
     // SVG container width and height
-    var svg_width = parseInt( $svg.style("width") );
-    var svg_height = parseInt( $svg.style("height") );
+    var svg_width = parseInt( $html.style("width") );
+    var svg_height = parseInt( $html.style("height") );
     // Timeline group position and size
     var margin = 32;
     var timeline_width = svg_width - margin * 2;
@@ -273,12 +253,33 @@ var SingleYearTimeline = function($svg, data) {
     var timeline_y_centered = svg_height / 2 - timeline_height / 2;
 
     // DOM setup
-    var $timeline = $svg.append("g")
+    var $timeline = $html.append("div")
         .attr("id", "single_year_timeline")
         .attr("width", timeline_width + "px")
         .attr("height", timeline_height + "px")
-        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
+        .style("position", "absolute")
+        .style("left", 0)
+        .style("top", 0)
+//        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
     ;
+    // Apply the translation transform
+    $($timeline[0]).css({
+        transform: "translate(" + timeline_x + ", " + timeline_y + "px)"
+    });
+
+    // Event handler
+    $timeline.on("mousemove", function() {
+     	var mouse = d3.mouse(this);
+     	xScale.distortion(100).focus(mouse[0]);
+
+     	rects.call(position);
+     	rectText.call(position);
+     	rectText.each(function() {
+     		var $that = d3.select(this);
+//     		var x = $that.attr("x");
+//     		$that.selectAll("tspan").attr("x", x + 30 + "px");
+     	});
+	});
 
 //    return $timeline;
     ////////////////////
@@ -293,41 +294,31 @@ var SingleYearTimeline = function($svg, data) {
     ;
 
 	$timeline
-		.data([data])
+		.data([data.docs])
 	    .attr("width", width)
 	    .attr("height", height)
-	    .append("g")
-	    .attr("transform", "translate(" + 0 + "," + height / 5 + ")")
-        .attr("opacity", "0.0")
+//	    .append("g")
+//	    .attr("transform", "translate(" + 0 + "," + height / 5 + ")")
+//        .attr("opacity", "0.0")
     ;
 
-	rectGroups = $timeline.selectAll("g")
+	rectGroups = $timeline.selectAll("div")
 		.data(function(d, i) { return d })
 		.enter()
-		.append("g")
-		.attr('x', function(d, i ){ return 15 * i  })
-	;
-
-	rects = rectGroups
-		.append("rect")
-		.attr('width', function(d) { return 160 + "px" })
-		.attr('height', function(d) { return 250 + "px" })
-
-		.attr('fill', "#3D5C95")
-
-		.on('mouseover', function(){
+		.append("div")
+        .classed("rect", true)
+//        .style('width', 160 + "px")
+//		.style('height', 250 + "px")
+        .style('background-color', "#3D5C95")
+        .on('mouseover', function() {
 			var rect = d3.select(this)
 			var position = rect[0][0].__data__;
 
 			rect.transition()
 				//.attr('y', 300)
 				//.attr('width', "30px")
-				.attr('fill', '#cc0000')
+				.style('background-color', '#cc0000')
 				.duration(200);
-
-
-			//moveSquares(position, rects[0].length, true);
-			//moveSquares(position, rects[0].length);
 		})
 		.on('mouseout',function(){
 
@@ -338,8 +329,9 @@ var SingleYearTimeline = function($svg, data) {
 				.transition()
 				//.attr('y', 0)
 				//.attr('width', "10px")
-				.attr('fill','#3D5C95')
+				.style('background-color','#3D5C95')
 				.duration(200)
+            ;
 
 			//moveSquares(position, rects[0].length, false);
 
@@ -347,31 +339,88 @@ var SingleYearTimeline = function($svg, data) {
 		.on('click', function(d) {
 			window.open(d.web_url);
 		})
-		//.append("text")
-		//.text(function(d) { return d.main_headline })
-		.call(position)
+    ;
+
+    // CSS Transforms
+    rectGroups
+        .each(function(d, i) {
+            $(this).css({
+                transform: "translateX(" + 15 * i + "px)"
+            });
+
+            var transform = new WebKitCSSMatrix(
+                $(this).css("-webkit-transform")
+            );
+            transform = transform.translate(0, i * -250);
+            $(this).css("-webkit-transform", transform);
+        })
+//		.attr('x', function(d, i ){ return 15 * i  })
 	;
+
+//	rects = rectGroups
+//		.append("div")
+//        .classed("rect")
+//		.attr('width', function(d) { return 160 + "px" })
+//		.attr('height', function(d) { return 250 + "px" })
+//		.style('background-color', "#3D5C95")
+//		.on('mouseover', function() {
+//			var rect = d3.select(this)
+//			var position = rect[0][0].__data__;
+//
+//			rect.transition()
+//				//.attr('y', 300)
+//				//.attr('width', "30px")
+//				.style('background-color', '#cc0000')
+//				.duration(200);
+//
+//
+//			//moveSquares(position, rects[0].length, true);
+//			//moveSquares(position, rects[0].length);
+//		})
+//		.on('mouseout',function(){
+//
+//			var rect = d3.select(this)
+//			var position = rect[0][0].__data__;
+//
+//			d3.select(this)
+//				.transition()
+//				//.attr('y', 0)
+//				//.attr('width', "10px")
+//				.style('background-color','#3D5C95')
+//				.duration(200)
+//
+//			//moveSquares(position, rects[0].length, false);
+//
+//		})
+//		.on('click', function(d) {
+//			window.open(d.web_url);
+//		})
+//		//.append("text")
+//		//.text(function(d) { return d.main_headline })
+//		.call(position)
+//	;
 
 	// Append svg foreignObject element containing an HTML paragraph
 	rectText = rectGroups
-		.append("text")
+		.append("span")
 		.attr("y", "10px")
 		.attr("data-headline", function(d) { return d.main_headline; })
-		.each(function(d) {
-			var $that = d3.select(this);
-			var textContent = d.main_headline;
-			var wordsPerLine = 4;
-			var words = textContent.split(" ");
-
-			for (var i = 0; i < words.length; i += wordsPerLine) {
-				var lineContent = words.slice(i, i + wordsPerLine).join(" ");
-				$that.append("tspan")
-					.attr("dy", (1.2) + "em")
-					.attr('dx', "1em")
-					.text(lineContent)
-				;
-			}
-		});
+        .text(function(d) { return d.main_headline; })
+//		.each(function(d) {
+//			var $that = d3.select(this);
+//			var textContent = d.main_headline;
+//			var wordsPerLine = 4;
+//			var words = textContent.split(" ");
+//
+//			for (var i = 0; i < words.length; i += wordsPerLine) {
+//				var lineContent = words.slice(i, i + wordsPerLine).join(" ");
+//				$that.append("tspan")
+//					.attr("dy", (1.2) + "em")
+//					.attr('dx', "1em")
+//					.text(lineContent)
+//				;
+//			}
+//		})
 	;
 
     // Event Handlers
