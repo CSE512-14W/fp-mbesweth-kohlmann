@@ -147,7 +147,7 @@ var createTimeline = function(data, $svg) {
             if(data.years)
                 return d.year; 
             else {
-                return months[i] + ".";
+                return months[i] + " '" + (d.year + "").substr(2,2);
             }
         })
         .attr("width", year_rect_width + "px")
@@ -275,12 +275,9 @@ var SingleYearTimeline = function(data, $html) {
         .attr("id", "single_year_timeline")
         .style("width", timeline_width + "px")
         .style("height", 250 + "px")
+        .style("-webkit-transform", "translate(" + margin + "px, " + margin + "px)")
         .data([data.docs])
     ;
-    // Apply the translation transform
-    $($timeline[0]).css({
-        transform: "translate(" + margin + ", " + margin + "px)"
-    });
 
     // Insert articles as <a> elements
     var rects = $timeline.selectAll("a.rect")
@@ -302,6 +299,19 @@ var SingleYearTimeline = function(data, $html) {
 //            return "translate(" + 15 * i + ", " + 0 + ")"
 //        })
     ;
+
+    // Article Images
+    rectImgs = rects.each(function(d) {
+        if (d.multimedia_url) {
+            d3.select(this)
+                .append("div")
+                .classed("imgContainer", true)
+                .classed(d.multimedia_type, true)
+                .append("img")
+                .attr("src", d.multimedia_url)
+            ;
+        }
+    });
 
     // Set up an interior container for the rects
     var rectInsides = rects
@@ -331,19 +341,6 @@ var SingleYearTimeline = function(data, $html) {
             return pub_date.getDate() + " " + months[pub_date.getMonth()] + " " + pub_date.getFullYear();
         })
     ;
-
-    // Article Images
-    rectImgs = rects.each(function(d) {
-        if (d.multimedia_url) {
-            d3.select(this)
-                .append("div")
-                .classed("imgContainer", true)
-                .append("img")
-                .attr("src", d.multimedia_url)
-                .attr("class", d.multimedia_type)
-            ;
-        }
-    });
 
     // Event Handler
     $timeline.on("mousemove", function() {
