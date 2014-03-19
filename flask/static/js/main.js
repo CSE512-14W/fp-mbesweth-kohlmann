@@ -24,7 +24,7 @@ var init = function() {
 
 var CreateSVGContainer = function($container) {
     var svg_width = 1920;
-    var svg_height = 640;
+    var svg_height = 300;
 
     return $container.append("svg")
         .attr("id", "svgContainer")
@@ -64,6 +64,7 @@ var createTimeline = function(data, $svg) {
         graphName  = "month_timeline";
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     }
+
     console.log(data);
     console.log(data.years);
     // SVG container width and height
@@ -80,8 +81,6 @@ var createTimeline = function(data, $svg) {
     //data.max_hits
     var heightScale = d3.scale.log().domain([maxHits, 0.5]).range([timeline_height,0]);
 
-    console.log(heightScale(428));
-
     // Year rect size | data.years.length
     var year_rect_width = timeline_width / timeLength;
 
@@ -92,7 +91,7 @@ var createTimeline = function(data, $svg) {
         .attr("id", graphName)
         .attr("width", timeline_width + "px")
         .attr("height", timeline_height + "px")
-        .attr("transform", "translate(" + timeline_x + ", " + timeline_y_centered + ")")
+        .attr("transform", "translate(" + timeline_x + ", " + 0 + ")") // timelineYCentered
     ;
 
     // SVG elements for each year
@@ -180,7 +179,7 @@ var createTimeline = function(data, $svg) {
 
     // Event Handlers
     $year_groups.selectAll("rect, text").on("mouseenter", function(d, i) {
-        console.log("Hello, hovering");
+        //console.log("Hello, hovering");
     });
 
     $year_groups.selectAll("rect, text").on("click", function(d, i) {
@@ -199,10 +198,14 @@ var createTimeline = function(data, $svg) {
             $single_year_timeline.remove();
 //        } else {
         }
+
         // Should we display a month timeline or an article timeline next?
         if (d.docs == null) {
             //console.log(d);
-            $("#all_years_timeline").remove();
+            //$("#all_years_timeline").remove();
+            $timeline
+                .transition()
+                .attr("transform", "translate(" + timeline_x + ", " + 150 + ")") // timelineYCentered
             createTimeline(d, $svg);
             //window.alert("We should show a month timeline for the year" + d.year + ".");
             //throw "Month timeline not implemented yet.";
