@@ -17,7 +17,7 @@ var init = function() {
     var $container = d3.select("#container .content");
     var $svg = CreateSVGContainer($container);
     // Set up a timeline for all the years represented in the data set.
-    var $all_years_timeline = AllYearsTimeline(data.years, $svg);
+    var $all_years_timeline = AllYearsTimeline(data, $svg);
 //    var $single_year_timeline = SingleYearTimeline($svg);
 };
 
@@ -63,6 +63,7 @@ var TransitionToSingleYearTimeline = function(single_year_data, $svg, $all_years
 }
 
 var AllYearsTimeline = function(data, $svg) {
+    console.log(data.years);
     // SVG container width and height
     var svg_width = parseInt( $svg.style("width") );
     var svg_height = parseInt( $svg.style("height") );
@@ -73,12 +74,17 @@ var AllYearsTimeline = function(data, $svg) {
     var timeline_x = margin;
     var timeline_y = svg_height / 2 + margin - 36;
     var timeline_y_centered = svg_height / 2 - timeline_height / 2;
+
+    var heightScale = d3.scale.log().domain([data.max_hits, 0.5]).range([timeline_height,0]);
+
+    console.log(heightScale(428));
+
     // Year rect size
-    var year_rect_width = timeline_width / data.length;
+    var year_rect_width = timeline_width / data.years.length;
 
     // DOM setup
     var $timeline = $svg.append("g")
-        .data([data])
+        .data([data.years])
         .attr("id", "all_years_timeline")
         .attr("width", timeline_width + "px")
         .attr("height", timeline_height + "px")
@@ -115,19 +121,11 @@ var AllYearsTimeline = function(data, $svg) {
         .classed("fg", true)
         .attr("x", function(d,i) { return (i * year_rect_width) + "px" })
         .attr("y", function(d,i) {
-            var height = 4 * d.hits;
-            if (height > timeline_height) {
-                height = timeline_height;
-            }
-            return (timeline_height - height) / 2 + "px";
+            return timeline_height - heightScale(d.hits) + "px";
         })
         .attr("width", year_rect_width + "px")
         .attr("height", function(d,i) {
-            var height = 4 * d.hits;
-            if (height > timeline_height) {
-                height = timeline_height;
-            }
-            return height + "px";
+            return heightScale(d.hits) + "px";
         })
         // .attr("transform", "scale(1.0, 0.0)")
         // .attr("transform-origin", "50%, 50%")
@@ -139,7 +137,7 @@ var AllYearsTimeline = function(data, $svg) {
 
     var $year_labels = $year_groups
         .append("text")
-        .classed("label", true)
+        .classed("annotation", true)
         .text(function(d) { return d.year; })
         .attr("width", year_rect_width + "px")
         .attr("height", 24 + "px")
@@ -147,6 +145,7 @@ var AllYearsTimeline = function(data, $svg) {
         .attr("y", (timeline_height + 24) + "px")
     ;
 
+    /*
     var $year_annotations = $year_groups
         .append("text")
         .classed("annotation", true)
@@ -156,6 +155,7 @@ var AllYearsTimeline = function(data, $svg) {
         .attr("x", function(d,i) { return (i * year_rect_width + year_rect_width / 2) + "px" })
         .attr("y", (timeline_height + 42) + "px")
     ;
+    */
 
 //    $timeline
 //        .transition()
