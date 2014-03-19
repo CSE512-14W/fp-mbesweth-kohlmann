@@ -24,7 +24,7 @@ var init = function() {
 
 var CreateSVGContainer = function($container) {
     var svg_width = 1920;
-    var svg_height = 640;
+    var svg_height = 300;
 
     return $container.append("svg")
         .attr("id", "svgContainer")
@@ -91,7 +91,7 @@ var createTimeline = function(data, $svg) {
         .attr("id", graphName)
         .attr("width", timeline_width + "px")
         .attr("height", timeline_height + "px")
-        .attr("transform", "translate(" + timeline_x + ", " + timeline_y_centered + ")")
+        .attr("transform", "translate(" + timeline_x + ", " + 0 + ")") // timelineYCentered
     ;
 
     // SVG elements for each year
@@ -202,7 +202,10 @@ var createTimeline = function(data, $svg) {
         // Should we display a month timeline or an article timeline next?
         if (d.docs == null) {
             //console.log(d);
-            $("#all_years_timeline").remove();
+            //$("#all_years_timeline").remove();
+            $timeline
+                .transition()
+                .attr("transform", "translate(" + timeline_x + ", " + 150 + ")") // timelineYCentered
             createTimeline(d, $svg);
             //window.alert("We should show a month timeline for the year" + d.year + ".");
             //throw "Month timeline not implemented yet.";
