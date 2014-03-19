@@ -1,10 +1,8 @@
 // ---------------------------------------------------------------------------
 // Imports
 
-@import "susy";
-@import "normalize";
-@import "compass/typography/vertical_rhythm";
 @import "compass/css3";
+@import "compass/css3/border-radius";
 @import "compass/utilities/text/ellipsis";
 
 // ---------------------------------------------------------------------------
@@ -17,9 +15,9 @@ $grid-padding    : $gutter-width;
 
 $show-grid-backgrounds  : true;
 
-$base-font-size  : 16px;
-$base-line-height: 24px;
-$round-to-nearest-half-line: false;
+//$base-font-size  : 16px;
+//$base-line-height: 24px;
+//$round-to-nearest-half-line: false;
 
 // http://stackoverflow.com/a/12335841
 @function strip-units($number) {

@@ -1,3 +1,6 @@
+@import "compass/css3";
+@import "compass/utilities/text/ellipsis";
+
 $margin: 32pt;
 $fillColor: #3D5C95;
 $fillColorActive: #cc0000;
@@ -103,21 +106,38 @@ div#single_year_timeline {
     cursor: pointer;
 
     .rectInside {
-      width: 420px;
-      height: 100%;
+      width: 400px;
       padding: 10px;
-      background: gray;
       margin: 0 auto;
+      background-color: rgba(#000, 0.50);
+      color: #fff;
+      position: absolute;
+      bottom: 32px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 1;
+      @include border-radius(8px);
     }
 
     h3 {
-      margin: 0;
+      color: inherit;
+      width: 400px;
+      font-size: 20px;
+      margin: 0 0 10px;
+      line-height: 24px;
       font-weight: 500;
-      background-color: green;
     }
 
     p {
-      background-color: white;
+      width: 400px;
+      font-size: 16px;
+      line-height: 20px;
+      color: inherit;
+      margin: 0;
+      max-height: 36px;
+      overflow: hidden;
+//      @include ellipsis;
     }
 
     img {
@@ -126,6 +146,19 @@ div#single_year_timeline {
       width: auto;
       height: auto;
       margin: 0 auto;
+    }
+
+    img.xlarge {
+      width: auto;
+      height: auto;
+      max-height: 100%;
+      position: absolute;
+      left:   -50%;
+      right:  -50%;
+//      top:    0;
+      bottom: 0;
+      margin: auto;
+      z-index: 0;
     }
   }
 }

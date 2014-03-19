@@ -440,10 +440,10 @@ var SingleYearTimeline = function(data, $html) {
 
     rectLeads = rectInsides
         .append("p")
-        .text(function(d) { return d.lead_paragraph; })
+        .text(function(d) { return d.snippet; })
     ;
 
-    rectImgs = rectInsides.each(function(d, i) {
+    rectImgs = rects.each(function(d, i) {
         if (d.multimedia_url) {
             d3.select(this)
                 .append("img")

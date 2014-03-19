@@ -46,9 +46,9 @@ def reduce(input_path, output_dir):
     # Reduce the data into a new JSON file
     new_data = []
     for article in json_data:
-        lead_paragraph = None
-        if "lead_paragraph" in article:
-            lead_paragraph = article["lead_paragraph"]
+        abstract = None
+        if "abstract" in article:
+            abstract = article["abstract"]
         byline = None
         if "byline" in article and article["byline"] is not None and "original" in article["byline"]:
             byline = article["byline"]["original"]
@@ -57,7 +57,7 @@ def reduce(input_path, output_dir):
             "main_headline": article["headline"]["main"],
             "web_url": article["web_url"],
             "original_byline": byline,
-            "lead_paragraph": lead_paragraph,
+            "abstract": abstract,
             "_id": article["_id"]
         }
         new_data.append(new_article_data)
@@ -140,6 +140,10 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
         # Determine if the year is already a key in new_data
         if article_year not in new_data:
             raise ValueError("The year %d should absolutely be in new_data by now..." % article_year)
+        # Get the snippet for the article
+        snippet = None
+        if "snippet" in article:
+            snippet = article["snippet"]
         # Get the byline for the article
         byline = None
         if "byline" in article and article["byline"] is not None and "original" in article["byline"]:
@@ -184,7 +188,8 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
             "_id": article["_id"],
             "keywords": flat_keywords,
             "multimedia_url": multimedia_url,
-            "multimedia_type": multimedia_type
+            "multimedia_type": multimedia_type,
+            "snippet": snippet
         }
         # Append the reduced data to the new_data structure (by year)
         new_data[article_year].append(new_article_data)

@@ -1,54 +1,54 @@
-/* line 5, ../sass/nyt.scss */
+/* line 8, ../sass/nyt.scss */
 body {
   font-family: Avenir;
   margin: 0;
 }
 
-/* line 10, ../sass/nyt.scss */
+/* line 13, ../sass/nyt.scss */
 p, text {
   font-size: 9.23pt;
 }
 
-/* line 14, ../sass/nyt.scss */
+/* line 17, ../sass/nyt.scss */
 p {
   width: 300px;
   margin-top: 100px;
 }
 
-/* line 19, ../sass/nyt.scss */
+/* line 22, ../sass/nyt.scss */
 h1, .donut, p {
   margin-left: 80px;
 }
 
-/* line 23, ../sass/nyt.scss */
+/* line 26, ../sass/nyt.scss */
 h1 {
   margin-top: 40px;
   font-size: 40pt;
   margin-bottom: 0px;
 }
 
-/* line 29, ../sass/nyt.scss */
+/* line 32, ../sass/nyt.scss */
 text {
   fill: white;
 }
 
-/* line 37, ../sass/nyt.scss */
+/* line 40, ../sass/nyt.scss */
 .content {
   margin: 32pt;
   height: 640px;
 }
-/* line 41, ../sass/nyt.scss */
+/* line 44, ../sass/nyt.scss */
 .content svg {
   width: 100%;
 }
 
-/* line 48, ../sass/nyt.scss */
+/* line 51, ../sass/nyt.scss */
 svg g#all_years_timeline g.bar rect.bg, svg g#month_timeline g.bar rect.bg {
   fill: #efefef;
   stroke: #fff;
   stroke-width: 2px;
 }
-/* line 54, ../sass/nyt.scss */
+/* line 57, ../sass/nyt.scss */
 svg g#all_years_timeline g.bar rect.fg, svg g#month_timeline g.bar rect.fg {
   fill: #3d5c95;
   stroke: #fff;
@@ -56,7 +56,7 @@ svg g#all_years_timeline g.bar rect.fg, svg g#month_timeline g.bar rect.fg {
   -webkit-transition-property: fill;
   -webkit-transition-duration: 0.25s;
 }
-/* line 62, ../sass/nyt.scss */
+/* line 65, ../sass/nyt.scss */
 svg g#all_years_timeline g.bar text.label, svg g#month_timeline g.bar text.label {
   font-size: 18px;
   line-height: 24px;
@@ -64,7 +64,7 @@ svg g#all_years_timeline g.bar text.label, svg g#month_timeline g.bar text.label
   font-weight: 500;
   fill: #000;
 }
-/* line 70, ../sass/nyt.scss */
+/* line 73, ../sass/nyt.scss */
 svg g#all_years_timeline g.bar text.annotation, svg g#month_timeline g.bar text.annotation {
   font-size: 14px;
   line-height: 18px;
@@ -72,21 +72,21 @@ svg g#all_years_timeline g.bar text.annotation, svg g#month_timeline g.bar text.
   font-weight: 500;
   fill: #999;
 }
-/* line 79, ../sass/nyt.scss */
+/* line 82, ../sass/nyt.scss */
 svg g#all_years_timeline g.bar:hover rect.bg, svg g#all_years_timeline g.bar.active rect.bg, svg g#month_timeline g.bar:hover rect.bg, svg g#month_timeline g.bar.active rect.bg {
   fill: #ccc;
 }
-/* line 83, ../sass/nyt.scss */
+/* line 86, ../sass/nyt.scss */
 svg g#all_years_timeline g.bar:hover rect.fg, svg g#all_years_timeline g.bar.active rect.fg, svg g#month_timeline g.bar:hover rect.fg, svg g#month_timeline g.bar.active rect.fg {
   fill: #cc0000;
 }
 
-/* line 90, ../sass/nyt.scss */
+/* line 93, ../sass/nyt.scss */
 div#single_year_timeline {
   position: relative;
   background: purple;
 }
-/* line 94, ../sass/nyt.scss */
+/* line 97, ../sass/nyt.scss */
 div#single_year_timeline .rect {
   width: 160px;
   height: 250px;
@@ -98,29 +98,61 @@ div#single_year_timeline .rect {
   top: 0;
   cursor: pointer;
 }
-/* line 105, ../sass/nyt.scss */
+/* line 108, ../sass/nyt.scss */
 div#single_year_timeline .rect .rectInside {
-  width: 420px;
-  height: 100%;
+  width: 400px;
   padding: 10px;
-  background: gray;
   margin: 0 auto;
-}
-/* line 113, ../sass/nyt.scss */
-div#single_year_timeline .rect h3 {
-  margin: 0;
-  font-weight: 500;
-  background-color: green;
-}
-/* line 119, ../sass/nyt.scss */
-div#single_year_timeline .rect p {
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
 }
 /* line 123, ../sass/nyt.scss */
+div#single_year_timeline .rect h3 {
+  color: inherit;
+  width: 400px;
+  font-size: 20px;
+  margin: 0 0 10px;
+  line-height: 24px;
+  font-weight: 500;
+}
+/* line 132, ../sass/nyt.scss */
+div#single_year_timeline .rect p {
+  width: 400px;
+  font-size: 16px;
+  line-height: 20px;
+  color: inherit;
+  margin: 0;
+  max-height: 36px;
+  overflow: hidden;
+}
+/* line 143, ../sass/nyt.scss */
 div#single_year_timeline .rect img {
   display: block;
   max-width: 100%;
   width: auto;
   height: auto;
   margin: 0 auto;
+}
+/* line 151, ../sass/nyt.scss */
+div#single_year_timeline .rect img.xlarge {
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: 0;
+  margin: auto;
+  z-index: 0;
 }
