@@ -64,6 +64,7 @@ var createTimeline = function(data, $svg) {
         graphName  = "month_timeline";
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     }
+
     console.log(data);
     console.log(data.years);
     // SVG container width and height
@@ -79,8 +80,6 @@ var createTimeline = function(data, $svg) {
 
     //data.max_hits
     var heightScale = d3.scale.log().domain([maxHits, 0.5]).range([timeline_height,0]);
-
-    console.log(heightScale(428));
 
     // Year rect size | data.years.length
     var year_rect_width = timeline_width / timeLength;
@@ -180,7 +179,7 @@ var createTimeline = function(data, $svg) {
 
     // Event Handlers
     $year_groups.selectAll("rect, text").on("mouseenter", function(d, i) {
-        console.log("Hello, hovering");
+        //console.log("Hello, hovering");
     });
 
     $year_groups.selectAll("rect, text").on("click", function(d, i) {
@@ -199,6 +198,7 @@ var createTimeline = function(data, $svg) {
             $single_year_timeline.remove();
 //        } else {
         }
+
         // Should we display a month timeline or an article timeline next?
         if (d.docs == null) {
             //console.log(d);
