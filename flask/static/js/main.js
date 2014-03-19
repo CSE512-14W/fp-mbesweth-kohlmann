@@ -2,6 +2,10 @@
 var data_url = flask_util.url_for("search", {fq: 'persons:("Obama, Barack")'});
 // Available for debugging purposes
 var data;
+
+// Months
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
 // Load the data from the server
 d3.json(data_url, function(error, json) {
     if (error) return console.warn(error);
@@ -51,7 +55,6 @@ var createTimeline = function(data, $svg) {
     var timeLength; // number of years or months being considered
     var timeData;   // the associated month or year data
     var graphName;
-    var months;
     if(data.years){
         maxHits    = data.max_hits;
         timeLength = data.years.length;
@@ -62,7 +65,6 @@ var createTimeline = function(data, $svg) {
         timeLength = data.months.length;
         timeData   = data.months;
         graphName  = "month_timeline";
-        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     }
 
 //    console.log(data);
@@ -292,6 +294,10 @@ var SingleYearTimeline = function(data, $html) {
         .attr("data-has-multimedia", function(d) { return (d.multimedia_url && true) == true; })
             // Set up the fisheye distortion right away.
         .each(position)
+        .on("click", function(d, i) {
+            d3.event.preventDefault();
+            window.open(d.web_url);
+        })
 //        .style("-webkit-transform", function(d, i) {
 //            return "translate(" + 15 * i + ", " + 0 + ")"
 //        })
@@ -315,6 +321,15 @@ var SingleYearTimeline = function(data, $html) {
     var rectSnippets = rectInsides
         .append("p")
         .text(function(d) { return d.snippet; })
+    ;
+
+    // Article Dates
+    var rectDates = rectInsides
+        .append("cite")
+        .text(function(d) {
+            var pub_date = new Date(d.pub_date);
+            return pub_date.getDate() + " " + months[pub_date.getMonth()] + " " + pub_date.getFullYear();
+        })
     ;
 
     // Article Images

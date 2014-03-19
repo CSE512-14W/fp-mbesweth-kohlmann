@@ -2,11 +2,19 @@
 @import "compass/utilities/text/ellipsis";
 
 $margin: 32pt;
+
 $fillColor: #3D5C95;
 $fillColorActive: #cc0000;
 $bgColor: #efefef;
 $bgColorActive: #ccc;
-$rectInsideWidth: 360px;
+$annotationTextColor: #999;
+
+$borderColor: #fff;
+$borderWidth: 2px;
+
+$rectInsideWidth: 320px;
+
+
 
 body{
 	font-family: Avenir;
@@ -36,10 +44,6 @@ text {
 	fill: white;
 }
 
-//#single_year_timeline {
-//  border: 2px solid blue;
-//}
-
 .content {
   margin: $margin;
   height: 640px;
@@ -51,16 +55,19 @@ text {
 
 svg g#all_years_timeline, svg g#month_timeline {
   g.bar {
+    rect {
+      stroke: $borderColor;
+      stroke-width: $borderWidth;
+    }
+
     rect.bg {
       fill: $bgColor;
-      stroke: #fff;
+      stroke: $borderColor;
       stroke-width: 2px;
     }
 
     rect.fg {
       fill: $fillColor;
-      stroke: #fff;
-      stroke-width: 2px;
       -webkit-transition-property: fill;
       -webkit-transition-duration: 0.25s;
     }
@@ -78,7 +85,7 @@ svg g#all_years_timeline, svg g#month_timeline {
       line-height: 18px;
       text-anchor: middle;
       font-weight: 500;
-      fill: #999;
+      fill: $annotationTextColor;
     }
 
     &:hover, &.active {
@@ -101,15 +108,15 @@ div#single_year_timeline {
   .rect {
     width: 160px;
     height: 250px;
-    background-color: rgba($fillColor, 0);
-    color: #000;
-    text-shadow: 0 1px 2px #fff;
+    background-color: $bgColor;
+    color: #666;
+    text-shadow: 0 1px 2px rgba(#000, 0);
     overflow: hidden;
     position: absolute;
     left: 0;
     top: 0;
     cursor: pointer;
-    outline: 2px solid #fff;
+    outline: 2px solid $borderColor;
 //    @include box-shadow(0 4px 8px rgba(#000, 0.25));
     @include transition-property(background-color);
     @include transition-duration(0.25s);
@@ -124,7 +131,6 @@ div#single_year_timeline {
       right: 0;
       top: 0;
       bottom: 0;
-      @include transition(opacity, 0.25s, ease-in-out);
       @include background-image(linear-gradient(top, rgba(#000, 0.00), rgba(#000, 0.65)));
       opacity: 0;
     }
@@ -145,30 +151,33 @@ div#single_year_timeline {
       z-index: 1;
     }
 
-    h3, p {
+    h3, p, cite {
+      display: block;
       position: relative;
       z-index: 1;
       color: inherit;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 20px;
 //      min-width: $rectInsideWidth / 2;
       width: $rectInsideWidth;
     }
 
     h3 {
       font-size: 20px;
-      margin: 0 auto 10px;
       line-height: 24px;
       font-weight: 500;
     }
 
     p {
       padding: 0;
-      font-size: 16px;
-      line-height: 20px;
-      color: inherit;
-      margin: 0 auto;
-//      max-height: 42px;
-      overflow: hidden;
-//      @include ellipsis;
+      /* A magic number that limits the snippet to 3 lines of text */
+      max-height: 60px;
+      overflow-y: hidden;
+    }
+
+    cite {
+      font-size: 14px;
     }
 
 //    img {
