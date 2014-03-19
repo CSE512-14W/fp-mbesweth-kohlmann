@@ -65,8 +65,8 @@ var createTimeline = function(data, $svg) {
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     }
 
-    console.log(data);
-    console.log(data.years);
+//    console.log(data);
+//    console.log(data.years);
     // SVG container width and height
     var svg_width = parseInt( $svg.style("width") );
     var svg_height = parseInt( $svg.style("height") );
@@ -230,46 +230,36 @@ var createTimeline = function(data, $svg) {
     return $timeline;
 };
 
+var initFisheye = function(numDocs, baseWidth) {
+    var margin = {top: 20, right: 250, bottom: 30, left: 40};
+    var width = baseWidth - margin.left - margin.right;
+//    var height = window.innerHeight - margin.top - margin.bottom;
+
+    return d3.fisheye.scale(d3.scale.linear).domain([0, numDocs]).range([0, baseWidth - 148]).focus(0);
+};
+
 var SingleYearTimeline = function(data, $html) {
-    var margin = {top: 20, right: 250, bottom: 30, left: 40},
-    width = window.innerWidth - margin.left - margin.right,
-    height = window.innerHeight - margin.top - margin.bottom;
+    // Scaling function for fisheye distortion
+    var xScale = initFisheye(data.docs.length, 1920);
+    var xScaleDistortion = 10;
+    // Set the fisheye distortion center right away
+    xScale.distortion(xScaleDistortion).focus(960);
 
-    var rects;
-
-    // this populates relative position of
-//  for (var i = 0; i < 200; i++) {
-//      data.push(i)
-//    }
-
-    var xScale = d3.fisheye.scale(d3.scale.linear).domain([0, data.docs.length]).range([0, width]).focus(width/2);
-
-    // Positions the bars based on data.
+    // The position() function implements the fisheye lens distortion on the articles.
     var position = function(d, i) {
-        // get the current transformation
-//        var transform = new WebKitCSSMatrix(
-//            d3.select(this).style("-webkit-transform")
-//        );
-        var transform = new WebKitCSSMatrix()
-            .translate(xScale(i) + 5, 0)
-//            .scale((xScale(i + .97) - xScale(i)) / 160, 1.0)
-        ;
+        var translateX = xScale(i);
+        var translateY = 0;
+
         d3.select(this)
-            .style("-webkit-transform", transform)
-            .style("width", xScale(i + .97) - xScale(i) + "px")
+            .style("-webkit-transform", "translate(" + translateX + "px, " + translateY + "px)")
+            .style("width", xScale(i + 1.0) - xScale(i) + "px")
+//            .select(".rectInside")
+//            .style("opacity", (xScale(i + 1.0) - xScale(i)) / xScale(data.docs.length))
         ;
+
+//        console.log(xScale(i));
     };
 
-//  var textPosition = function(text) {
-//      text.each(function(d, i) {
-//          $(this).css({
-//                transform: xScale(i) + 5
-//            });
-//        });
-//  };
-    //////////////////////
-    // Begin Joe's Code //
-    //////////////////////
     // SVG container width and height
     var svg_width = parseInt( $html.style("width") );
     var svg_height = parseInt( $html.style("height") );
@@ -277,9 +267,6 @@ var SingleYearTimeline = function(data, $html) {
     var margin = 32;
     var timeline_width = svg_width - margin * 2;
     var timeline_height = svg_height / 2 - margin * 2;
-    var timeline_x = margin;
-    var timeline_y = margin;
-    var timeline_y_centered = svg_height / 2 - timeline_height / 2;
 
     // DOM setup
     var $timeline = $html.append("div")
@@ -287,193 +274,70 @@ var SingleYearTimeline = function(data, $html) {
         .style("width", timeline_width + "px")
         .style("height", 250 + "px")
         .data([data.docs])
-//        .style("position", "absolute")
-//        .style("left", 0)
-//        .style("top", 0)
-//        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
     ;
     // Apply the translation transform
     $($timeline[0]).css({
-        transform: "translate(" + timeline_x + ", " + timeline_y + "px)"
+        transform: "translate(" + margin + ", " + margin + "px)"
     });
 
-    // Event handler
-    $timeline.on("mousemove", function() {
-        var mouse = d3.mouse(this);
-        xScale.distortion(100).focus(mouse[0]);
-
-        rects.call(position);
-        rectText.call(position);
-        rectText.each(function() {
-            var $that = d3.select(this);
-//          var x = $that.attr("x");
-//          $that.selectAll("tspan").attr("x", x + 30 + "px");
-        });
-    });
-
-//    return $timeline;
-    ////////////////////
-    // End Joe's Code //
-    ////////////////////
-    radius = Math.min(width, height) / 2;
-
-    var color = d3.scale.category20();
-
-    var pie = d3.layout.pie()
-        .value(function (d) {return d })
-    ;
-
-//    $timeline
-//        .data([data.docs])
-//        .attr("width", width)
-//        .attr("height", height)
-////      .append("g")
-////      .attr("transform", "translate(" + 0 + "," + height / 5 + ")")
-////        .attr("opacity", "0.0")
-//    ;
-
-    rects = $timeline.selectAll("div")
+    // Insert articles as <a> elements
+    var rects = $timeline.selectAll("a.rect")
         .data(function(d) { return d })
         .enter()
-        .append("div")
+        .append("a")
         .classed("rect", true)
-        .attr("data-headline", function(d) { return d.main_headline; })
-        .attr("data-multimedia", function(d) { return d.multimedia_url; })
-        .style("-webkit-transform", function(d, i) {
-            return "translate(" + 15 * i + ", " + 0 + ")"
-        })
-//        .style('background-color', "#3D5C95")
-//        .on('mouseover', function() {
-////            var rect = d3.select(this)
-////            var position = rect[0][0].__data__;
-//
-//            rect.transition()
-//                .style('background-color', '#cc0000')
-//                .duration(200)
-//            ;
+        .attr("href", function(d) { return d.web_url; })
+//        .attr("data-headline", function(d) { return d.main_headline; })
+        // For debugging
+        .attr("data-has-multimedia", function(d) { return (d.multimedia_url && true) == true; })
+            // Set up the fisheye distortion right away.
+        .each(position)
+//        .style("-webkit-transform", function(d, i) {
+//            return "translate(" + 15 * i + ", " + 0 + ")"
 //        })
-//        .on('mouseout',function(){
-//
-//            var rect = d3.select(this)
-//            var position = rect[0][0].__data__;
-//
-//            d3.select(this)
-//                .transition()
-//                .duration(200)
-//            ;
-//
-//        })
-        .on('click', function(d) {
-            window.open(d.web_url);
-        })
     ;
 
-    rectInsides = rects
+    // Set up an interior container for the rects
+    var rectInsides = rects
         .append("div")
         .classed("rectInside", true)
     ;
 
-    // CSS Transforms
-//    rects
-//        .each(function(d, i) {
-//            $(this).css({
-//                transform: "translateX(" + 15 * i + "px)"
-//            });
-//
-//            var transform = new WebKitCSSMatrix(
-//                $(this).css("-webkit-transform")
-//            );
-//            transform = transform.translate(0, i * -250);
-//            $(this).css("-webkit-transform", transform);
-//        })
-//    ;
-
-//  rects = rectGroups
-//      .append("div")
-//        .classed("rect")
-//      .attr('width', function(d) { return 160 + "px" })
-//      .attr('height', function(d) { return 250 + "px" })
-//      .style('background-color', "#3D5C95")
-//      .on('mouseover', function() {
-//          var rect = d3.select(this)
-//          var position = rect[0][0].__data__;
-//
-//          rect.transition()
-//              //.attr('y', 300)
-//              //.attr('width', "30px")
-//              .style('background-color', '#cc0000')
-//              .duration(200);
-//
-//
-//          //moveSquares(position, rects[0].length, true);
-//          //moveSquares(position, rects[0].length);
-//      })
-//      .on('mouseout',function(){
-//
-//          var rect = d3.select(this)
-//          var position = rect[0][0].__data__;
-//
-//          d3.select(this)
-//              .transition()
-//              //.attr('y', 0)
-//              //.attr('width', "10px")
-//              .style('background-color','#3D5C95')
-//              .duration(200)
-//
-//          //moveSquares(position, rects[0].length, false);
-//
-//      })
-//      .on('click', function(d) {
-//          window.open(d.web_url);
-//      })
-//      //.append("text")
-//      //.text(function(d) { return d.main_headline })
-//      .call(position)
-//  ;
-
-    // Append svg foreignObject element containing an HTML paragraph
-    rectHeadlines = rectInsides
+    // Article headlines
+    var rectHeadlines = rectInsides
         .append("h3")
 //        .attr("data-headline", function(d) { return d.main_headline; })
         .text(function(d) { return d.main_headline; })
+        .style("text-transform", "capitalize")
     ;
 
-    rectLeads = rectInsides
+    // Article Snippets
+    var rectSnippets = rectInsides
         .append("p")
         .text(function(d) { return d.snippet; })
     ;
 
-    rectImgs = rects.each(function(d, i) {
+    // Article Images
+    rectImgs = rects.each(function(d) {
         if (d.multimedia_url) {
             d3.select(this)
+                .append("div")
+                .classed("imgContainer", true)
                 .append("img")
                 .attr("src", d.multimedia_url)
                 .attr("class", d.multimedia_type)
             ;
         }
-    })
-//        .append("img")
-////        .attr("data-multimedia", function(d) { return d.multimedia_url; })
-//        .attr("src", function(d) { return d.multimedia_url; })
-    ;
-
-    // Event Handlers
-    $timeline.on("mousemove", function() {
-        var mouse = d3.mouse(this);
-        xScale.distortion(100).focus(mouse[0]);
-        rects.each(position);
     });
 
-    // Invoke the layout right away
-    xScale.distortion(100).focus(960);
-
-//    rects.call(position);
-//    rectText.call(position);
-//    rectText.each(function() {
-//        var $that = d3.select(this);
-//        var x = $that.attr("x");
-//        $that.selectAll("tspan").attr("x", x + 30 + "px");
-//    });
+    // Event Handler
+    $timeline.on("mousemove", function() {
+        var mouse = d3.mouse(this);
+        // Change the fisheye distortion.
+        xScale.distortion(xScaleDistortion).focus(mouse[0]);
+        // Previously this was rects.call(position), and I'm not actually sure how that worked in the first place.
+        rects.each(position);
+    });
 
     // Return
     return $timeline;
