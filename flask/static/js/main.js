@@ -69,6 +69,7 @@ var createTimeline = function(data, $svg) {
     var timeLength; // number of years or months being considered
     var timeData;   // the associated month or year data
     var graphName;
+    var months;
     if(data.years){
         maxHits    = data.max_hits;
         timeLength = data.years.length;
@@ -79,6 +80,7 @@ var createTimeline = function(data, $svg) {
         timeLength = data.months.length;
         timeData   = data.months;
         graphName  = "month_timeline";
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     }
     console.log(data);
     console.log(data.years);
@@ -158,7 +160,13 @@ var createTimeline = function(data, $svg) {
     var $year_labels = $year_groups
         .append("text")
         .classed("annotation", true)
-        .text(function(d) { return d.year; })
+        .text(function(d, i) { 
+            if(data.years)
+                return d.year; 
+            else {
+                return months[i] + ".";
+            }
+        })
         .attr("width", year_rect_width + "px")
         .attr("height", 24 + "px")
         .attr("x", function(d,i) { return (i * year_rect_width + year_rect_width / 2) + "px" })
