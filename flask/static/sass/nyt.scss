@@ -9,12 +9,12 @@ $bgColor: #efefef;
 $bgColorActive: #ccc;
 $annotationTextColor: #999;
 
-$borderColor: #fff;
+$containerColor: #fff;
+
+$borderColor: $containerColor;
 $borderWidth: 2px;
 
 $rectInsideWidth: 320px;
-
-
 
 body{
 	font-family: Avenir;
@@ -46,15 +46,32 @@ text {
 
 .content {
   margin: $margin;
-  height: 640px;
-
-  svg {
-    width: 100%;
-  }
 }
 
-svg g#all_years_timeline, svg g#month_timeline {
+.timeline {
+  display: block;
+  width: 100%;
+  height: 300px;
+  background-color: $containerColor;
+}
+
+%small_gray_text {
+  font-size: 14px;
+  line-height: 18px;
+  fill: $annotationTextColor;
+  color: $annotationTextColor;
+  font-weight: 500;
+  text-anchor: middle;
+  text-align: center;
+  margin: 0;
+}
+
+svg.bar_graph_timeline {
   g.bar {
+    &:not(.empty) {
+      cursor: pointer;
+    }
+
     rect {
       stroke: $borderColor;
       stroke-width: $borderWidth;
@@ -68,8 +85,6 @@ svg g#all_years_timeline, svg g#month_timeline {
 
     rect.fg {
       fill: $fillColor;
-      -webkit-transition-property: fill;
-      -webkit-transition-duration: 0.25s;
     }
 
     text.label {
@@ -81,14 +96,10 @@ svg g#all_years_timeline, svg g#month_timeline {
     }
 
     text.annotation {
-      font-size: 14px;
-      line-height: 18px;
-      text-anchor: middle;
-      font-weight: 500;
-      fill: $annotationTextColor;
+      @extend %small_gray_text;
     }
 
-    &:hover, &.active {
+    &:not(.empty):hover, &:not(.empty).active {
       rect.bg {
         fill: $bgColorActive;
       }
@@ -96,18 +107,29 @@ svg g#all_years_timeline, svg g#month_timeline {
       rect.fg {
         fill: $fillColorActive;
       }
+
+      text.annotation {
+        fill: #000;
+      }
     }
   }
 }
 
-div#single_year_timeline {
+div.articles_timeline {
   position: relative;
-//  background-color: $bgColor;
   overflow: hidden;
+  outline: 4px solid red;
 
-  .rect {
-    width: 156px;
-    height: 246px;
+  h2 {
+    @extend %small_gray_text;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    line-height: 24px;
+  }
+
+  .article {
     background-color: $bgColor;
     color: #666;
     text-shadow: 0 1px 2px rgba(#000, 0);
@@ -116,11 +138,7 @@ div#single_year_timeline {
     left: 0;
     top: 0;
     cursor: pointer;
-    border: 2px solid $borderColor;
-//    @include box-shadow(0 4px 8px rgba(#000, 0.25));
-//    @include transition-property(background-color);
-//    @include transition-duration(0.25s);
-//    @include transition-timing-function(ease-in-out);
+    border: $borderWidth solid $borderColor;
 
     .rectInside:before, &:after {
       content: "";
@@ -133,9 +151,6 @@ div#single_year_timeline {
       bottom: 0;
       @include background-image(linear-gradient(top, rgba($bgColor, 0.00), rgba($bgColor, 0.5)));
       opacity: 0;
-//      @include transition-property(opacity);
-//      @include transition-duration(0.25s);
-//      @include transition-timing-function(ease-in-out);
     }
 
     &:after {
@@ -150,9 +165,7 @@ div#single_year_timeline {
       bottom: 0;
       left: 0;
       right: 0;
-//      margin: auto;
       z-index: 1;
-//      -webkit-transform: translate3d(0, 0, 0);
     }
 
     h3, p, cite {
@@ -164,7 +177,6 @@ div#single_year_timeline {
       margin: 0 auto;
       font-size: 16px;
       line-height: 20px;
-//      min-width: $rectInsideWidth / 2;
       width: $rectInsideWidth;
     }
 
@@ -200,7 +212,6 @@ div#single_year_timeline {
         left:   -50%;
         right:  -50%;
         top:    0;
-//        bottom: 0;
         margin: auto;
       }
 
@@ -213,32 +224,26 @@ div#single_year_timeline {
     &:hover {
       color: #fff;
       text-shadow: 0 0 2px rgba(#000, 0.65);
-//      color: #000;
       background-color: $fillColor;
-//      color: #000;
-//      text-shadow: 0 1px 2px #000;
-
-//      .rectInside:before {
-//        @include background-image(linear-gradient(top, rgba(#000, 0.00), rgba(#000, 0.5)));
-//        opacity: 1.0;
-//      }
 
       &:after {
         opacity: 0.0;
       }
-    }
 
-    &:hover .imgContainer:not(.thumbnail) img {
-      opacity: 0.85;
-    }
+      /* Lower the opacity of non-thumbnail images */
+      .imgContainer:not(.thumbnail) {
+        opacity: 0.85;
+      }
 
-    &:hover .imgContainer:not(.thumbnail) + .rectInside {
-      color: #fff;
-      text-shadow: 0 0 2px rgba(#000, 0.65);
+      /* Different hover appearance for articles with non-thumbnail images */
+      .imgContainer:not(.thumbnail) + .rectInside {
+        color: #fff;
+        text-shadow: 0 0 2px rgba(#000, 0.65);
 
-      &:before {
-        @include background-image(linear-gradient(top, rgba(#000, 0.00), rgba(#000, 0.5)));
-        opacity: 1.0;
+        &:before {
+          @include background-image(linear-gradient(top, rgba(#000, 0.00), rgba(#000, 0.5)));
+          opacity: 1.0;
+        }
       }
     }
   }

@@ -18,83 +18,61 @@ var init = function() {
     if (! data) {
         throw "No data has been loaded! This is not good.";
     }
+
+    // Debugging stuff
+    var tempYearData = data.years[17];
+    var tempMonthData = data.years[17].months[0];
+    console.log(tempMonthData);
+
     var $container = d3.select("#container .content");
-    var $svg = CreateSVGContainer($container);
-    var $div = CreateDivContainer($container);
-    // Set up a timeline for all the years represented in the data set.
-    var $all_years_timeline = createTimeline(data, $svg);
-    var $single_year_timeline = SingleYearTimeline(data.years[17].months[0], $div);
+    // Set up all three timelines (instantiate them in reverse order for correct DOM ordering).
+    var $articles_timeline = ArticlesTimeline(tempMonthData, $container);
+    var $months_timeline = createTimeline(tempYearData, $container);
+    var $years_timeline = createTimeline(data, $container);
 };
 
-var CreateSVGContainer = function($container) {
-    var svg_width = 1920;
-    var svg_height = 300;
-
-    return $container.append("svg")
-        .attr("id", "svgContainer")
-        .attr("width", svg_width + "px")
-        .attr("height", svg_height + "px")
-    ;
-};
-
-var CreateDivContainer = function($container) {
-    var svg_width = 1920;
-    var svg_height = 640;
-
-    return $container.append("div")
-        .attr("id", "divContainer")
-        .attr("width", svg_width + "px")
-        .attr("height", svg_height + "px")
-    ;
-};
-
-var createTimeline = function(data, $svg) {
-
+var createTimeline = function(data, $container) {
     //dealing with year data
     var maxHits;    // max number of articles
     var timeLength; // number of years or months being considered
     var timeData;   // the associated month or year data
     var graphName;
-    if(data.years){
+    if(data.years) {
         maxHits    = data.max_hits;
         timeLength = data.years.length;
         timeData   = data.years;
-        graphName  = "all_years_timeline";
+        graphName  = "years_timeline";
     } else { // dealing with month data
         maxHits    = data.months_max_hits;
         timeLength = data.months.length;
         timeData   = data.months;
-        graphName  = "month_timeline";
+        graphName  = "months_timeline";
     }
 
-//    console.log(data);
-//    console.log(data.years);
-    // SVG container width and height
-    var svg_width = parseInt( $svg.style("width") );
-    var svg_height = parseInt( $svg.style("height") );
-    // Timeline group position and size
-    var margin = 32;
-    var timeline_width = svg_width - margin * 2;
-    var timeline_height = svg_height / 2 - margin * 2;
-    var timeline_x = margin;
-    var timeline_y = svg_height / 2 + margin - 36;
-    var timeline_y_centered = svg_height / 2 - timeline_height / 2;
+    // DOM Setup
+    var $timeline = $container
+        .append("svg")
+        .data([timeData])
+        .attr("id", graphName)
+        .classed(graphName, true)
+        .classed("bar_graph_timeline", true)
+        .classed("timeline", true)
+    ;
 
-    //data.max_hits
+    // Calculate Dimensions
+    var label_height = 18;
+    var timeline_width = parseInt( $timeline.style("width") );
+    var timeline_height = parseInt( $timeline.style("height") ) - label_height * 1.35;
+    // Logarithmic scaling for the timeline bars
     var heightScale = d3.scale.log().domain([maxHits, 0.5]).range([timeline_height,0]);
-
     // Year rect size | data.years.length
     var year_rect_width = timeline_width / timeLength;
 
-    // DOM setup
-    var $timeline = $svg.append("g")
-        //data.years
-        .data([timeData])
-        .attr("id", graphName)
-        .attr("width", timeline_width + "px")
-        .attr("height", timeline_height + "px")
-        .attr("transform", "translate(" + timeline_x + ", " + 0 + ")") // timelineYCentered
-    ;
+//    $timeline
+//        .attr("width", timeline_width + "px")
+//        .attr("height", timeline_height + "px")
+////        .attr("transform", "translate(" + timeline_x + ", " + 0 + ")")
+//    ;
 
     // SVG elements for each year
     var $year_groups = $timeline.selectAll("g")
@@ -105,6 +83,9 @@ var createTimeline = function(data, $svg) {
         .enter()
         .append("g")
         .classed("bar", true)
+        .classed("empty", function(d) {
+            return d.hits == 0;
+        })
         .attr("data-year", function(d) { return d.year; })
         .attr("data-hits", function(d) { return d.hits; })
     ;
@@ -116,9 +97,6 @@ var createTimeline = function(data, $svg) {
         .attr("y", "0px" )
         .attr("width", year_rect_width + "px")
         .attr("height", timeline_height + "px")
-        .attr("opacity", "0")
-        .transition()
-        .attr("opacity", "1.0")
     ;
 
     var $year_fg_rects = $year_groups
@@ -132,15 +110,6 @@ var createTimeline = function(data, $svg) {
         .attr("height", function(d,i) {
             return heightScale(d.hits) + "px";
         })
-        // .attr("transform", "scale(1.0, 0.0)")
-        // .attr("transform-origin", "50%, 50%")
-        .attr("opacity", "0")
-        .transition()
-        .attr("height", function(d,i) {
-            return heightScale(d.hits) + "px";
-        })
-        // .attr("transform", "scale(1.0, 1.0)")
-        .attr("opacity", "1.0")
     ;
 
     var $year_labels = $year_groups
@@ -156,31 +125,12 @@ var createTimeline = function(data, $svg) {
         .attr("width", year_rect_width + "px")
         .attr("height", 24 + "px")
         .attr("x", function(d,i) { return (i * year_rect_width + year_rect_width / 2) + "px" })
-        .attr("y", (timeline_height + 24) + "px")
+        .attr("y", (timeline_height + label_height) + "px")
     ;
-
-    /*
-    var $year_annotations = $year_groups
-        .append("text")
-        .classed("annotation", true)
-        .text(function(d) { return d.hits; })
-        .attr("width", year_rect_width + "px")
-        .attr("height", 18 + "px")
-        .attr("x", function(d,i) { return (i * year_rect_width + year_rect_width / 2) + "px" })
-        .attr("y", (timeline_height + 42) + "px")
-    ;
-    */
-
-//    $timeline
-//        .transition()
-//        .delay(500)
-//        .duration(1000)
-//        .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
-//    ;
 
     var $single_year_timeline = null;
 
-    // var $single_year_timeline = SingleYearTimeline($svg, data[17].docs);
+    // var $single_year_timeline = ArticlesTimeline($svg, data[17].docs);
 
     // Event Handlers
     $year_groups.selectAll("rect, text").on("mouseenter", function(d, i) {
@@ -215,7 +165,7 @@ var createTimeline = function(data, $svg) {
             //window.alert("We should show a month timeline for the year" + d.year + ".");
             //throw "Month timeline not implemented yet.";
         } else {
-            $single_year_timeline = SingleYearTimeline($svg, d.docs);
+            $single_year_timeline = ArticlesTimeline($svg, d.docs);
             // Bring the single year timeline in
             $single_year_timeline
                 .transition()
@@ -236,17 +186,30 @@ var createTimeline = function(data, $svg) {
 };
 
 var initFisheye = function(numDocs, baseWidth) {
-    var margin = {top: 20, right: 250, bottom: 30, left: 40};
-    var width = baseWidth - margin.left - margin.right;
-//    var height = window.innerHeight - margin.top - margin.bottom;
+//    var margin = {top: 20, right: 250, bottom: 30, left: 40};
+//    var width = baseWidth - margin.left - margin.right;
 
-    return d3.fisheye.scale(d3.scale.linear).domain([0, numDocs]).range([0, baseWidth - 148]).focus(0);
+    return d3.fisheye.scale(d3.scale.linear).domain([0, numDocs]).range([0, baseWidth]).focus(0);
 };
 
-var SingleYearTimeline = function(data, $html) {
-    // Scaling function for fisheye distortion
-    var xScale = initFisheye(data.docs.length, 1920);
+var ArticlesTimeline = function(data, $html) {
+    // DOM Setup
+    var $timeline = $html.append("div")
+        .attr("id", "articles_timeline")
+        .classed("timeline", true)
+        .classed("articles_timeline", true)
+        .data([data.docs])
+    ;
+
+    // Timeline group position and size
+    var label_height = 18;
+    var timeline_width = parseInt( $timeline.style("width") );
+    var timeline_height = parseInt( $timeline.style("height") ) - label_height * 1.35;
+
+    // Fisheye Distortion Setup
+    var xScale = initFisheye(data.docs.length, timeline_width);
     var xScaleDistortion = 10;
+
     // Set the fisheye distortion center right away
     xScale.distortion(xScaleDistortion).focus(960);
 
@@ -258,53 +221,34 @@ var SingleYearTimeline = function(data, $html) {
         d3.select(this)
             .style("-webkit-transform", "translate(" + translateX + "px, " + translateY + "px)")
             .style("width", xScale(i + 1.0) - xScale(i) + "px")
-//            .select(".rectInside")
-//            .style("opacity", (xScale(i + 1.0) - xScale(i)) / xScale(data.docs.length))
         ;
-
-//        console.log(xScale(i));
     };
 
-    // SVG container width and height
-    var svg_width = parseInt( $html.style("width") );
-    var svg_height = parseInt( $html.style("height") );
-    // Timeline group position and size
-    var margin = 32;
-    var timeline_width = svg_width - margin * 2;
-    var timeline_height = svg_height / 2 - margin * 2;
-
-    // DOM setup
-    var $timeline = $html.append("div")
-        .attr("id", "single_year_timeline")
-        .style("width", timeline_width + "px")
-        .style("height", 250 + "px")
-        .style("-webkit-transform", "translate(" + margin + "px, " + margin + "px)")
-        .data([data.docs])
+    // Timeline label
+    var timeline_label = $timeline
+        .append("h2")
+        .text(months[data.month] + " '" + (data.year + "").substr(2,2))
     ;
 
     // Insert articles as <a> elements
-    var rects = $timeline.selectAll("a.rect")
+    var articles = $timeline.selectAll("a.article")
         .data(function(d) { return d })
         .enter()
         .append("a")
-        .classed("rect", true)
+        .classed("article", true)
+        .style("height", timeline_height + "px")
         .attr("href", function(d) { return d.web_url; })
-//        .attr("data-headline", function(d) { return d.main_headline; })
-        // For debugging
-        .attr("data-has-multimedia", function(d) { return (d.multimedia_url && true) == true; })
-            // Set up the fisheye distortion right away.
+        // Set up the fisheye distortion right away.
         .each(position)
+        // Event handler to open links in a new window
         .on("click", function(d, i) {
             d3.event.preventDefault();
             window.open(d.web_url);
         })
-//        .style("-webkit-transform", function(d, i) {
-//            return "translate(" + 15 * i + ", " + 0 + ")"
-//        })
     ;
 
     // Article Images
-    rectImgs = rects.each(function(d) {
+    var articleImages = articles.each(function(d) {
         if (d.multimedia_url) {
             d3.select(this)
                 .append("div")
@@ -316,14 +260,14 @@ var SingleYearTimeline = function(data, $html) {
         }
     });
 
-    // Set up an interior container for the rects
-    var rectInsides = rects
+    // Set up an interior container for the articles
+    var rectInsides = articles
         .append("div")
         .classed("rectInside", true)
     ;
 
     // Article headlines
-    var rectHeadlines = rectInsides
+    var articleHeadlines = rectInsides
         .append("h3")
 //        .attr("data-headline", function(d) { return d.main_headline; })
         .text(function(d) { return d.main_headline; })
@@ -331,13 +275,13 @@ var SingleYearTimeline = function(data, $html) {
     ;
 
     // Article Snippets
-    var rectSnippets = rectInsides
+    var articleSnippets = rectInsides
         .append("p")
         .text(function(d) { return d.snippet; })
     ;
 
     // Article Dates
-    var rectDates = rectInsides
+    var articleDates = rectInsides
         .append("cite")
         .text(function(d) {
             var pub_date = new Date(d.pub_date);
@@ -345,13 +289,13 @@ var SingleYearTimeline = function(data, $html) {
         })
     ;
 
-    // Event Handler
+    // Fisheye Distortion Event Handler
     $timeline.on("mousemove", function() {
         var mouse = d3.mouse(this);
         // Change the fisheye distortion.
         xScale.distortion(xScaleDistortion).focus(mouse[0]);
-        // Previously this was rects.call(position), and I'm not actually sure how that worked in the first place.
-        rects.each(position);
+        // Previously this was articles.call(position), and I'm not actually sure how that worked in the first place.
+        articles.each(position);
     });
 
     // Return
