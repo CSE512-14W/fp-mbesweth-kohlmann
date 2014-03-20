@@ -50,8 +50,10 @@ text {
 
 .content {
   margin: $margin;
-  outline: 4px solid blue;
+//  outline: 4px solid blue;
   @include transition(height 0.5s ease-in-out);
+  height: 0px;
+  overflow: hidden;
 
   &.years {
     height: $timelineHeight;

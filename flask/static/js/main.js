@@ -222,7 +222,8 @@ var ArticlesTimeline = function(data, $html) {
 
     // Fisheye Distortion Setup
     var xScale = initFisheye(data.docs.length, timeline_width);
-    var xScaleDistortion = 10;
+    // A value of 10 works well with 33 items
+    var xScaleDistortion = data.docs.length / 3;
 
     // The position() function implements the fisheye lens distortion on the articles.
     var position = function(d, i) {
