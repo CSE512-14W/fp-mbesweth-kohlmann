@@ -27,8 +27,22 @@ var init = function() {
     var $container = d3.select("#container .content");
     // Set up all three timelines (instantiate them in reverse order for correct DOM ordering).
     //var $articles_timeline = ArticlesTimeline(tempMonthData, $container);
-    $months_timeline = createTimeline(tempYearData, $container);
-    var $years_timeline = createTimeline(data, $container);
+//    $months_timeline = createTimeline(
+//        tempYearData,
+//        $container.select("#months_timeline")
+//    );
+
+    createTimeline(
+        data,
+        d3.select("#years_timeline")
+    );
+
+    $container
+        .classed("years-articles", false)
+        .classed("years-months-articles", false)
+        .classed("years-months", false)
+        .classed("years", true)
+    ;
 };
 
 var createTimeline = function(data, $container) {
@@ -37,6 +51,7 @@ var createTimeline = function(data, $container) {
     var timeLength; // number of years or months being considered
     var timeData;   // the associated month or year data
     var graphName;
+
     if(data.years) {
         maxHits    = data.max_hits;
         timeLength = data.years.length;
@@ -50,13 +65,12 @@ var createTimeline = function(data, $container) {
     }
 
     // DOM Setup
-    var $timeline = $container
-        .append("svg")
-        .data([timeData])
-        .attr("id", graphName)
-        .classed(graphName, true)
-        .classed("bar_graph_timeline", true)
-        .classed("timeline", true)
+    // Clear out the container and set its opacity to 0
+    var $timeline = $container;
+
+    $timeline
+        .classed("hidden", true)
+        .text("")
     ;
 
     // Calculate Dimensions
@@ -68,18 +82,13 @@ var createTimeline = function(data, $container) {
     // Year rect size | data.years.length
     var year_rect_width = timeline_width / timeLength;
 
-//    $timeline
-//        .attr("width", timeline_width + "px")
-//        .attr("height", timeline_height + "px")
-////        .attr("transform", "translate(" + timeline_x + ", " + 0 + ")")
-//    ;
-
-    // SVG elements for each year
-    var $year_groups = $timeline.selectAll("g")
-        .data(function(d) { return d; })
+    // SVG groups for each year
+    var $year_bars = $timeline.selectAll("g.bar")
+        .data(timeData)
     ;
 
-    $year_groups
+    // Enter
+    $year_bars
         .enter()
         .append("g")
         .classed("bar", true)
@@ -90,7 +99,16 @@ var createTimeline = function(data, $container) {
         .attr("data-hits", function(d) { return d.hits; })
     ;
 
-    var $year_bg_rects = $year_groups
+    // Exit
+    $year_bars
+        .exit()
+        .transition()
+        .duration(500)
+        .attr("height", 0)
+        .remove()
+    ;
+
+    var $year_bg_rects = $year_bars
         .append("rect")
         .classed("bg", true)
         .attr("x", function(d,i) { return (i * year_rect_width) + "px" })
@@ -99,7 +117,7 @@ var createTimeline = function(data, $container) {
         .attr("height", timeline_height + "px")
     ;
 
-    var $year_fg_rects = $year_groups
+    var $year_fg_rects = $year_bars
         .append("rect")
         .classed("fg", true)
         .attr("x", function(d,i) { return (i * year_rect_width) + "px" })
@@ -112,7 +130,7 @@ var createTimeline = function(data, $container) {
         })
     ;
 
-    var $year_labels = $year_groups
+    var $year_labels = $year_bars
         .append("text")
         .classed("annotation", true)
         .text(function(d, i) { 
@@ -128,63 +146,55 @@ var createTimeline = function(data, $container) {
         .attr("y", (timeline_height + label_height) + "px")
     ;
 
-    var $single_year_timeline = null;
-
-    // var $single_year_timeline = ArticlesTimeline($svg, data[17].docs);
-
-    // Event Handlers
-    $year_groups.selectAll("rect, text").on("mouseenter", function(d, i) {
-        //console.log("Hello, hovering");
-    });
-
-    $year_groups.selectAll("rect, text").on("click", function(d, i) {
-        console.log("Clicking");
-        var $this = d3.select(this);
+    // Event Handler
+    $year_bars.selectAll("rect, text").on("click", function(d) {
         var $parent = d3.select(this.parentNode);
 
         if ($parent.classed("active")) {
+            // Do nothing when clicking on a bar that is already active.
             return;
         } else {
-            $timeline.select("g.year.active").classed("active", false);
+            $timeline.select("g.bar.active").classed("active", false);
             $parent.classed("active", true);
-        }
-
-        if ($single_year_timeline) {
-            $single_year_timeline.remove();
-//        } else {
         }
 
         // Should we display a month timeline or an article timeline next?
         if (d.docs == null) {
-            //console.log(d);
-            //$("#all_years_timeline").remove();
-            $timeline
-                .transition()
-                .style("margin-top", "150px")
-                //.attr("transform", "translate(" + timeline_x + ", " + 150 + ")") // timelineYCentered
+            // Bring in the months timeline
+            createTimeline(d, d3.select("#months_timeline"));
+            // b the articles timeline
+            d3.select(".content")
+                .classed("years-articles", false)
+                .classed("years-months-articles", false)
+                .classed("years-months", true)
+                .classed("years", false)
             ;
-
-            // Change the data in the months timeline
-            $months_timeline.data(d);
-            // createTimeline(d, $container);
-            //window.alert("We should show a month timeline for the year" + d.year + ".");
-            //throw "Month timeline not implemented yet.";
         } else {
-            $single_year_timeline = ArticlesTimeline($svg, d.docs);
-            // Bring the single year timeline in
-            $single_year_timeline
-                .transition()
-                .duration(1000)
-                .attr("opacity", "1.0")
-            ;
-            // Slide the all years timeline down
-            $timeline
-                .transition()
-                .duration(1000)
-                .attr("transform", "translate(" + timeline_x + ", " + timeline_y + ")")
-            ;
+            // Bring in the articles timeline
+            ArticlesTimeline(d, d3.select("#articles_timeline"));
+            // Bring out the months timeline if we need to
+            if (graphName == "years_timeline") {
+                d3.select(".content")
+                    .classed("years-articles", true)
+                    .classed("years-months-articles", false)
+                    .classed("years-months", false)
+                    .classed("years", false)
+                ;
+            } else {
+                d3.select(".content")
+                    .classed("years-articles", false)
+                    .classed("years-months-articles", true)
+                    .classed("years-months", false)
+                    .classed("years", false)
+                ;
+            }
         }
     });
+
+    // Unhide the element
+    $timeline
+        .classed("hidden", false)
+    ;
 
     // All Done
     return $timeline;
@@ -198,12 +208,11 @@ var initFisheye = function(numDocs, baseWidth) {
 };
 
 var ArticlesTimeline = function(data, $html) {
+
+    console.log(data);
     // DOM Setup
-    var $timeline = $html.append("div")
-        .attr("id", "articles_timeline")
-        .classed("timeline", true)
-        .classed("articles_timeline", true)
-        .data([data.docs])
+    var $timeline = $html;
+        $timeline.text("")
     ;
 
     // Timeline group position and size
@@ -214,9 +223,6 @@ var ArticlesTimeline = function(data, $html) {
     // Fisheye Distortion Setup
     var xScale = initFisheye(data.docs.length, timeline_width);
     var xScaleDistortion = 10;
-
-    // Set the fisheye distortion center right away
-    xScale.distortion(xScaleDistortion).focus(960);
 
     // The position() function implements the fisheye lens distortion on the articles.
     var position = function(d, i) {
@@ -229,15 +235,30 @@ var ArticlesTimeline = function(data, $html) {
         ;
     };
 
+    // Set the fisheye distortion center right away
+    xScale.distortion(xScaleDistortion).focus(960);
+
+    var $timelineContainer = $timeline
+        .append("div")
+        .classed("timelineContainer", true)
+        .style("height", timeline_height + "px")
+    ;
+
+    var timeline_label = data.year;
+
+    if (data.month) {
+        timeline_label = months[data.month - 1] + " '" + (data.year + "").substr(2,2);
+    }
+
     // Timeline label
-    var timeline_label = $timeline
+    var timeline_label_el = $timeline
         .append("h2")
-        .text(months[data.month] + " '" + (data.year + "").substr(2,2))
+        .text(timeline_label)
     ;
 
     // Insert articles as <a> elements
-    var articles = $timeline.selectAll("a.article")
-        .data(function(d) { return d })
+    var articles = $timelineContainer.selectAll("a.article")
+        .data(data.docs)
         .enter()
         .append("a")
         .classed("article", true)
@@ -295,13 +316,18 @@ var ArticlesTimeline = function(data, $html) {
     ;
 
     // Fisheye Distortion Event Handler
-    $timeline.on("mousemove", function() {
+    $timelineContainer.on("mousemove", function() {
         var mouse = d3.mouse(this);
         // Change the fisheye distortion.
         xScale.distortion(xScaleDistortion).focus(mouse[0]);
         // Previously this was articles.call(position), and I'm not actually sure how that worked in the first place.
         articles.each(position);
     });
+
+    // Unhide the timeline
+    $timeline
+        .classed("hidden", false)
+    ;
 
     // Return
     return $timeline;

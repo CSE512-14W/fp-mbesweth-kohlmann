@@ -16,7 +16,8 @@ $borderWidth: 2px;
 
 $rectInsideWidth: 320px;
 
-$timelineHeight: 150px;
+$timelinePadding: 16px;
+$timelineHeight: 200px;
 $articlesTimelineHeight: 300px;
 
 body{
@@ -49,6 +50,86 @@ text {
 
 .content {
   margin: $margin;
+  outline: 4px solid blue;
+  @include transition(height 0.5s ease-in-out);
+
+  &.years {
+    height: $timelineHeight;
+
+    .months_timeline, .articles_timeline {
+      opacity: 0;
+      @include scale(1.0, 0);
+    }
+
+    .years_timeline {
+      opacity: 1.0;
+      @include transform(
+        scale(1.0, 1.0)
+        translate(0, -($timelineHeight + $articlesTimelineHeight + $timelinePadding * 2))
+      );
+    }
+  }
+
+  &.years-months {
+    height: $timelineHeight * 2 + $timelinePadding;
+
+    .articles_timeline {
+      opacity: 0;
+      @include scale(1.0, 0);
+    }
+
+    .months_timeline {
+      opacity: 1.0;
+      @include transform(
+        scale(1.0, 1.0)
+        translate(0, -($articlesTimelineHeight + $timelinePadding))
+      );
+    }
+
+    .years_timeline {
+      opacity: 1.0;
+      @include transform(
+        scale(1.0, 1.0)
+        translate(0, -($articlesTimelineHeight + $timelinePadding))
+      );
+    }
+  }
+
+  &.years-articles {
+    height: $articlesTimelineHeight + $timelineHeight + $timelinePadding;
+    .months_timeline {
+      opacity: 0;
+      @include scale(1.0, 0);
+    }
+
+    .years_timeline {
+      opacity: 1.0;
+      @include transform(
+        scale(1.0, 1.0)
+        translate(0, -($timelineHeight + $timelinePadding))
+      );
+    }
+  }
+
+  &.years-months-articles {
+    height: $articlesTimelineHeight + $timelineHeight * 2 + $timelinePadding * 2;
+
+    .months_timeline {
+      opacity: 1.0;
+      @include transform(
+        scale(1.0, 1.0)
+        translate(0, 0)
+      );
+    }
+
+    .years_timeline {
+      opacity: 1.0;
+      @include transform(
+        scale(1.0, 1.0)
+        translate(0, 0)
+      );
+    }
+  }
 }
 
 .timeline {
@@ -56,6 +137,14 @@ text {
   width: 100%;
   height: $timelineHeight;
   background-color: $containerColor;
+  padding-bottom: 16px;
+  @include transition(all 0.5s ease-in-out);
+  @include transform-origin(50%, 0%);
+  opacity: 1;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
 }
 
 %small_gray_text {
@@ -71,8 +160,10 @@ text {
 
 svg.bar_graph_timeline {
   g.bar {
-    &:not(.empty) {
-      cursor: pointer;
+    cursor: pointer;
+
+    &.empty, &.active {
+      cursor: auto;
     }
 
     rect {
@@ -103,6 +194,7 @@ svg.bar_graph_timeline {
     }
 
     &:not(.empty):hover, &:not(.empty).active {
+
       rect.bg {
         fill: $bgColorActive;
       }
@@ -120,15 +212,19 @@ svg.bar_graph_timeline {
 
 div.articles_timeline {
   height: $articlesTimelineHeight;
-  position: relative;
-  overflow: hidden;
+
+  .timelineContainer {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
 
   h2 {
     @extend %small_gray_text;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+//    position: absolute;
+//    left: 0;
+//    right: 0;
+//    bottom: 0;
     line-height: 24px;
   }
 
@@ -225,6 +321,7 @@ div.articles_timeline {
     }
 
     &:hover {
+//      position: relative;
       color: #fff;
       text-shadow: 0 0 2px rgba(#000, 0.65);
       background-color: $fillColor;
