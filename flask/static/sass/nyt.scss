@@ -1,12 +1,12 @@
 @import "compass/css3";
 @import "compass/utilities/text/ellipsis";
 
-$margin: 32pt;
+$margin: 80px;
 
-$fillColor: #3D5C95;
-$fillColorActive: #cc0000;
-$bgColor: #efefef;
-$bgColorActive: #ccc;
+$fillColor: #000;
+$fillColorActive: #537DCC;
+$bgColor: #f2f2f2;
+$bgColorActive: #d9d9d9;
 $annotationTextColor: #999;
 
 $containerColor: #fff;
@@ -68,8 +68,8 @@ text {
     .years_timeline {
       opacity: 1.0;
       @include transform(
-        scale(1.0, 1.0)
         translate(0, -($timelineHeight + $articlesTimelineHeight + $timelinePadding * 2))
+        scale(1.0, 1.0)
       );
     }
   }
@@ -85,16 +85,16 @@ text {
     .months_timeline {
       opacity: 1.0;
       @include transform(
-        scale(1.0, 1.0)
         translate(0, -($articlesTimelineHeight + $timelinePadding))
+        scale(1.0, 1.0)
       );
     }
 
     .years_timeline {
       opacity: 1.0;
       @include transform(
-        scale(1.0, 1.0)
         translate(0, -($articlesTimelineHeight + $timelinePadding))
+        scale(1.0, 1.0)
       );
     }
   }
@@ -109,8 +109,8 @@ text {
     .years_timeline {
       opacity: 1.0;
       @include transform(
-        scale(1.0, 1.0)
         translate(0, -($timelineHeight + $timelinePadding))
+        scale(1.0, 1.0)
       );
     }
   }
@@ -121,16 +121,16 @@ text {
     .months_timeline {
       opacity: 1.0;
       @include transform(
-        scale(1.0, 1.0)
         translate(0, 0)
+        scale(1.0, 1.0)
       );
     }
 
     .years_timeline {
       opacity: 1.0;
       @include transform(
-        scale(1.0, 1.0)
         translate(0, 0)
+        scale(1.0, 1.0)
       );
     }
   }
@@ -225,11 +225,7 @@ div.articles_timeline {
 
   h2 {
     @extend %small_gray_text;
-//    position: absolute;
-//    left: 0;
-//    right: 0;
-//    bottom: 0;
-    line-height: 24px;
+    line-height: 32px;
   }
 
   .article {
@@ -332,7 +328,7 @@ div.articles_timeline {
 //      position: relative;
       color: #fff;
       text-shadow: 0 0 2px rgba(#000, 0.65);
-      background-color: $fillColor;
+      background-color: $fillColorActive;
 
       &:after {
         opacity: 0.0;

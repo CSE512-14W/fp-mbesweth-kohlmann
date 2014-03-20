@@ -25,12 +25,6 @@ var init = function() {
     tempMonthData = data.years[17].months[0];
 
     var $container = d3.select("#container .content");
-    // Set up all three timelines (instantiate them in reverse order for correct DOM ordering).
-    //var $articles_timeline = ArticlesTimeline(tempMonthData, $container);
-//    $months_timeline = createTimeline(
-//        tempYearData,
-//        $container.select("#months_timeline")
-//    );
 
     createTimeline(
         data,
@@ -69,7 +63,6 @@ var createTimeline = function(data, $container) {
     var $timeline = $container;
 
     $timeline
-        .classed("hidden", true)
         .text("")
     ;
 
@@ -190,11 +183,6 @@ var createTimeline = function(data, $container) {
             }
         }
     });
-
-    // Unhide the element
-    $timeline
-        .classed("hidden", false)
-    ;
 
     // All Done
     return $timeline;
@@ -323,11 +311,6 @@ var ArticlesTimeline = function(data, $html) {
         // Previously this was articles.call(position), and I'm not actually sure how that worked in the first place.
         articles.each(position);
     });
-
-    // Unhide the timeline
-    $timeline
-        .classed("hidden", false)
-    ;
 
     // Return
     return $timeline;
