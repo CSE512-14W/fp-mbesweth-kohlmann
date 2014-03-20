@@ -83,19 +83,25 @@ class ArticleSearch(object):
         """
         # Hash the query params to come up with a filename for this query.
         lame_hash = hashlib.sha1()
-        if "q" in query_params and type(query_params["q"]) is str:
+        hash_valid = False
+        if "q" in query_params and type(query_params["q"]) is unicode:
             lame_hash.update(query_params["q"])
-        if "fq" in query_params and type(query_params["fq"]) is str:
+            hash_valid = True
+        if "fq" in query_params and type(query_params["fq"]) is unicode:
             lame_hash.update(query_params["fq"])
+            hash_valid = True
         # Generate a 16-character query name based on this hash.
         qname = lame_hash.hexdigest()[:16]
-
+        if not hash_valid:
+            raise ValueError("Something went wrong with hashing, so we have an invalid qname")
         # Get the query filename as might exist on disk
         query_filename, query_path = self.get_query_filename(qname)
         if os.path.exists(query_path) and os.path.isfile(query_path):
             if self.debug:
                 print "Returning early because we have this query result cached!"
             return query_path
+        if self.debug:
+                print "Fetching the results live from the New York Times API"
         # First try the query without any date limits to figure out how many hits there are.
         ir_stats = self.fetch_query_stats_dict(**query_params)
         if ir_stats["hits"] == 0:

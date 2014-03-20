@@ -25,8 +25,8 @@
         <!-- flask_util.url_for() in JavaScript: https://github.com/kohlmannj/flask_util_js -->
         <script type="text/javascript" src="{{ url_for("flask_util_js") }}" charset="utf-8"></script>
         <!-- D3 CDN with Local Fallback -->
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <script>window.d3 || document.write('<script src="{{ url_for('static', filename='js/vendor/d3.min.js') }}" charset="utf-8"><\/script>')</script>
+        <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+        <script>window.d3 || document.write('<script src="{{ url_for('static', filename='js/vendor/d3.js') }}" charset="utf-8"><\/script>')</script>
         <!-- jQuery CDN with Local Fallback -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/vendor/jquery-2.1.0.min.js') }}"><\/script>')</script>

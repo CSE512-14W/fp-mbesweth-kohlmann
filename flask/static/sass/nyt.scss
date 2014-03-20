@@ -53,6 +53,8 @@ text {
 //  outline: 4px solid blue;
   @include transition(height 0.5s ease-in-out);
   height: 0px;
+  /* Magic padding to prevent things from getting cut off */
+  padding-bottom: $timelinePadding * 4;
   overflow: hidden;
 
   &.years {
@@ -260,7 +262,6 @@ div.articles_timeline {
     }
 
     .rectInside {
-//      width: 100%;
       padding: 32px 12px 12px;
       position: absolute;
       bottom: 0;
@@ -307,8 +308,9 @@ div.articles_timeline {
       min-width: $rectInsideWidth;
 
       img {
-        width: 540px;
+        width: auto;
         height: auto;
+//        max-height: 100%;
         position: absolute;
         left:   -50%;
         right:  -50%;
@@ -319,6 +321,10 @@ div.articles_timeline {
       &.thumbnail img {
         width: auto;
         top: 12.5%;
+      }
+
+      &:not(.thumbnail) img {
+        min-width: 640px;
       }
     }
 
@@ -334,7 +340,7 @@ div.articles_timeline {
 
       /* Lower the opacity of non-thumbnail images */
       .imgContainer:not(.thumbnail) {
-        opacity: 0.85;
+        opacity: 0.65;
       }
 
       /* Different hover appearance for articles with non-thumbnail images */
@@ -343,7 +349,7 @@ div.articles_timeline {
         text-shadow: 0 0 2px rgba(#000, 0.65);
 
         &:before {
-          @include background-image(linear-gradient(top, rgba(#000, 0.00), rgba(#000, 0.5)));
+          @include background-image(linear-gradient(top, rgba($fillColor, 0.00), rgba($fillColor, 0.5)));
           opacity: 1.0;
         }
       }

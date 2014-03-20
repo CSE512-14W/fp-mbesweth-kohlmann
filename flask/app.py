@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, Response
 from flask_util_js.flask_util_js import FlaskUtilJs
 from nyt_api import ArticleSearch, reduce_json
 import json
+import urllib
 
 app = Flask(__name__)
 # flask_util.url_for() in JavaScript: https://github.com/kohlmannj/flask_util_js
@@ -24,7 +25,12 @@ def index():
 @app.route('/search.json', methods=['GET'])
 def search():
     query_params = dict(request.args)
-    query_params["fq"] = query_params["fq"][0]
+    # Early return for bad params
+    if "fq" not in query_params:
+        return json.dumps({})
+    query_params["fq"] = " AND ".join(
+        [urllib.unquote(fq).decode('utf8') for fq in query_params["fq"]]
+    )
     # Get the path to the full json path
     original_json_full_path = searchInst.search(**query_params)
     # original_json_full_path

@@ -171,20 +171,24 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
                     continue
                 # Get the very first multimedia item so we at least have something
                 if index == 0:
-                    multimedia_url = u"http://nyt.com/%s" % multimedia["url"]
+                    multimedia_url = multimedia["url"]
                 # Get one particular multimedia entry
                 if "subtype" in multimedia:
-                    multimedia_url = "http://nyt.com/" + multimedia["url"]
+                    multimedia_url = multimedia["url"]
                     multimedia_type =  multimedia["subtype"]
                     # Prefer xlarge
                     if multimedia["subtype"] == "xlarge":
                         break
+        # Add the domain and a protocol to the multimedia url
+        if multimedia_url is not None and multimedia_url.startswith("images/"):
+            multimedia_url = u"http://nyt.com/" + multimedia_url
         # Prepare a dict with all the article data we care about
         new_article_data = {
             "pub_date": article["pub_date"],
             "main_headline": article["headline"]["main"],
             "web_url": article["web_url"],
-            "original_byline": byline,
+            # Removing this because it's too verbose and annoying to deal with
+            # "original_byline": byline,
             "_id": article["_id"],
             "keywords": flat_keywords,
             "multimedia_url": multimedia_url,

@@ -208,8 +208,6 @@ var initFisheye = function(numDocs, baseWidth) {
 };
 
 var ArticlesTimeline = function(data, $html) {
-
-    console.log(data);
     // DOM Setup
     var $timeline = $html;
         $timeline.text("")
@@ -223,7 +221,8 @@ var ArticlesTimeline = function(data, $html) {
     // Fisheye Distortion Setup
     var xScale = initFisheye(data.docs.length, timeline_width);
     // A value of 10 works well with 33 items
-    var xScaleDistortion = data.docs.length / 3;
+    var xScaleDistortion = data.docs.length / 2 * 1836 / timeline_width;
+//    console.log(timeline_width);
 
     // The position() function implements the fisheye lens distortion on the articles.
     var position = function(d, i) {
@@ -235,9 +234,6 @@ var ArticlesTimeline = function(data, $html) {
             .style("width", xScale(i + 1.0) - xScale(i) + "px")
         ;
     };
-
-    // Set the fisheye distortion center right away
-    xScale.distortion(xScaleDistortion).focus(960);
 
     var $timelineContainer = $timeline
         .append("div")
@@ -256,6 +252,9 @@ var ArticlesTimeline = function(data, $html) {
         .append("h2")
         .text(timeline_label)
     ;
+
+    // Set the fisheye distortion
+    xScale.distortion(xScaleDistortion).focus(timeline_width / 2);
 
     // Insert articles as <a> elements
     var articles = $timelineContainer.selectAll("a.article")
@@ -280,7 +279,7 @@ var ArticlesTimeline = function(data, $html) {
             d3.select(this)
                 .append("div")
                 .classed("imgContainer", true)
-                .classed(d.multimedia_type, true)
+                .classed(d.multimedia_type || "thumbnail", true)
                 .append("img")
                 .attr("src", d.multimedia_url)
             ;
