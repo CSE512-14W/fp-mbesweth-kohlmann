@@ -20,14 +20,14 @@ var init = function() {
     }
 
     // Debugging stuff
-    var tempYearData = data.years[17];
-    var tempMonthData = data.years[17].months[0];
-    console.log(tempMonthData);
+    tempYearData = data.years[17];
+    tempYear2Data = data.years[18];
+    tempMonthData = data.years[17].months[0];
 
     var $container = d3.select("#container .content");
     // Set up all three timelines (instantiate them in reverse order for correct DOM ordering).
-    var $articles_timeline = ArticlesTimeline(tempMonthData, $container);
-    var $months_timeline = createTimeline(tempYearData, $container);
+    //var $articles_timeline = ArticlesTimeline(tempMonthData, $container);
+    $months_timeline = createTimeline(tempYearData, $container);
     var $years_timeline = createTimeline(data, $container);
 };
 
@@ -160,8 +160,13 @@ var createTimeline = function(data, $container) {
             //$("#all_years_timeline").remove();
             $timeline
                 .transition()
-                .attr("transform", "translate(" + timeline_x + ", " + 150 + ")") // timelineYCentered
-            createTimeline(d, $svg);
+                .style("margin-top", "150px")
+                //.attr("transform", "translate(" + timeline_x + ", " + 150 + ")") // timelineYCentered
+            ;
+
+            // Change the data in the months timeline
+            $months_timeline.data(d);
+            // createTimeline(d, $container);
             //window.alert("We should show a month timeline for the year" + d.year + ".");
             //throw "Month timeline not implemented yet.";
         } else {
