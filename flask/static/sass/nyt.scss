@@ -16,6 +16,9 @@ $borderWidth: 2px;
 
 $rectInsideWidth: 320px;
 
+$timelineHeight: 150px;
+$articlesTimelineHeight: 300px;
+
 body{
 	font-family: Avenir;
 	margin: 0;
@@ -27,7 +30,7 @@ p, text{
 
 p {
 	width: 300px;
-	margin-top: 100px;
+	margin-top: 40px;
 }
 
 h1, .donut, p {
@@ -35,7 +38,7 @@ h1, .donut, p {
 }
 
 h1 {
-	margin-top: 40px;
+	margin-top: 20px;
 	font-size: 40pt;
 	margin-bottom: 0px;
 }
@@ -51,7 +54,7 @@ text {
 .timeline {
   display: block;
   width: 100%;
-  height: 300px;
+  height: $timelineHeight;
   background-color: $containerColor;
 }
 
@@ -116,9 +119,9 @@ svg.bar_graph_timeline {
 }
 
 div.articles_timeline {
+  height: $articlesTimelineHeight;
   position: relative;
   overflow: hidden;
-  outline: 4px solid red;
 
   h2 {
     @extend %small_gray_text;
