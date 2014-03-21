@@ -492,42 +492,44 @@ div.articles_timeline .article .imgContainer img {
 /* line 471, ../sass/nyt.scss */
 div.articles_timeline .article .imgContainer.thumbnail img {
   width: auto;
-  top: 12.5%;
+  top: 16px;
+  left: 16px;
+  right: auto;
 }
-/* line 476, ../sass/nyt.scss */
+/* line 478, ../sass/nyt.scss */
 div.articles_timeline .article .imgContainer:not(.thumbnail) img {
   min-width: 640px;
 }
-/* line 481, ../sass/nyt.scss */
+/* line 483, ../sass/nyt.scss */
 div.articles_timeline .article:hover {
   background-color: #537dcc;
   /* Lower the opacity of non-thumbnail images */
   /* Different hover appearance for articles with non-thumbnail images */
 }
-/* line 484, ../sass/nyt.scss */
+/* line 486, ../sass/nyt.scss */
 div.articles_timeline .article:hover .keyword {
   background: rgba(255, 255, 255, 0.5);
   color: rgba(0, 0, 0, 0.5);
 }
-/* line 489, ../sass/nyt.scss */
+/* line 491, ../sass/nyt.scss */
 div.articles_timeline .article:hover .rectInside {
   color: #fff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.65);
 }
-/* line 494, ../sass/nyt.scss */
+/* line 496, ../sass/nyt.scss */
 div.articles_timeline .article:hover:after {
   opacity: 0.0;
 }
-/* line 499, ../sass/nyt.scss */
+/* line 501, ../sass/nyt.scss */
 div.articles_timeline .article:hover .imgContainer:not(.thumbnail) {
   opacity: 0.65;
 }
-/* line 504, ../sass/nyt.scss */
+/* line 506, ../sass/nyt.scss */
 div.articles_timeline .article:hover .imgContainer:not(.thumbnail) + .rectInside {
   color: #fff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.65);
 }
-/* line 508, ../sass/nyt.scss */
+/* line 510, ../sass/nyt.scss */
 div.articles_timeline .article:hover .imgContainer:not(.thumbnail) + .rectInside:before {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.5)));
   background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));

@@ -78,7 +78,7 @@ var createTimeline = function(data, $container) {
 
     // Calculate Dimensions
     var margin = 80;
-    var label_width = 32;
+    var label_width = 36;
     var label_height = 18;
     var timeline_width = parseInt( $timeline.style("width") )  - margin * 2;
     var timeline_height = parseInt( $timeline.style("height") ) - label_height * 1.35;
@@ -153,7 +153,7 @@ var createTimeline = function(data, $container) {
     $year_bars.selectAll("rect, text").on("click", function(d) {
         var $parent = d3.select(this.parentNode);
 
-        if ($parent.classed("active")) {
+        if ($parent.classed("active") || $parent.classed("empty")) {
             // Do nothing when clicking on a bar that is already active.
             return;
         } else {

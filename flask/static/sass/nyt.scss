@@ -470,7 +470,9 @@ div.articles_timeline {
 
             &.thumbnail img {
                 width: auto;
-                top: 12.5%;
+                top: 16px;
+                left: 16px;
+                right: auto;
             }
 
             &:not(.thumbnail) img {
