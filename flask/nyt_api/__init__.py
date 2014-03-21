@@ -23,7 +23,7 @@ class ArticleSearch(object):
     query_results_per_page = 10
     query_hits_limit = query_pages_limit * query_results_per_page
     # Fail on queries with more than this number of results
-    query_max_hits = 5000
+    query_max_hits = 8000
 
     @staticmethod
     def get_hash_for_query(**query_params):

@@ -16,32 +16,36 @@
     <body>
         <div id="container">
             <header>
-                <div class="column loading">
+                <div class="column">
                     <div class="wrapper">
                         <h1>Nested Year Timelines (NYT)</h1>
                         <form id="pages">
                             <select id="page" name="page">
-                            {% if fq is defined and fq not in sample_queries %}
+                            {% if fq is defined and fq not in queries %}
                                 <option value=" {{  url_for('search', fq=fq) }}" selected="selected">{{ fq }}</option>
                             {% endif %}
-                            {% if sample_queries is defined %}
-                                {% for query in sample_queries %}
+                            {% if queries is defined %}
+                                {% for query in queries %}
                                     <option value=" {{  url_for('search', fq=query) }}"{% if fq == query %}  selected="selected"{% endif %}>{{ query }}</option>
                                 {% endfor %}
                             {% endif %}
                             </select>
                         </form>
+                        <h2>Loading Articles&hellip;</h2>
                     </div>
                 </div>
                 <div class="column">
                     <p>
                         <strong>Nested Year Timelines (NYT)</strong> is a hierarchical timeline visualization. It supports exploring large sets of news articles from <strong><a href="http://nyt.com">The New York Times</a></strong>, based on a search query. <strong>Hover on or click a bar below to start exploring.</strong>
+                        <br><br>Want to see a different set of articles? Check out the list of cached article searches on the left.
                         <br><br>Created by <strong><a href="http://stewed.co">Michael Beswetherick</a></strong> and <strong><a href="https://kohlmannj.com/">Joe Kohlmann</a></strong> as a final project for <a href="http://courses.cs.washington.edu/courses/cse512/14wi/">CSE 512: Data Visualization (Winter 2014)</a> at the <a href="http://uw.edu/">University of Washington</a>.
                     </p>
                 </div>
                 <div class="column">
                     <p class="wrapper">
-                        <strong>Note:</strong> Some search results are cached, while others may take some time to load from the <a href="http://developer.nytimes.com/docs/read/article_search_api_v2">NYT Article Search API</a>. Please be patient.
+                        You'll notice that articles have <strong>scrollable lists of keywords</strong> on their bottom edges. <strong>Click on a keyword to start a new article search!</strong>
+                        <br><br><strong>Note:</strong> Some search results are cached (again, see the menu on the left), while others may take some time to load from the <a href="http://developer.nytimes.com/docs/read/article_search_api_v2">NYT Article Search API</a>. Please be patient.
+                        <br><br>Advanced users: use any search query value that works with the <a href="http://developer.nytimes.com/docs/read/article_search_api_v2#h2-requests">API's fq parameter</a> (take a look at the address bar for a hint).
                         <br><br>
                         <a href="http://developer.nytimes.com/">
                             <img src="{{ url_for('static', filename='img/poweredby_nytimes_200a.png') }}" alt="Data provided by the New York Times."/>

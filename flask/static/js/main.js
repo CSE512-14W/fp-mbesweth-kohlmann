@@ -21,7 +21,7 @@ d3.json(data_url, function(error, json) {
     if (error) return console.warn(error);
     data = json;
     if (! data) {
-        window.alert("Either there were no articles found...or there were more than 5000 articles found for this query! In the current implementation this would take forever and a day to retrieve from the NYT Article Search API, so we're punting. Sorry. :-(");
+        window.alert("Either there were no articles found...or there were more than 8000 articles found for this query! In the current implementation this would take forever and a day to retrieve from the NYT Article Search API, so we're punting. Sorry. :-(");
     }
     // Call the init function...
     init(data);
@@ -33,6 +33,8 @@ var init = function() {
     }
 
     var $container = d3.select("#container .content");
+
+    d3.select("header h2").text(data.total_hits + " articles spanning " + data.year_range + " years");
 
     // Get the years timeline up and running.
     createTimeline(
@@ -107,15 +109,6 @@ var createTimeline = function(data, $container) {
         .attr("data-hits", function(d) { return d.hits; })
     ;
 
-    // Exit
-    $year_bars
-        .exit()
-        .transition()
-        .duration(500)
-        .attr("height", 0)
-        .remove()
-    ;
-
     var $year_bg_rects = $year_bars
         .append("rect")
         .classed("bg", true)
@@ -123,6 +116,7 @@ var createTimeline = function(data, $container) {
         .attr("y", "0px" )
         .attr("width", year_rect_width + "px")
         .attr("height", timeline_height + "px")
+        .attr("title", function(d) { return d.hits + " articles"; })
     ;
 
     var $year_fg_rects = $year_bars
@@ -136,11 +130,13 @@ var createTimeline = function(data, $container) {
         .attr("height", function(d,i) {
             return heightScale(d.hits) + "px";
         })
+        .attr("title", function(d) { return d.hits + " articles"; })
     ;
 
     var $year_labels = $year_bars
         .append("text")
         .classed("annotation", true)
+        .attr("title", function(d) { return d.hits + " articles"; })
         .text(function(d, i) { 
             if(data.years)
                 return d.year; 
@@ -248,6 +244,8 @@ var ArticlesTimeline = function(data, $html) {
     if (data.month) {
         timeline_label = months[data.month - 1] + " '" + (data.year + "").substr(2,2);
     }
+
+    timeline_label += " (" + data.hits + " article" + (data.hits == 1 ? "" : "s") + ")";
 
     // Timeline label
     var timeline_label_el = $timeline

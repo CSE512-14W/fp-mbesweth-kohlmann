@@ -56,6 +56,7 @@ def reduce_json(input_path, output_dir, replace=False, year_docs_limit=200):
     # Beyond here, we've got to actually do the reduction
     # Read in the input file.
     json_data = _get_input_json(input_path)
+    total_hits = len(json_data)
     # Figure out the range of years that the article list covers
     first_year = dateutil.parser.parse(json_data[0]["pub_date"]).year
     last_year = dateutil.parser.parse(json_data[-1]["pub_date"]).year
@@ -128,6 +129,8 @@ def reduce_json(input_path, output_dir, replace=False, year_docs_limit=200):
     # Reformulate the OrderedDict into a list of dicts
     all_years_keywords_counter = Counter()
     final_data = {
+        "total_hits": total_hits,
+        "year_range": last_year - first_year + 1,
         "max_hits": 0,
         "years": [],
         "most_common_keywords": Counter(),

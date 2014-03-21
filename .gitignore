@@ -3,3 +3,4 @@ flask/.idea
 
 *.pyc
 flask/config.py
+flask/static/cache/ArticleSearch/*.json
