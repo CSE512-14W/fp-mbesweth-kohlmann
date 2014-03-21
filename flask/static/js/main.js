@@ -70,7 +70,9 @@ var createTimeline = function(data, $container) {
     }
 
     // DOM Setup
-    var $timeline = $container;
+    var $timeline = $container
+        .text("")
+    ;
 
     // Calculate Dimensions
     var margin = 80;
