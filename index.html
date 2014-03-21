@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<style>
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    color: #737373;
+    background-color: white;
+    margin: 10px 13px 10px 13px;
+}
+table {
+	margin: 10px 0 15px 0;
+	border-collapse: collapse;
+}
+td,th {	
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+}
+th {
+	padding: 5px 10px;	
+}
+
+a {
+    color: #0069d6;
+}
+a:hover {
+    color: #0050a3;
+    text-decoration: none;
+}
+a img {
+    border: none;
+}
+p {
+    margin-bottom: 9px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #404040;
+    line-height: 36px;
+}
+h1 {
+    margin-bottom: 18px;
+    font-size: 30px;
+}
+h2 {
+    font-size: 24px;
+}
+h3 {
+    font-size: 18px;
+}
+h4 {
+    font-size: 16px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 13px;
+}
+hr {
+    margin: 0 0 19px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+blockquote {
+    padding: 13px 13px 21px 15px;
+    margin-bottom: 18px;
+    font-family:georgia,serif;
+    font-style: italic;
+}
+blockquote:before {
+    content:"\201C";
+    font-size:40px;
+    margin-left:-10px;
+    font-family:georgia,serif;
+    color:#eee;
+}
+blockquote p {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 18px;
+    margin-bottom: 0;
+    font-style: italic;
+}
+code, pre {
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+code {
+    background-color: #fee9cc;
+    color: rgba(0, 0, 0, 0.75);
+    padding: 1px 3px;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 14px;
+    margin: 0 0 18px;
+    line-height: 16px;
+    font-size: 11px;
+    border: 1px solid #d9d9d9;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    background-color: #fff;
+    color:#737373;
+    font-size: 11px;
+    padding: 0;
+}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:10px auto;
+    }
+}
+@media print {
+	body,code,pre code,h1,h2,h3,h4,h5,h6 {
+		color: black;
+	}
+	table, pre {
+		page-break-inside: avoid;
+	}
+}
+</style>
+<title>Live Demo</title>
+
+</head>
+<body>
+<h1>Nested Year Timelines (NYT)</h1>
+
+<p><a href="http://stewed.co/">Michael Beswetherick</a>, <a href="https://kohlmannj.com/">Joe Kohlmann</a> {mbesweth,kohlmann}@uw.edu</p>
+
+<p>Nested Year Timelines is a hierarchical timeline visualization that supports exploring large sets of news article retrieved from the <a href="http://developer.nytimes.com/docs/read/article_search_api_v2">New York Times Article Search API</a>.</p>
+
+<p><a href="http://keynotesavant.com/"><img src="Teaser2Small.png" alt="Teaser Graphic" style="display: block; margin: 0 auto; width: 85%; height: auto;"/></a></p>
+
+<h2>Live Demo</h2>
+
+<p>You should definitely go play with Nested Year Timelines at <a href="http://keynotesavant.com/">keynotesavant.com</a>. (Be gentle and patient with that server, please!)</p>
+
+<h2>Credits</h2>
+
+<ul>
+<li>Design Concept: <strong>Michael and Joe</strong></li>
+<li>Data: <a href="http://developer.nytimes.com/">The New York Times</a></li>
+<li>Prototype Implementation: <strong>Michael</strong></li>
+<li>New York Times API Wrangling and Python-Whispering: <strong>Joe</strong></li>
+<li>Spit-Shining: <strong>Joe</strong></li>
+<li>Late Nights: <strong>Michael and Joe</strong></li>
+</ul>
+
+
+<p><a href="https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/final/poster-mbesweth-kohlmann.pdf">Poster</a>,
+<a href="https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/final/paper-mbesweth-kohlmann">Final Paper</a></p>
+
+<h2>Running Instructions</h2>
+
+<p>Again, check out the live version of NYT at <a href="http://keynotesavant.com/">keynotesavant.com</a> if you haven't already.</p>
+
+<p>If you're about to clone this repository and try to get this working on your own, keep reading.</p>
+
+<h3>System Requirements</h3>
+
+<p>This is a Python job, so you'll need the following software to run Nested Year Timelines:</p>
+
+<ul>
+<li><a href="http://python.org">Python 2.7.5</a> (probably doesn't work with Python 3)</li>
+<li><a href="http://flask.pocoo.org">Flask 0.10</a></li>
+<li><a href="http://docs.python-requests.org/en/latest/">Requests: HTTP for Humans</a></li>
+<li>Maybe some other fourth thing (Python will tell you, I promise)</li>
+</ul>
+
+
+<h3>Configure the App with config.py</h3>
+
+<p>Once you've cloned the repository, check out the <code>flask</code> folder. Inside you'll find <code>config_example.py</code>, which you should <strong>duplicate</strong> and rename <code>config.py</code>. Open it up and you'll see something like this:</p>
+
+<pre><code>class Config(object):
+    DEBUG = False
+    # NYT Article Search API Key
+    # Request a key at http://developer.nytimes.com
+    SEARCH_API_KEY = "PASTE_API_KEY_HERE"
+    CACHE_ROOT = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        "static",
+        "cache"
+    )
+    ARTICLE_SEARCH_ROOT = os.path.join(
+        CACHE_ROOT,
+        "ArticleSearch"
+    )
+    QUERY_CACHE_PATH = os.path.join(
+        CACHE_ROOT,
+        "queries.json"
+    )
+
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+</code></pre>
+
+<h3>Request an Article Search API Key from The New York Times</h3>
+
+<p>Visit <a href="http://developer.nytimes.com">developer.nytimes.com</a>, create a user account, and <a href="http://developer.nytimes.com/apps/register">register your application</a> for use with the Article Search API.</p>
+
+<p>NYT will give you an API key, which you should paste into <code>config.py</code> to set the value of <code>SEARCH_API_KEY</code> to a valid API key string.</p>
+
+<h3>Run the Flask Server</h3>
+
+<p>If you're just on your local machine, invoke <code>python</code> on the command line to start the Flask web server on <a href="http://localhost:5000">http://localhost:5000</a>:</p>
+
+<pre><code>$ cd path/to/repo
+$ cd flask
+$ python app.py
+Loaded cached queries from disk.
+ * Running on http://127.0.0.1:5000/
+</code></pre>
+
+<h3>Appendix: Cache Files and Folders</h3>
+
+<p>Check out <code>flask/static/cache/</code> for three (count 'em, three) types of cache files:</p>
+
+<ol>
+<li><code>queries.json</code>, which lists recent queries (for which there may exist cached data)</li>
+<li>In the <code>ArticleSearch</code> folder, <code>61c5cce1ba03475e.json</code> (or something like that) is a cached JSON file containing all the NYT Article Search API results for a certain query.
+
+<ul>
+<li>Which query does a certain file represent, you ask? Good question. There's a rudimentary caching scheme in place that uses the search query value to generate a file name, so your guess is as good as mine. Check out the function <code>nyt_api.ArticleSearch.get_hash_for_query</code> for more on how those file names are generated.</li>
+<li>I can tell you that <code>61c5cce1ba03475e.json</code> contains the cached results for the query <code>fq=persons:("Obama, Barack")</code>, however.</li>
+<li>These cache files take a long time to generate since we have to retrieve however many thousands of article results from the NYT Article Search API to create them. I'd let them stick around if you can spare the megabytes.</li>
+</ul>
+</li>
+<li>In the <code>ArticleSearch</code> folder, <code>64d2ae7086249faf_reduce_by_year_and_month_with_multimedia.json</code> is a cache file containing the reduced data set that actually gets loaded into Nested Year Timelines. <strong>These are both smaller and easier to regenerate,</strong> so get rid of them whenever you want.</li>
+</ol>
+
+
+<h3>Uh, That's It</h3>
+
+<p>Things should be up and running. Don't forget to have fun!</p>
+
+<h2>License</h2>
+
+<p>It's <a href="http://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29">BSD-new</a>, dude. Read our license here: <a href="https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/LICENSE">LICENSE</a></p>
+</body>
+</html>

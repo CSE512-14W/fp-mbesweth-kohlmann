@@ -1,6 +1,8 @@
 # coding=utf-8
 __author__ = 'kohlmannj'
 
+import os
+
 
 class Config(object):
     DEBUG = False
