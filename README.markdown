@@ -2,7 +2,7 @@ Nested Year Timelines (NYT)
 ===============
 [Michael Beswetherick](http://stewed.co/), [Joe Kohlmann](https://kohlmannj.com/) {mbesweth,kohlmann}@uw.edu
 
-Nested Year Timelines is a hierarchical timeline visualization that supports exploring large sets of news article retrieved from the [New York Times Article Search API](http://developer.nytimes.com/docs/read/article_search_api_v2).
+Nested Year Timelines is a hierarchical timeline visualization that supports exploring large sets of news articles retrieved from the [New York Times Article Search API](http://developer.nytimes.com/docs/read/article_search_api_v2).
 
 [![Teaser Graphic](Teaser2Small.png)](http://keynotesavant.com/)
 
