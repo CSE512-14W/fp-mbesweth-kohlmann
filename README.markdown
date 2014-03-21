@@ -97,4 +97,4 @@ Things should be up and running. Don't forget to have fun!
 
 ## License
 
-It's [BSD-new](http://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29), dude. Read our license here: [LICENSE](https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/LICENSE)
+It's [BSD-new](http://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29), dude. Read our license here: [LICENSE](https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/LICENSE.txt)
