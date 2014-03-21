@@ -7,7 +7,7 @@ d3.select("#page").on("change", function() {
 
 if (! fq) {
     console.log("Setting fq variable to a default value.");
-    var fq = 'persons:("Obama, Barack")';
+    var fq = 'organizations:("WIKILEAKS")';
 }
 var data_url = flask_util.url_for("search_json", {fq: fq});
 // Available for debugging purposes
