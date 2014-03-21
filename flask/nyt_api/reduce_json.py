@@ -1,35 +1,30 @@
+# coding=utf-8
 __author__ = 'kohlmannj'
+
 import codecs
 import json
 import os
 import dateutil.parser
 from collections import OrderedDict, Counter
+from operator import itemgetter
+import heapq
 
 root_folder_path = "/Users/kohlmannj/Desktop/article_search_api/"
 debug = True
 
+
 # Least Common Values in a an array or Counter: http://stackoverflow.com/a/4743286
-
-from operator import itemgetter
-import heapq
-import collections
-
-
-multimedia_types = [
-    "xlarge",
-    ""
-]
-
-
 def least_common_values(counter, to_find=None):
     if to_find is None:
         return sorted(counter.items(), key=itemgetter(1), reverse=False)
     return heapq.nsmallest(to_find, counter.items(), key=itemgetter(1))
 
-# End Least Common Values Snippet
 
-
-def get_input_json(input_path):
+def _get_input_json(input_path):
+    """
+    A really basic helper function to dump the JSON data. This is probably a
+    leftover from when I was iterating on different reduce() functions.
+    """
     # Read in the input file.
     input_file = codecs.open(input_path, encoding="utf-8", mode="r")
     json_data = json.load(input_file)
@@ -37,77 +32,12 @@ def get_input_json(input_path):
     return json_data
 
 
-def reduce(input_path, output_dir):
-    # Get the input filename and stuff
-    input_filename = os.path.basename(input_path)
-    input_splitext = os.path.splitext(input_filename)
-    # Read in the input file.
-    json_data = get_input_json(input_path)
-    # Reduce the data into a new JSON file
-    new_data = []
-    for article in json_data:
-        abstract = None
-        if "abstract" in article:
-            abstract = article["abstract"]
-        byline = None
-        if "byline" in article and article["byline"] is not None and "original" in article["byline"]:
-            byline = article["byline"]["original"]
-        new_article_data = {
-            "pub_date": article["pub_date"],
-            "main_headline": article["headline"]["main"],
-            "web_url": article["web_url"],
-            "original_byline": byline,
-            "abstract": abstract,
-            "_id": article["_id"]
-        }
-        new_data.append(new_article_data)
-    # Output a new file
-    output_filename = input_splitext[0] + "_reduced" + input_splitext[1]
-    output_path = os.path.join(output_dir, output_filename)
-    with codecs.open(output_path, mode="w", encoding="utf-8") as fileobj:
-        fileobj.write( json.dumps(new_data) )
-    if debug:
-        print "%s --> %s" % (input_path, output_path)
-    return output_path
-
-
-def reduce_by_year(input_path, output_dir):
-    # Get the input filename and stuff
-    input_filename = os.path.basename(input_path)
-    input_splitext = os.path.splitext(input_filename)
-    # Read in the input file.
-    json_data = get_input_json(input_path)
-    # Reduce the data into a new JSON file:
-    new_data = {}
-    for article in json_data:
-        article_date = dateutil.parser.parse(article["pub_date"])
-        article_year = article_date.year
-        if article_year not in new_data:
-            new_data[article_year] = []
-        # Get the reduced set of data for this article
-        byline = None
-        if "byline" in article and article["byline"] is not None and "original" in article["byline"]:
-            byline = article["byline"]["original"]
-        new_article_data = {
-            "pub_date": article["pub_date"],
-            "main_headline": article["headline"]["main"],
-            "web_url": article["web_url"],
-            "original_byline": byline,
-            "_id": article["_id"]
-        }
-        # Append the reduced data to the new_data structure (by year)
-        new_data[article_year].append(new_article_data)
-    # Output a new file
-    output_filename = input_splitext[0] + "_reduced_by_year" + input_splitext[1]
-    output_path = os.path.join(output_dir, output_filename)
-    with codecs.open(output_path, mode="w", encoding="utf-8") as fileobj:
-        fileobj.write( json.dumps(new_data) )
-    if debug:
-        print "%s --> %s" % (input_path, output_path)
-    return output_path
-
-
-def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_limit=200):
+def reduce_json(input_path, output_dir, replace=False, year_docs_limit=200):
+    """
+    Given an input JSON file, reduce the data in it down to a JSON file
+    containing some data from the articles, grouped by year, and additionally
+    by month within a year if the year contains more than 200 articles.
+    """
     # File suffix
     file_suffix = "_reduce_by_year_and_month_with_multimedia"
     # Get the input filename and stuff
@@ -117,13 +47,15 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
     output_filename = input_splitext[0] + file_suffix + input_splitext[1]
     output_path = os.path.join(output_dir, output_filename)
     # Does that file already exist?
-    if os.path.exists(output_path) and os.path.isfile(output_path):
+    if not replace and os.path.exists(output_path) and os.path.isfile(output_path):
         if debug:
-            print "Early return: we've already reduced the input file!"
+            print "Early return: we've already reduced the input file! '%s'" % output_filename
         return output_path
+    if debug and replace and os.path.exists(output_path) and os.path.isfile(output_path):
+            print "Replacing existing file '%s'" % output_path
     # Beyond here, we've got to actually do the reduction
     # Read in the input file.
-    json_data = get_input_json(input_path)
+    json_data = _get_input_json(input_path)
     # Figure out the range of years that the article list covers
     first_year = dateutil.parser.parse(json_data[0]["pub_date"]).year
     last_year = dateutil.parser.parse(json_data[-1]["pub_date"]).year
@@ -144,10 +76,6 @@ def reduce_by_year_and_month_with_multimedia(input_path, output_dir, year_docs_l
         snippet = None
         if "snippet" in article:
             snippet = article["snippet"]
-        # Get the byline for the article
-        byline = None
-        if "byline" in article and article["byline"] is not None and "original" in article["byline"]:
-            byline = article["byline"]["original"]
         # Get the keywords for the article
         keyword_names_to_skip = ["unknown", "type_of_material"]
         flat_keywords = []
@@ -313,34 +241,3 @@ def _output_year_by_month(year, year_docs):
         year_keywords_counter += month_keywords
     # Return some data structures
     return year_by_month, year_keywords_counter, months_max_hits
-
-
-def reduce_by_year_minimal(input_path, output_dir):
-    # Get the input filename and stuff
-    input_filename = os.path.basename(input_path)
-    input_splitext = os.path.splitext(input_filename)
-    # Read in the input file.
-    json_data = get_input_json(input_path)
-    # Reduce the data into a new JSON file:
-    new_data = {}
-    for article in json_data:
-        article_date = dateutil.parser.parse(article["pub_date"])
-        article_year = article_date.year
-        if article_year not in new_data:
-            new_data[article_year] = []
-        # Get the reduced set of data for this article
-        new_article_data = {
-            "pub_date": article["pub_date"],
-            "main_headline": article["headline"]["main"],
-            "_id": article["_id"]
-        }
-        # Append the reduced data to the new_data structure (by year)
-        new_data[article_year].append(new_article_data)
-    # Output a new file
-    output_filename = input_splitext[0] + "_reduced_by_year_minimal" + input_splitext[1]
-    output_path = os.path.join(output_dir, output_filename)
-    with codecs.open(output_path, mode="w", encoding="utf-8") as fileobj:
-        fileobj.write( json.dumps(new_data) )
-    if debug:
-        print "%s --> %s" % (input_path, output_path)
-    return output_path

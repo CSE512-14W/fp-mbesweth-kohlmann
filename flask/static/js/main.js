@@ -1,5 +1,15 @@
 // (function() {
-var data_url = flask_util.url_for("search", {fq: 'persons:("Obama, Barack")'});
+
+// Lame event handler for the #page menu
+d3.select("#page").on("change", function() {
+    document.location = this.options[this.selectedIndex].value;
+});
+
+if (! fq) {
+    console.log("Setting fq variable to a default value.");
+    var fq = 'persons:("Obama, Barack")';
+}
+var data_url = flask_util.url_for("search_json", {fq: fq});
 // Available for debugging purposes
 var data;
 
@@ -10,6 +20,9 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "O
 d3.json(data_url, function(error, json) {
     if (error) return console.warn(error);
     data = json;
+    if (! data) {
+        window.alert("Either there were no articles found...or there were more than 5000 articles found for this query! In the current implementation this would take forever and a day to retrieve from the NYT Article Search API, so we're punting. Sorry. :-(");
+    }
     // Call the init function...
     init(data);
 });
@@ -19,19 +32,17 @@ var init = function() {
         throw "No data has been loaded! This is not good.";
     }
 
-    // Debugging stuff
-    tempYearData = data.years[17];
-    tempYear2Data = data.years[18];
-    tempMonthData = data.years[17].months[0];
-
     var $container = d3.select("#container .content");
 
+    // Get the years timeline up and running.
     createTimeline(
         data,
         d3.select("#years_timeline")
     );
 
+    // Add the classes that will make .content look correct.
     $container
+        .classed("loading", false)
         .classed("years-articles", false)
         .classed("years-months-articles", false)
         .classed("years-months", false)
@@ -59,16 +70,13 @@ var createTimeline = function(data, $container) {
     }
 
     // DOM Setup
-    // Clear out the container and set its opacity to 0
     var $timeline = $container;
 
-    $timeline
-        .text("")
-    ;
-
     // Calculate Dimensions
+    var margin = 80;
+    var label_width = 32;
     var label_height = 18;
-    var timeline_width = parseInt( $timeline.style("width") );
+    var timeline_width = parseInt( $timeline.style("width") )  - margin * 2;
     var timeline_height = parseInt( $timeline.style("height") ) - label_height * 1.35;
     // Logarithmic scaling for the timeline bars
     var heightScale = d3.scale.log().domain([maxHits, 0.5]).range([timeline_height,0]);
@@ -78,6 +86,11 @@ var createTimeline = function(data, $container) {
     // SVG groups for each year
     var $year_bars = $timeline.selectAll("g.bar")
         .data(timeData)
+    ;
+
+    $timeline
+        .classed("narrow-bars", year_rect_width < label_width)
+        .attr("width", (timeline_width + margin * 2) + "px");
     ;
 
     // Enter
@@ -104,7 +117,7 @@ var createTimeline = function(data, $container) {
     var $year_bg_rects = $year_bars
         .append("rect")
         .classed("bg", true)
-        .attr("x", function(d,i) { return (i * year_rect_width) + "px" })
+        .attr("x", function(d,i) { return (margin + i * year_rect_width) + "px" })
         .attr("y", "0px" )
         .attr("width", year_rect_width + "px")
         .attr("height", timeline_height + "px")
@@ -113,7 +126,7 @@ var createTimeline = function(data, $container) {
     var $year_fg_rects = $year_bars
         .append("rect")
         .classed("fg", true)
-        .attr("x", function(d,i) { return (i * year_rect_width) + "px" })
+        .attr("x", function(d,i) { return (margin + i * year_rect_width) + "px" })
         .attr("y", function(d,i) {
             return timeline_height - heightScale(d.hits) + "px";
         })
@@ -133,9 +146,8 @@ var createTimeline = function(data, $container) {
                 return months[i] + " '" + (d.year + "").substr(2,2);
             }
         })
-        .attr("width", year_rect_width + "px")
         .attr("height", 24 + "px")
-        .attr("x", function(d,i) { return (i * year_rect_width + year_rect_width / 2) + "px" })
+        .attr("x", function(d,i) { return (margin + i * year_rect_width + year_rect_width / 2) + "px" })
         .attr("y", (timeline_height + label_height) + "px")
     ;
 
@@ -248,17 +260,12 @@ var ArticlesTimeline = function(data, $html) {
     var articles = $timelineContainer.selectAll("a.article")
         .data(data.docs)
         .enter()
-        .append("a")
+        .append("div")
         .classed("article", true)
+        .classed("long", function(d) { return d.main_headline.length > 100; })
         .style("height", timeline_height + "px")
-        .attr("href", function(d) { return d.web_url; })
         // Set up the fisheye distortion right away.
         .each(position)
-        // Event handler to open links in a new window
-        .on("click", function(d, i) {
-            d3.event.preventDefault();
-            window.open(d.web_url);
-        })
     ;
 
     // Article Images
@@ -276,8 +283,14 @@ var ArticlesTimeline = function(data, $html) {
 
     // Set up an interior container for the articles
     var rectInsides = articles
-        .append("div")
+        .append("a")
         .classed("rectInside", true)
+        .attr("href", function(d) { return d.web_url; })
+        // Event handler to open links in a new window
+        .on("click", function(d) {
+            d3.event.preventDefault();
+            window.open(d.web_url);
+        })
     ;
 
     // Article headlines
@@ -300,6 +313,35 @@ var ArticlesTimeline = function(data, $html) {
         .text(function(d) {
             var pub_date = new Date(d.pub_date);
             return pub_date.getDate() + " " + months[pub_date.getMonth()] + " " + pub_date.getFullYear();
+        })
+    ;
+
+    var articleKeywordsWrapper = articles
+        .append("div")
+        .classed("keywordsWrapper", true)
+        .append("div")
+        .classed("keywords", true)
+    ;
+
+    var articleKeywords = articleKeywordsWrapper
+        .selectAll("a.keyword")
+        .data(function(d) {
+            return d.keywords;
+        })
+        .enter()
+        .append("a")
+        .classed("keyword", true)
+        .each(function(d, i) {
+            var matches = d.match(/fq=([^:]+):\(\"([^\"]+)\"\)/);
+            var label = d;
+            if (matches[2]) {
+                label = matches[2];
+            }
+            d3.select(this)
+                .attr("href", flask_util.url_for("search", { fq: d.substr(3) }))
+                // http://stackoverflow.com/a/7592235
+                .text(label)
+            ;
         })
     ;
 

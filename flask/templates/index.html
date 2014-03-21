@@ -1,9 +1,14 @@
+{% if fq is not defined %}
+    {# Should be a single-quoted string, since the NYT Article Search API needs those double quotes. #}
+    {% set fq = 'persons:("Obama, Barack")' %}
+{% endif %}
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Nested Year Timelines (NYT){% if fq is defined %} &mdash; {{ fq }}{% endif %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nyt.css') }}">
@@ -11,10 +16,40 @@
     <body>
         <div id="container">
             <header>
-                <p>This is an attempt to visualize articles from The New York Times. You might even say it's a Dynamic Timeline for News Articles With Interactive Exploration and Linking of Related Subjects’ Timelines.</p> 
-                <h1>Barack Obama</h1>
+                <div class="column loading">
+                    <div class="wrapper">
+                        <h1>Nested Year Timelines (NYT)</h1>
+                        <form id="pages">
+                            <select id="page" name="page">
+                            {% if fq is defined and fq not in sample_queries %}
+                                <option value=" {{  url_for('search', fq=fq) }}" selected="selected">{{ fq }}</option>
+                            {% endif %}
+                            {% if sample_queries is defined %}
+                                {% for query in sample_queries %}
+                                    <option value=" {{  url_for('search', fq=query) }}"{% if fq == query %}  selected="selected"{% endif %}>{{ query }}</option>
+                                {% endfor %}
+                            {% endif %}
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                <div class="column">
+                    <p>
+                        <strong>Nested Year Timelines (NYT)</strong> is a hierarchical timeline visualization. It supports exploring large sets of news articles from <strong><a href="http://nyt.com">The New York Times</a></strong>, based on a search query. <strong>Hover on or click a bar below to start exploring.</strong>
+                        <br><br>Created by <strong><a href="http://stewed.co">Michael Beswetherick</a></strong> and <strong><a href="https://kohlmannj.com/">Joe Kohlmann</a></strong> as a final project for <a href="http://courses.cs.washington.edu/courses/cse512/14wi/">CSE 512: Data Visualization (Winter 2014)</a> at University of Washington.
+                    </p>
+                </div>
+                <div class="column">
+                    <p>
+                        <strong>Note:</strong> Some search results are cached, while others may take some time to load from the <a href="http://developer.nytimes.com/docs/read/article_search_api_v2">NYT Article Search API</a>. Please be patient.
+                        <br><br>
+                        <a href="http://developer.nytimes.com/">
+                            <img src="{{ url_for('static', filename='img/poweredby_nytimes_200a.png') }}" alt="Data provided by the New York Times."/>
+                        </a>
+                    </p>
+                </div>
             </header>
-            <div class="content">
+            <div class="content years loading">
                 <div id="articles_timeline" class="articles_timeline timeline hidden"></div>
                 <svg id="months_timeline" class="months_timeline bar_graph_timeline timeline hidden"></svg>
                 <svg id="years_timeline" class="years_timeline bar_graph_timeline timeline hidden"></svg>
@@ -39,6 +74,11 @@
         <!--script src="js/plugins.js"></script-->
         <!-- D3 Fisheye Plugin -->
         <script src="{{ url_for('static', filename='js/fisheye.js') }}"></script>
+        {% if fq is defined %}
+        <script>
+            var fq = '{{ fq|safe }}';
+        </script>
+        {% endif %}
         <!-- Main Scripts -->
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
         <!--script src="{{ url_for('static', filename='js/nyt.js') }}"></script-->

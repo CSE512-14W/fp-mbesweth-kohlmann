@@ -7,10 +7,12 @@ import json
 import requests
 import dateutil.parser
 from calendar import monthrange
-from copy import copy
+from copy import deepcopy
 import math
 import tempfile
 import hashlib
+import re
+import string
 
 
 class ArticleSearch(object):
@@ -20,12 +22,41 @@ class ArticleSearch(object):
     query_pages_limit = 100
     query_results_per_page = 10
     query_hits_limit = query_pages_limit * query_results_per_page
+    # Fail on queries with more than this number of results
+    query_max_hits = 5000
 
     @staticmethod
-    def lame_hash(input_str):
+    def get_hash_for_query(**query_params):
+        """
+        Hash the query params for use in a rudimentary caching scheme.
+        """
         lame_hash = hashlib.sha1()
-        lame_hash.update(input_str)
-        return lame_hash.hexdigest()[:10]
+        hash_valid = False
+        if "q" in query_params and (
+            type(query_params["q"]) is unicode or
+            type(query_params["q"]) is str
+        ):
+            no_whitespace = re.sub("[\s]", "", query_params["q"].lower(), re.UNICODE)
+            lame_hash.update(
+                u"q" + unicode(no_whitespace)
+            )
+            hash_valid = True
+        if "fq" in query_params and (
+            type(query_params["fq"]) is unicode or
+            type(query_params["fq"]) is str
+        ):
+            # Get rid of spaces and punctuation
+            no_whitespace = re.sub("[\s]", "", query_params["fq"].lower(), re.UNICODE)
+            lame_hash.update(
+                u"fq" + unicode(no_whitespace)
+            )
+            hash_valid = True
+        # Generate a 16-character query name based on this hash.
+        qname = lame_hash.hexdigest()[:16]
+        if hash_valid:
+            return qname
+        else:
+            return None
 
     def __init__(self, **kwargs):
         # Root Folder Path (for file storage)
@@ -76,38 +107,48 @@ class ArticleSearch(object):
         else:
             self.debug = False
 
+        # Replace existing cache files
+        if "replace_existing_cache_files" in kwargs:
+            self.replace = kwargs["replace_existing_cache_files"]
+        else:
+            self.replace = False
+
     def search(self, **query_params):
         """
         Any and all query parameters are technically supported, but the queries
         must contain either q or fq keys.
         """
         # Hash the query params to come up with a filename for this query.
-        lame_hash = hashlib.sha1()
-        hash_valid = False
-        if "q" in query_params and type(query_params["q"]) is unicode:
-            lame_hash.update(query_params["q"])
-            hash_valid = True
-        if "fq" in query_params and type(query_params["fq"]) is unicode:
-            lame_hash.update(query_params["fq"])
-            hash_valid = True
-        # Generate a 16-character query name based on this hash.
-        qname = lame_hash.hexdigest()[:16]
-        if not hash_valid:
-            raise ValueError("Something went wrong with hashing, so we have an invalid qname")
+        qname = self.get_hash_for_query(**query_params)
+        if qname is None:
+            raise ValueError("Something went wrong with hashing, so we have an invalid query")
         # Get the query filename as might exist on disk
         query_filename, query_path = self.get_query_filename(qname)
-        if os.path.exists(query_path) and os.path.isfile(query_path):
+        # Try to return early if the cache file already exists
+        if not self.replace and os.path.exists(query_path) and os.path.isfile(query_path):
             if self.debug:
-                print "Returning early because we have this query result cached!"
+                print "Returning early because we have this query result cached! '%s'" % query_filename
             return query_path
+        if self.debug and self.replace and os.path.exists(query_path) and os.path.isfile(query_path):
+            print "Replacing existing file '%s'" % query_path
         if self.debug:
-                print "Fetching the results live from the New York Times API"
+                print "'%s' didn't exist, so we're fetching the results live from the New York Times API." % query_filename
+        # Set query_params["sort"] to "oldest". There are certain assumptions
+        # made about the data we're getting back, and chronological order is
+        # one of them. No exceptions.
+        query_params["sort"] = "oldest"
         # First try the query without any date limits to figure out how many hits there are.
         ir_stats = self.fetch_query_stats_dict(**query_params)
         if ir_stats["hits"] == 0:
             if self.debug:
                 print "No hits for query '%s'" % query_params
             return None
+        elif ir_stats["hits"] > self.query_max_hits:
+            if self.debug:
+                print "More than %d hits (%d hits, to be exact) for query '%s'" % (self.query_max_hits, ir_stats["hits"], query_params)
+            return None
+        elif self.debug:
+            print "%d hits for query '%s'" % (ir_stats["hits"], query_params)
         page_range = range(0, ir_stats["pages"] + 1, 1)
         # Are there few enough hits than we can retrieve them with multiple pages of this query?
         if ir_stats["pages"] <= self.query_pages_limit:
@@ -115,17 +156,17 @@ class ArticleSearch(object):
                 page_range=page_range,
                 **query_params
             )
-        # Nope, we'll have to use a binary tree to fetch all the results
+        # Nope, we'll have to fetch all the results.
         else:
             # We already know the begin date from the inital response (ir)
             begin_date = dateutil.parser.parse( ir_stats["first_pub_date_str"] )
             # We do not know the end date yet, so do another request.
-            newest_first_query_params = copy(query_params)
+            newest_first_query_params = deepcopy(query_params)
             newest_first_query_params["sort"] = "newest"
             newest_first_result_stats = self.fetch_query_stats_dict(**newest_first_query_params)
             end_date = dateutil.parser.parse( newest_first_result_stats["first_pub_date_str"] )
             if self.debug:
-                print str(query_params) + " beginning and ending dates: " + begin_date.strftime("%Y-%m-%d") + " to " + end_date.strftime("%Y-%m-%d")
+                print str(query_params) + " beginning and ending dates: " + begin_date.isoformat() + " to " + end_date.isoformat()
             # Get the results in a way-too-clever way
             results = self.fetch_query_pages_by_year(
                 begin_date=begin_date,
@@ -237,7 +278,8 @@ class ArticleSearch(object):
                     print "No hits for query '%s' in the year %d." % (query_params["fq"], this_year)
                 continue
             year_pages = year_stats["pages"]
-            # If there are more than 1000 results for the query on this particular year, query by individual month instead.
+            # If there are more than 1000 results for the query on this particular year,
+            # query by individual month instead.
             if year_pages > self.query_pages_limit:
                 results["docs"] += self.fetch_query_pages_for_year_by_month(this_year, **query_params)["docs"]
             else:

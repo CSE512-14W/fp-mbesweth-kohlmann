@@ -20,335 +20,490 @@ $timelinePadding: 16px;
 $timelineHeight: 200px;
 $articlesTimelineHeight: 300px;
 
-body{
-	font-family: Avenir;
-	margin: 0;
+a {
+    color: $fillColorActive;
 }
 
-p, text{
-	font-size: 9.23pt;
+body {
+    font-family: "Avenir Next", Avenir;
+    margin: 0;
 }
 
-p {
-	width: 300px;
-	margin-top: 40px;
+strong {
+    font-weight: 600;
 }
 
-h1, .donut, p {
-	margin-left: 80px;
-}
-
-h1 {
-	margin-top: 20px;
-	font-size: 40pt;
-	margin-bottom: 0px;
-}
-
-text {
-	fill: white;
-}
-
-.content {
-  margin: $margin;
-//  outline: 4px solid blue;
-  @include transition(height 0.5s ease-in-out);
-  height: 0px;
-  /* Magic padding to prevent things from getting cut off */
-  padding-bottom: $timelinePadding * 4;
-  overflow: hidden;
-
-  &.years {
-    height: $timelineHeight;
-
-    .months_timeline, .articles_timeline {
-      opacity: 0;
-      @include scale(1.0, 0);
-    }
-
-    .years_timeline {
-      opacity: 1.0;
-      @include transform(
-        translate(0, -($timelineHeight + $articlesTimelineHeight + $timelinePadding * 2))
-        scale(1.0, 1.0)
-      );
-    }
-  }
-
-  &.years-months {
-    height: $timelineHeight * 2 + $timelinePadding;
-
-    .articles_timeline {
-      opacity: 0;
-      @include scale(1.0, 0);
-    }
-
-    .months_timeline {
-      opacity: 1.0;
-      @include transform(
-        translate(0, -($articlesTimelineHeight + $timelinePadding))
-        scale(1.0, 1.0)
-      );
-    }
-
-    .years_timeline {
-      opacity: 1.0;
-      @include transform(
-        translate(0, -($articlesTimelineHeight + $timelinePadding))
-        scale(1.0, 1.0)
-      );
-    }
-  }
-
-  &.years-articles {
-    height: $articlesTimelineHeight + $timelineHeight + $timelinePadding;
-    .months_timeline {
-      opacity: 0;
-      @include scale(1.0, 0);
-    }
-
-    .years_timeline {
-      opacity: 1.0;
-      @include transform(
-        translate(0, -($timelineHeight + $timelinePadding))
-        scale(1.0, 1.0)
-      );
-    }
-  }
-
-  &.years-months-articles {
-    height: $articlesTimelineHeight + $timelineHeight * 2 + $timelinePadding * 2;
-
-    .months_timeline {
-      opacity: 1.0;
-      @include transform(
-        translate(0, 0)
-        scale(1.0, 1.0)
-      );
-    }
-
-    .years_timeline {
-      opacity: 1.0;
-      @include transform(
-        translate(0, 0)
-        scale(1.0, 1.0)
-      );
-    }
-  }
-}
-
-.timeline {
-  display: block;
-  width: 100%;
-  height: $timelineHeight;
-  background-color: $containerColor;
-  padding-bottom: 16px;
-  @include transition(all 0.5s ease-in-out);
-  @include transform-origin(50%, 0%);
-  opacity: 1;
-
-  &:last-child {
-    padding-bottom: 0;
-  }
-}
-
-%small_gray_text {
-  font-size: 14px;
-  line-height: 18px;
-  fill: $annotationTextColor;
-  color: $annotationTextColor;
-  font-weight: 500;
-  text-anchor: middle;
-  text-align: center;
-  margin: 0;
-}
-
-svg.bar_graph_timeline {
-  g.bar {
-    cursor: pointer;
-
-    &.empty, &.active {
-      cursor: auto;
-    }
-
-    rect {
-      stroke: $borderColor;
-      stroke-width: $borderWidth;
-    }
-
-    rect.bg {
-      fill: $bgColor;
-      stroke: $borderColor;
-      stroke-width: 2px;
-    }
-
-    rect.fg {
-      fill: $fillColor;
-    }
-
-    text.label {
-      font-size: 18px;
-      line-height: 24px;
-      text-anchor: middle;
-      font-weight: 500;
-      fill: #000;
-    }
-
-    text.annotation {
-      @extend %small_gray_text;
-    }
-
-    &:not(.empty):hover, &:not(.empty).active {
-
-      rect.bg {
-        fill: $bgColorActive;
-      }
-
-      rect.fg {
-        fill: $fillColorActive;
-      }
-
-      text.annotation {
-        fill: #000;
-      }
-    }
-  }
-}
-
-div.articles_timeline {
-  height: $articlesTimelineHeight;
-
-  .timelineContainer {
-    width: 100%;
+header {
     position: relative;
-    overflow: hidden;
-  }
+    width: 100%;
+    float: left;
+//  background-color: $bgColor;
+    padding: 40px 0;
+    margin-bottom: 40px;
+//  padding: 40px 80px;
 
-  h2 {
-    @extend %small_gray_text;
-    line-height: 32px;
-  }
-
-  .article {
-    background-color: $bgColor;
-    color: #666;
-    text-shadow: 0 1px 2px rgba(#000, 0);
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    top: 0;
-    cursor: pointer;
-    border: $borderWidth solid $borderColor;
-
-    .rectInside:before, &:after {
-      content: "";
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      @include background-image(linear-gradient(top, rgba($bgColor, 0.00), rgba($bgColor, 0.5)));
-      opacity: 0;
+    .column {
+        width: 33.333333333%;
+        height: 100%;
+        float: left;
+//    background-color: green;
     }
 
-    &:after {
-      @include background-image(linear-gradient(top, rgba($bgColor, 0.50), rgba($bgColor, 1.0)));
-      opacity: 1.0;
-    }
-
-    .rectInside {
-      padding: 32px 12px 12px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 1;
-    }
-
-    h3, p, cite {
-      padding: 0 4px;
-      display: block;
-      position: relative;
-      z-index: 1;
-      color: inherit;
-      margin: 0 auto;
-      font-size: 16px;
-      line-height: 20px;
-      width: $rectInsideWidth;
-    }
-
-    h3 {
-      font-size: 20px;
-      line-height: 24px;
-      font-weight: 500;
+    h1, h2, p {
+        margin: 0;
     }
 
     p {
-      /* A magic number that limits the snippet to 3 lines of text */
-      max-height: 62px;
-      overflow-y: hidden;
+//    background-color: $bgColorActive;
+        margin: 0 40px;
     }
 
-    cite {
-      font-size: 14px;
+    .wrapper {
+        margin-left: 80px;
     }
 
-    .imgContainer {
-      position: absolute;
-      left:   0;
-      right:  0;
-      top:    0;
-      bottom: 0;
-      z-index: 0;
-      min-width: $rectInsideWidth;
+    h1 {
+        font-size: 24px;
+    }
 
-      img {
-        width: auto;
-        height: auto;
-//        max-height: 100%;
+    #page {
+        font-family: Avenir;
+        background-color: $bgColorActive;
+        border: 0;
+        font-size: 18px;
+        font-weight: 500;
+        width: 100%;
+    }
+}
+
+p, text {
+    font-size: 9.23pt;
+}
+
+text {
+    fill: white;
+}
+
+.content {
+    clear: both;
+    position: relative;
+//  outline: 4px solid blue;
+    @include transition(height 0.5s ease-in-out);
+    height: 0px;
+    /* Magic padding to prevent things from getting cut off */
+    padding-bottom: $timelinePadding * 4;
+//  overflow: hidden;
+
+    &:after {
+        content: "";
+        width: 256px;
+        height: 88px;
+        padding: 16px;
         position: absolute;
-        left:   -50%;
-        right:  -50%;
-        top:    0;
+        left: 0;
+        right: 0;
+        top: 16px;
+        z-index: 4;
         margin: auto;
-      }
-
-      &.thumbnail img {
-        width: auto;
-        top: 12.5%;
-      }
-
-      &:not(.thumbnail) img {
-        min-width: 640px;
-      }
+        pointer-events: none;
+        opacity: 0;
+        background: image-url("loading.gif") no-repeat center $bgColor;
+        @include border-radius(8px);
+        @include transition(all 0.5s ease-in-out);
     }
 
-    &:hover {
-//      position: relative;
-      color: #fff;
-      text-shadow: 0 0 2px rgba(#000, 0.65);
-      background-color: $fillColorActive;
+    &.loading:after {
+        opacity: 1;
+    }
 
-      &:after {
-        opacity: 0.0;
-      }
+    &.years {
+        height: $timelineHeight;
 
-      /* Lower the opacity of non-thumbnail images */
-      .imgContainer:not(.thumbnail) {
-        opacity: 0.65;
-      }
-
-      /* Different hover appearance for articles with non-thumbnail images */
-      .imgContainer:not(.thumbnail) + .rectInside {
-        color: #fff;
-        text-shadow: 0 0 2px rgba(#000, 0.65);
-
-        &:before {
-          @include background-image(linear-gradient(top, rgba($fillColor, 0.00), rgba($fillColor, 0.5)));
-          opacity: 1.0;
+        .months_timeline, .articles_timeline {
+            opacity: 0;
+            @include scale(1.0, 0);
         }
-      }
+
+        .years_timeline {
+            opacity: 1.0;
+            @include transform(
+                translate(0, -($timelineHeight + $articlesTimelineHeight + $timelinePadding * 2))
+                scale(1.0, 1.0)
+            );
+        }
     }
-  }
+
+    &.years-months {
+        height: $timelineHeight * 2 + $timelinePadding;
+
+        .articles_timeline {
+            opacity: 0;
+            @include scale(1.0, 0);
+        }
+
+        .months_timeline {
+            opacity: 1.0;
+            @include transform(
+                translate(0, -($articlesTimelineHeight + $timelinePadding))
+                scale(1.0, 1.0)
+            );
+        }
+
+        .years_timeline {
+            opacity: 1.0;
+            @include transform(
+                translate(0, -($articlesTimelineHeight + $timelinePadding))
+                scale(1.0, 1.0)
+            );
+        }
+    }
+
+    &.years-articles {
+        height: $articlesTimelineHeight + $timelineHeight + $timelinePadding;
+        .months_timeline {
+            opacity: 0;
+            @include scale(1.0, 0);
+        }
+
+        .years_timeline {
+            opacity: 1.0;
+            @include transform(
+                translate(0, -($timelineHeight + $timelinePadding))
+                scale(1.0, 1.0)
+            );
+        }
+    }
+
+    &.years-months-articles {
+        height: $articlesTimelineHeight + $timelineHeight * 2 + $timelinePadding * 2;
+
+        .months_timeline {
+            opacity: 1.0;
+            @include transform(
+                translate(0, 0)
+                scale(1.0, 1.0)
+            );
+        }
+
+        .years_timeline {
+            opacity: 1.0;
+            @include transform(
+                translate(0, 0)
+                scale(1.0, 1.0)
+            );
+        }
+    }
+}
+
+.timeline {
+    display: block;
+//  width: 100%;
+    height: $timelineHeight;
+    background-color: $containerColor;
+//  margin: 0 $margin;
+    margin-bottom: 16px;
+    @include transition(all 0.5s ease-in-out);
+    @include transform-origin(50%, 0%);
+    opacity: 1;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+%small_gray_text {
+    font-size: 14px;
+    line-height: 18px;
+    fill: $annotationTextColor;
+    color: $annotationTextColor;
+    font-weight: 500;
+    text-anchor: middle;
+    text-align: center;
+    margin: 0;
+}
+
+svg.bar_graph_timeline {
+//  margin-left: -$margin;
+//  margin-right: -$margin;
+//  position: relative;
+//  left: $margin;
+
+    g.bar {
+        cursor: pointer;
+
+        &.empty, &.active {
+            cursor: auto;
+        }
+
+        rect {
+            stroke: $borderColor;
+            stroke-width: $borderWidth;
+        }
+
+        rect.bg {
+            fill: $bgColor;
+            stroke: $borderColor;
+            stroke-width: 2px;
+        }
+
+        rect.fg {
+            fill: $fillColor;
+        }
+
+        text.label {
+            font-size: 18px;
+            line-height: 24px;
+            text-anchor: middle;
+            font-weight: 500;
+            fill: #000;
+        }
+
+        text.annotation {
+            @extend %small_gray_text;
+            width: 32px;
+        }
+
+        &:hover, &:not(.empty).active {
+
+            rect.bg {
+                fill: $bgColorActive;
+            }
+
+            rect.fg {
+                fill: $fillColorActive;
+            }
+
+            &:not(.empty) text.annotation {
+                fill: #000;
+            }
+        }
+    }
+
+    &.narrow-bars {
+        g.bar {
+            text {
+                opacity: 0;
+            }
+
+            &:hover, &:not(.empty).active {
+                text {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+//    @include border-radius(4px);
+    background-color: rgba(#000, 0.15);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+//    @include border-radius(4px);
+    background-color: rgba(#000, 0.35);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background-color: rgba(#000, 0.15);
+}
+
+div.articles_timeline {
+    margin: 0 $margin;
+    height: $articlesTimelineHeight;
+
+    .timelineContainer {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    h2 {
+        @extend %small_gray_text;
+        line-height: 32px;
+    }
+
+    .article {
+        background-color: $bgColor;
+        color: #666;
+        text-shadow: 0 1px 2px rgba(#000, 0);
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        cursor: pointer;
+        border: $borderWidth solid $borderColor;
+
+        .keywordsWrapper {
+            @include background-image(linear-gradient(top, rgba($bgColor, 0), rgba($bgColor, 0.35)));
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            z-index: 4;
+            overflow-x: auto;
+            overflow-y: hidden;
+            height: 32px;
+        }
+
+        .keywords {
+            height: 22px;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+
+        .keyword {
+            color: rgba(#000, 0.25);
+            padding: 2px 4px;
+            @include border-radius(4px);
+            font-size: 14px;
+            line-height: 14px;
+            text-decoration: none;
+            margin-right: 4px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .rectInside:before, &:after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            @include background-image(linear-gradient(top, rgba($bgColor, 0.00), rgba($bgColor, 0.5)));
+            opacity: 0;
+        }
+
+        &:after {
+            @include background-image(linear-gradient(top, rgba($bgColor, 0.50), rgba($bgColor, 1.0)));
+            opacity: 1.0;
+        }
+
+        .rectInside {
+            color: inherit;
+            text-decoration: none;
+            padding: 32px 12px 48px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        h3, p, cite {
+            padding: 0 4px;
+            display: block;
+            position: relative;
+            z-index: 1;
+            color: inherit;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 20px;
+            width: $rectInsideWidth;
+        }
+
+        h3 {
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 500;
+        }
+
+        p {
+            /* A magic number that limits the snippet to 3 lines of text */
+            max-height: 62px;
+            overflow-y: hidden;
+        }
+
+        cite {
+            font-size: 14px;
+            line-height: 16px;
+        }
+
+        &.long {
+            h3 {
+                font-size: 18px;
+                line-height: 21px;
+            }
+
+            p {
+                font-size: 14px;
+                line-height: 16px;
+                margin-bottom: 2px;
+            }
+        }
+
+        .imgContainer {
+            position: absolute;
+            left:   0;
+            right:  0;
+            top:    0;
+            bottom: 0;
+            z-index: 0;
+            min-width: $rectInsideWidth;
+
+            img {
+                width: auto;
+                height: auto;
+//        max-height: 100%;
+                position: absolute;
+                left:   -50%;
+                right:  -50%;
+                top:    0;
+                margin: auto;
+            }
+
+            &.thumbnail img {
+                width: auto;
+                top: 12.5%;
+            }
+
+            &:not(.thumbnail) img {
+                min-width: 640px;
+            }
+        }
+
+        &:hover {
+            background-color: $fillColorActive;
+
+            .keyword {
+                background: rgba(#fff, 0.5);
+                color: rgba(#000, 0.5);
+            }
+
+            .rectInside {
+                color: #fff;
+                text-shadow: 0 0 2px rgba(#000, 0.65);
+            }
+
+            &:after {
+                opacity: 0.0;
+            }
+
+            /* Lower the opacity of non-thumbnail images */
+            .imgContainer:not(.thumbnail) {
+                opacity: 0.65;
+            }
+
+            /* Different hover appearance for articles with non-thumbnail images */
+            .imgContainer:not(.thumbnail) + .rectInside {
+                color: #fff;
+                text-shadow: 0 0 2px rgba(#000, 0.65);
+
+                &:before {
+                    @include background-image(linear-gradient(top, rgba($fillColor, 0.00), rgba($fillColor, 0.5)));
+                    opacity: 1.0;
+                }
+            }
+        }
+    }
 }
