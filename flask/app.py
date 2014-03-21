@@ -18,6 +18,9 @@ def write_query_to_cache(query, queries):
         queries.insert(0, query)
         if app.config["DEBUG"]:
             print "Adding %s to list of cached queries." % query
+    else:
+        print "Returning early since cached queries list is up-to-date on disk."
+        return
     # Write everything back. Yes, this is inefficient.
     input_file = codecs.open(cache_path, encoding="utf-8", mode="w")
     json.dump(queries, input_file)
