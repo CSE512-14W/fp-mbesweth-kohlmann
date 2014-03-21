@@ -2,3 +2,4 @@
 flask/.idea
 
 *.pyc
+flask/config.py
