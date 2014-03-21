@@ -19,8 +19,9 @@ You should definitely go play with Nested Year Timelines at [keynotesavant.com](
 * Spit-Shining: **Joe**
 * Late Nights: **Michael and Joe**
 
-[Poster](https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/final/poster-mbesweth-kohlmann.pdf),
-[Final Paper](https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/final/paper-mbesweth-kohlmann) 
+## [Poster](https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/final/poster-mbesweth-kohlmann.pdf)
+
+## [Final Paper](https://github.com/CSE512-14W/fp-mbesweth-kohlmann/raw/master/final/paper-mbesweth-kohlmann.pdf)
 
 ## Running Instructions
 
