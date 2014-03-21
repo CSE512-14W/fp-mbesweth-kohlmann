@@ -22,29 +22,34 @@ header {
   padding: 40px 0;
   margin-bottom: 40px;
 }
-/* line 45, ../sass/nyt.scss */
+/* line 43, ../sass/nyt.scss */
 header .column {
   width: 33.333333333%;
   height: 100%;
   float: left;
 }
-/* line 52, ../sass/nyt.scss */
+/* line 49, ../sass/nyt.scss */
 header h1, header h2, header p {
   margin: 0;
 }
-/* line 56, ../sass/nyt.scss */
+/* line 53, ../sass/nyt.scss */
 header p {
   margin: 0 40px;
 }
-/* line 61, ../sass/nyt.scss */
+/* line 57, ../sass/nyt.scss */
 header .wrapper {
   margin-left: 80px;
 }
-/* line 65, ../sass/nyt.scss */
+/* line 61, ../sass/nyt.scss */
+header .column:last-child .wrapper {
+  margin-left: 0;
+  margin-right: 80px;
+}
+/* line 66, ../sass/nyt.scss */
 header h1 {
   font-size: 24px;
 }
-/* line 69, ../sass/nyt.scss */
+/* line 70, ../sass/nyt.scss */
 header #page {
   font-family: Avenir;
   background-color: #d9d9d9;
@@ -54,17 +59,17 @@ header #page {
   width: 100%;
 }
 
-/* line 79, ../sass/nyt.scss */
+/* line 80, ../sass/nyt.scss */
 p, text {
   font-size: 9.23pt;
 }
 
-/* line 83, ../sass/nyt.scss */
+/* line 84, ../sass/nyt.scss */
 text {
   fill: white;
 }
 
-/* line 87, ../sass/nyt.scss */
+/* line 88, ../sass/nyt.scss */
 .content {
   clear: both;
   position: relative;
@@ -76,7 +81,7 @@ text {
   /* Magic padding to prevent things from getting cut off */
   padding-bottom: 64px;
 }
-/* line 97, ../sass/nyt.scss */
+/* line 98, ../sass/nyt.scss */
 .content:after {
   content: "";
   width: 256px;
@@ -101,15 +106,15 @@ text {
   -o-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
-/* line 115, ../sass/nyt.scss */
+/* line 116, ../sass/nyt.scss */
 .content.loading:after {
   opacity: 1;
 }
-/* line 119, ../sass/nyt.scss */
+/* line 120, ../sass/nyt.scss */
 .content.years {
   height: 200px;
 }
-/* line 122, ../sass/nyt.scss */
+/* line 123, ../sass/nyt.scss */
 .content.years .months_timeline, .content.years .articles_timeline {
   opacity: 0;
   -webkit-transform: scale(1, 0);
@@ -118,7 +123,7 @@ text {
   -o-transform: scale(1, 0);
   transform: scale(1, 0);
 }
-/* line 127, ../sass/nyt.scss */
+/* line 128, ../sass/nyt.scss */
 .content.years .years_timeline {
   opacity: 1.0;
   -webkit-transform: translate(0, -532px) scale(1, 1);
@@ -127,11 +132,11 @@ text {
   -o-transform: translate(0, -532px) scale(1, 1);
   transform: translate(0, -532px) scale(1, 1);
 }
-/* line 136, ../sass/nyt.scss */
+/* line 137, ../sass/nyt.scss */
 .content.years-months {
   height: 416px;
 }
-/* line 139, ../sass/nyt.scss */
+/* line 140, ../sass/nyt.scss */
 .content.years-months .articles_timeline {
   opacity: 0;
   -webkit-transform: scale(1, 0);
@@ -140,7 +145,7 @@ text {
   -o-transform: scale(1, 0);
   transform: scale(1, 0);
 }
-/* line 144, ../sass/nyt.scss */
+/* line 145, ../sass/nyt.scss */
 .content.years-months .months_timeline {
   opacity: 1.0;
   -webkit-transform: translate(0, -316px) scale(1, 1);
@@ -149,7 +154,7 @@ text {
   -o-transform: translate(0, -316px) scale(1, 1);
   transform: translate(0, -316px) scale(1, 1);
 }
-/* line 152, ../sass/nyt.scss */
+/* line 153, ../sass/nyt.scss */
 .content.years-months .years_timeline {
   opacity: 1.0;
   -webkit-transform: translate(0, -316px) scale(1, 1);
@@ -158,11 +163,11 @@ text {
   -o-transform: translate(0, -316px) scale(1, 1);
   transform: translate(0, -316px) scale(1, 1);
 }
-/* line 161, ../sass/nyt.scss */
+/* line 162, ../sass/nyt.scss */
 .content.years-articles {
   height: 516px;
 }
-/* line 163, ../sass/nyt.scss */
+/* line 164, ../sass/nyt.scss */
 .content.years-articles .months_timeline {
   opacity: 0;
   -webkit-transform: scale(1, 0);
@@ -171,7 +176,7 @@ text {
   -o-transform: scale(1, 0);
   transform: scale(1, 0);
 }
-/* line 168, ../sass/nyt.scss */
+/* line 169, ../sass/nyt.scss */
 .content.years-articles .years_timeline {
   opacity: 1.0;
   -webkit-transform: translate(0, -216px) scale(1, 1);
@@ -180,11 +185,11 @@ text {
   -o-transform: translate(0, -216px) scale(1, 1);
   transform: translate(0, -216px) scale(1, 1);
 }
-/* line 177, ../sass/nyt.scss */
+/* line 178, ../sass/nyt.scss */
 .content.years-months-articles {
   height: 732px;
 }
-/* line 180, ../sass/nyt.scss */
+/* line 181, ../sass/nyt.scss */
 .content.years-months-articles .months_timeline {
   opacity: 1.0;
   -webkit-transform: translate(0, 0) scale(1, 1);
@@ -193,7 +198,7 @@ text {
   -o-transform: translate(0, 0) scale(1, 1);
   transform: translate(0, 0) scale(1, 1);
 }
-/* line 188, ../sass/nyt.scss */
+/* line 189, ../sass/nyt.scss */
 .content.years-months-articles .years_timeline {
   opacity: 1.0;
   -webkit-transform: translate(0, 0) scale(1, 1);
@@ -203,7 +208,7 @@ text {
   transform: translate(0, 0) scale(1, 1);
 }
 
-/* line 198, ../sass/nyt.scss */
+/* line 199, ../sass/nyt.scss */
 .timeline {
   display: block;
   height: 200px;
@@ -220,12 +225,12 @@ text {
   transform-origin: 50% 0%;
   opacity: 1;
 }
-/* line 209, ../sass/nyt.scss */
+/* line 210, ../sass/nyt.scss */
 .timeline:last-child {
   margin-bottom: 0;
 }
 
-/* line 214, ../sass/nyt.scss */
+/* line 215, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar text.annotation, div.articles_timeline h2 {
   font-size: 14px;
   line-height: 18px;
@@ -237,30 +242,30 @@ svg.bar_graph_timeline g.bar text.annotation, div.articles_timeline h2 {
   margin: 0;
 }
 
-/* line 231, ../sass/nyt.scss */
+/* line 232, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar {
   cursor: pointer;
 }
-/* line 234, ../sass/nyt.scss */
+/* line 235, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar.empty, svg.bar_graph_timeline g.bar.active {
   cursor: auto;
 }
-/* line 238, ../sass/nyt.scss */
+/* line 239, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar rect {
   stroke: white;
   stroke-width: 2px;
 }
-/* line 243, ../sass/nyt.scss */
+/* line 244, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar rect.bg {
   fill: #f2f2f2;
   stroke: white;
   stroke-width: 2px;
 }
-/* line 249, ../sass/nyt.scss */
+/* line 250, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar rect.fg {
   fill: black;
 }
-/* line 253, ../sass/nyt.scss */
+/* line 254, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar text.label {
   font-size: 18px;
   line-height: 24px;
@@ -268,69 +273,69 @@ svg.bar_graph_timeline g.bar text.label {
   font-weight: 500;
   fill: #000;
 }
-/* line 261, ../sass/nyt.scss */
+/* line 262, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar text.annotation {
   width: 32px;
 }
-/* line 268, ../sass/nyt.scss */
+/* line 269, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar:hover rect.bg, svg.bar_graph_timeline g.bar:not(.empty).active rect.bg {
   fill: #d9d9d9;
 }
-/* line 272, ../sass/nyt.scss */
+/* line 273, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar:hover rect.fg, svg.bar_graph_timeline g.bar:not(.empty).active rect.fg {
   fill: #537dcc;
 }
-/* line 276, ../sass/nyt.scss */
+/* line 277, ../sass/nyt.scss */
 svg.bar_graph_timeline g.bar:hover:not(.empty) text.annotation, svg.bar_graph_timeline g.bar:not(.empty).active:not(.empty) text.annotation {
   fill: #000;
 }
-/* line 284, ../sass/nyt.scss */
+/* line 285, ../sass/nyt.scss */
 svg.bar_graph_timeline.narrow-bars g.bar text {
   opacity: 0;
 }
-/* line 289, ../sass/nyt.scss */
+/* line 290, ../sass/nyt.scss */
 svg.bar_graph_timeline.narrow-bars g.bar:hover text, svg.bar_graph_timeline.narrow-bars g.bar:not(.empty).active text {
   opacity: 1;
 }
 
-/* line 297, ../sass/nyt.scss */
+/* line 298, ../sass/nyt.scss */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-/* line 302, ../sass/nyt.scss */
+/* line 303, ../sass/nyt.scss */
 ::-webkit-scrollbar-track {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
 /* Handle */
-/* line 308, ../sass/nyt.scss */
+/* line 309, ../sass/nyt.scss */
 ::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.35);
 }
 
-/* line 312, ../sass/nyt.scss */
+/* line 313, ../sass/nyt.scss */
 ::-webkit-scrollbar-thumb:window-inactive {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-/* line 316, ../sass/nyt.scss */
+/* line 317, ../sass/nyt.scss */
 div.articles_timeline {
   margin: 0 80px;
   height: 300px;
 }
-/* line 320, ../sass/nyt.scss */
+/* line 321, ../sass/nyt.scss */
 div.articles_timeline .timelineContainer {
   width: 100%;
   position: relative;
   overflow: hidden;
 }
-/* line 326, ../sass/nyt.scss */
+/* line 327, ../sass/nyt.scss */
 div.articles_timeline h2 {
   line-height: 32px;
 }
-/* line 331, ../sass/nyt.scss */
+/* line 332, ../sass/nyt.scss */
 div.articles_timeline .article {
   background-color: #f2f2f2;
   color: #666;
@@ -339,7 +344,6 @@ div.articles_timeline .article {
   position: absolute;
   left: 0;
   top: 0;
-  cursor: pointer;
   border: 2px solid white;
 }
 /* line 342, ../sass/nyt.scss */

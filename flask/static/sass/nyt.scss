@@ -37,16 +37,13 @@ header {
     position: relative;
     width: 100%;
     float: left;
-//  background-color: $bgColor;
     padding: 40px 0;
     margin-bottom: 40px;
-//  padding: 40px 80px;
 
     .column {
         width: 33.333333333%;
         height: 100%;
         float: left;
-//    background-color: green;
     }
 
     h1, h2, p {
@@ -54,12 +51,16 @@ header {
     }
 
     p {
-//    background-color: $bgColorActive;
         margin: 0 40px;
     }
 
     .wrapper {
         margin-left: 80px;
+    }
+
+    .column:last-child .wrapper {
+        margin-left: 0;
+        margin-right: 80px;
     }
 
     h1 {
@@ -336,7 +337,6 @@ div.articles_timeline {
         position: absolute;
         left: 0;
         top: 0;
-        cursor: pointer;
         border: $borderWidth solid $borderColor;
 
         .keywordsWrapper {
