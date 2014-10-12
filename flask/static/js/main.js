@@ -80,7 +80,7 @@ var createTimeline = function(data, $container) {
     var margin = 80;
     var label_width = 36;
     var label_height = 18;
-    var timeline_width = parseInt( $timeline.style("width") )  - margin * 2;
+    var timeline_width = parseInt( d3.select($timeline[0][0].parentNode).style("width") )  - margin * 2;
     var timeline_height = parseInt( $timeline.style("height") ) - label_height * 1.35;
     // Logarithmic scaling for the timeline bars
     var heightScale = d3.scale.log().domain([maxHits, 0.5]).range([timeline_height,0]);
