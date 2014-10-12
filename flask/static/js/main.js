@@ -229,6 +229,9 @@ var ArticlesTimeline = function(data, $html) {
 
         d3.select(this)
             .style("-webkit-transform", "translate(" + translateX + "px, " + translateY + "px)")
+            .style("-moz-transform", "translate(" + translateX + "px, " + translateY + "px)")
+            .style("-ms-transform", "translate(" + translateX + "px, " + translateY + "px)")
+            .style("transform", "translate(" + translateX + "px, " + translateY + "px)")
             .style("width", xScale(i + 1.0) - xScale(i) + "px")
         ;
     };
