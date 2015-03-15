@@ -300,14 +300,14 @@ var ArticlesTimeline = function(data, $html) {
     var articleHeadlines = rectInsides
         .append("h3")
 //        .attr("data-headline", function(d) { return d.main_headline; })
-        .text(function(d) { return d.main_headline; })
+        .html(function(d) { return d.main_headline; })
         .style("text-transform", "capitalize")
     ;
 
     // Article Snippets
     var articleSnippets = rectInsides
         .append("p")
-        .text(function(d) { return d.snippet; })
+        .html(function(d) { return d.snippet; })
     ;
 
     // Article Dates
