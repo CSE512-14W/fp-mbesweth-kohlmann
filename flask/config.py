@@ -22,7 +22,9 @@ class Config(object):
         CACHE_ROOT,
         "queries.json"
     )
+    LIMIT_QUERIES = True
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    LIMIT_QUERIES = False

@@ -40,6 +40,7 @@ search = ArticleSearch(
     ),
     search_api_key=Config.SEARCH_API_KEY,
     debug=Config.DEBUG,
+    limit_queries=Config.LIMIT_QUERIES,
     replace=True
 )
 

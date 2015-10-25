@@ -107,6 +107,13 @@ class ArticleSearch(object):
         else:
             self.debug = False
 
+        # Limit Queries
+        if "limit_queries" in kwargs:
+            self.limit_queries = kwargs["limit_queries"]
+        else:
+            # Default to True since retrieving article data for more than 8000 results is prohibitive
+            self.limit_queries = True
+
         # Replace existing cache files
         if "replace_existing_cache_files" in kwargs:
             self.replace = kwargs["replace_existing_cache_files"]
@@ -143,7 +150,7 @@ class ArticleSearch(object):
             if self.debug:
                 print "No hits for query '%s'" % query_params
             return None
-        elif ir_stats["hits"] > self.query_max_hits:
+        elif self.limit_queries and ir_stats["hits"] > self.query_max_hits:
             if self.debug:
                 print "More than %d hits (%d hits, to be exact) for query '%s'" % (self.query_max_hits, ir_stats["hits"], query_params)
             return None
